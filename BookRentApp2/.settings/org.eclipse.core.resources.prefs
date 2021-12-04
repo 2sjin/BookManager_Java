@@ -1,0 +1,15 @@
+eclipse.preferences.version=1
+encoding//src/javaBook/FrameBookCreate.java=UTF-8
+encoding//src/javaBook/FrameBookDelete.java=UTF-8
+encoding//src/javaBook/FrameBookEdit.java=UTF-8
+encoding//src/javaBook/FrameBookSearch.java=UTF-8
+encoding//src/javaBook/PanelBookInfo.java=UTF-8
+encoding//src/javaRent/FrameRent.java=UTF-8
+encoding//src/javaRent/FrameReturn.java=UTF-8
+encoding//src/javaUser/FrameUserCreate.java=UTF-8
+encoding//src/javaUser/FrameUserEdit.java=UTF-8
+encoding//src/javaUser/FrameUserOut.java=UTF-8
+encoding//src/javaUser/FrameUserSearch.java=UTF-8
+encoding//src/javaUser/PanelUserInfo.java=UTF-8
+encoding//src/main/FrameMain.java=UTF-8
+encoding//src/main/Start.java=UTF-8
