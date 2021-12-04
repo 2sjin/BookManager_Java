@@ -67,7 +67,7 @@ public class FrameMain extends JFrame {
 			}			
 		});
 
-		// [도서관리] 메뉴아이템 생성
+		// [도서관리] 메뉴아이템 생성!
 		JMenuItem menuItemBook_0 = new JMenuItem("도서 조회");
 		JSeparator separator_1 = new JSeparator();
 		JMenuItem menuItemBook_1 = new JMenuItem("도서 추가");
