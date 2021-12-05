@@ -6,7 +6,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.awt.event.*;
 
-public class CREATEBOOK {
+public class FrameBookCreate {
 
 	private JFrame frame;
 	private JTextField ISBN_FIELD;
@@ -26,7 +26,7 @@ public class CREATEBOOK {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CREATEBOOK window = new CREATEBOOK();
+					FrameBookCreate window = new FrameBookCreate();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,7 +38,7 @@ public class CREATEBOOK {
 	/**
 	 * Create the application.
 	 */
-	public CREATEBOOK() {
+	public FrameBookCreate() {
 		initialize();
 	}
 
@@ -47,6 +47,8 @@ public class CREATEBOOK {
 	 */
 	private void initialize() {
 		frame = new JFrame("도서 추가");
+		frame.setVisible(true);
+		
 		frame.setBounds(100, 100, 550, 340);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);

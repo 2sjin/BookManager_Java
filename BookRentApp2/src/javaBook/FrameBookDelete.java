@@ -15,7 +15,7 @@ import java.awt.Color;
 import javax.swing.UIManager;
 import javax.swing.JButton;
 
-public class DELETEBOOK {
+public class FrameBookDelete {
 
 	private JFrame frame;
 
@@ -26,7 +26,7 @@ public class DELETEBOOK {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DELETEBOOK window = new DELETEBOOK();
+					FrameBookDelete window = new FrameBookDelete();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,7 +38,7 @@ public class DELETEBOOK {
 	/**
 	 * Create the application.
 	 */
-	public DELETEBOOK() {
+	public FrameBookDelete() {
 		initialize();
 	}
 
@@ -47,10 +47,12 @@ public class DELETEBOOK {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setVisible(true);
+		
 		frame.setBounds(100, 100, 555, 689);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		BOOKJPanel book_panel = new BOOKJPanel(frame);
+		PanelBookInfo book_panel = new PanelBookInfo(frame);
 		frame.getContentPane().add(book_panel, BorderLayout.CENTER);
 		
 		JButton DELETE_BUTTON = new JButton("\uC0AD\uC81C");

@@ -6,7 +6,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-public class BOOKJPanel extends JPanel {
+public class PanelBookInfo extends JPanel {
 	private JTextField Search_Field;
 	private JTextField ISBN_FIELD;
 	private JTextField TITLE_FIELD;
@@ -27,7 +27,7 @@ public class BOOKJPanel extends JPanel {
 	private String header[] = {"ISBN","제목","저자","출판사","대여자","대여일","반납예정일"};
 	private JScrollPane jp;
 	private JPanel panel;
-	public BOOKJPanel(JFrame frame2) {
+	public PanelBookInfo(JFrame frame2) {
 		setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
 		setLayout(null);
 		JLabel Book_Search = new JLabel("\uB3C4\uC11C \uAC80\uC0C9");

@@ -19,7 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.UIManager;
 
-public class UPDATEBOOK {
+public class FrameBookEdit {
 
 	private JFrame frame;
 
@@ -30,7 +30,7 @@ public class UPDATEBOOK {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					UPDATEBOOK window = new UPDATEBOOK();
+					FrameBookEdit window = new FrameBookEdit();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,7 +42,7 @@ public class UPDATEBOOK {
 	/**
 	 * Create the application.
 	 */
-	public UPDATEBOOK() {
+	public FrameBookEdit() {
 		initialize();
 	}
 
@@ -51,10 +51,12 @@ public class UPDATEBOOK {
 	 */
 	private void initialize() {
 		frame = new JFrame("도서 수정");
+		frame.setVisible(true);
+		
 		frame.setBounds(100, 100, 555, 689);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		BOOKJPanel book_panel = new BOOKJPanel(frame);
+		PanelBookInfo book_panel = new PanelBookInfo(frame);
 		frame.getContentPane().add(book_panel, BorderLayout.CENTER);
 		
 		// 이미지 변경

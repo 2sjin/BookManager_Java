@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.FlowLayout;
 
-public class SEARCHBOOK {
+public class FrameBookSearch {
 
 	private JFrame frame;
 
@@ -20,7 +20,7 @@ public class SEARCHBOOK {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SEARCHBOOK window = new SEARCHBOOK();
+					FrameBookSearch window = new FrameBookSearch();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -32,7 +32,7 @@ public class SEARCHBOOK {
 	/**
 	 * Create the application.
 	 */
-	public SEARCHBOOK() {
+	public FrameBookSearch() {
 		initialize();
 	}
 
@@ -41,11 +41,13 @@ public class SEARCHBOOK {
 	 */
 	private void initialize() {
 		frame = new JFrame("도서 정보");
+		frame.setVisible(true);
+		
 		frame.setBounds(100, 100, 555, 689);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
-		JPanel book_panel = new BOOKJPanel(frame);
+		JPanel book_panel = new PanelBookInfo(frame);
 		frame.getContentPane().add(book_panel);
 		
 		JPanel panel = new JPanel();
