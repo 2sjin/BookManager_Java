@@ -1,4 +1,4 @@
-package BOOK;
+package javaBook;
 
 import java.awt.*;
 import java.awt.event.*;
