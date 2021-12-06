@@ -1,17 +1,8 @@
 package javaBook;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import java.awt.BorderLayout;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.FlowLayout;
-import javax.swing.UIManager;
-import java.awt.Color;
+import java.awt.event.*;
+import javax.swing.*;
+import java.awt.*;
 
 public class FrameBookSearch {
 
