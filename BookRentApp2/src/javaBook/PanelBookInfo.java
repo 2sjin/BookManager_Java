@@ -142,7 +142,7 @@ public class PanelBookInfo extends JPanel {
 		
 		Book_LENDER = new JLabel("\uB300\uC5EC\uC790");
 		Book_LENDER.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
-		Book_LENDER.setBounds(80, 483, 50, 15);
+		Book_LENDER.setBounds(80, 483, 62, 15);
 		add(Book_LENDER);
 		
 		LENDER_LABEL = new JLabel("");
@@ -152,7 +152,7 @@ public class PanelBookInfo extends JPanel {
 		
 		Book_RENTAL_DATE = new JLabel("\uB300\uC5EC\uC77C");
 		Book_RENTAL_DATE.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
-		Book_RENTAL_DATE.setBounds(252, 483, 50, 17);
+		Book_RENTAL_DATE.setBounds(252, 483, 70, 17);
 		add(Book_RENTAL_DATE);
 		
 		RENTAL_DATE_LABEL = new JLabel("");
@@ -162,7 +162,7 @@ public class PanelBookInfo extends JPanel {
 		
 		Book_RETURN_DATE = new JLabel("\uBC18\uB0A9 \uC608\uC815\uC77C");
 		Book_RETURN_DATE.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
-		Book_RETURN_DATE.setBounds(408, 483, 95, 17);
+		Book_RETURN_DATE.setBounds(408, 483, 110, 17);
 		add(Book_RETURN_DATE);
 		
 		RETURN_DATE_LABEL = new JLabel("");
