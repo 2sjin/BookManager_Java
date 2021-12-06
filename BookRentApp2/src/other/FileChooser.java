@@ -4,7 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.filechooser.*;
  
-// ÆÄÀÏ ¼±ÅÃ±â Å¬·¡½º(ÀÌ¹ÌÁö¸¦ ¸®ÅÏÇÔ)
+// íŒŒì¼ ì„ íƒê¸° í´ë˜ìŠ¤(ì´ë¯¸ì§€ë¥¼ ë¦¬í„´í•¨)
 public class FileChooser {
 	private static JFileChooser bookImg = new JFileChooser();
 	private static FileNameExtensionFilter fileFilter = new FileNameExtensionFilter("All Images", "jpg","jpge","png","gif","svg");
@@ -14,11 +14,11 @@ public class FileChooser {
 		bookImg.showOpenDialog(null);
 		String filePath = bookImg.getSelectedFile().getPath();
 		
-		// ÀÌ¹ÌÁö Å©±â Àç¼³Á¤
-    	ImageIcon images = new ImageIcon(filePath);          // °æ·Î¿¡¼­ ·ÎµåÇÑ Image ÆÄÀÏÀ» ImageIcon °´Ã¼·Î »ı¼º 
-        Image tempImg = images.getImage();                      	          // ImageIconÀ» Image·Î º¯È¯
-        tempImg = tempImg.getScaledInstance(155, 207, Image.SCALE_SMOOTH);    // Image Å©±â Àç¼³Á¤
-        images = new ImageIcon(tempImg);                                    // Àç¼³Á¤ÇÑ Image¸¦ ImageIcon °´Ã¼·Î Àç»ı¼º
+		// ì´ë¯¸ì§€ í¬ê¸° ì¬ì„¤ì •
+    	ImageIcon images = new ImageIcon(filePath);          // ê²½ë¡œì—ì„œ ë¡œë“œí•œ Image íŒŒì¼ì„ ImageIcon ê°ì²´ë¡œ ìƒì„± 
+        Image tempImg = images.getImage();                      	          // ImageIconì„ Imageë¡œ ë³€í™˜
+        tempImg = tempImg.getScaledInstance(155, 207, Image.SCALE_SMOOTH);    // Image í¬ê¸° ì¬ì„¤ì •
+        images = new ImageIcon(tempImg);                                    // ì¬ì„¤ì •í•œ Imageë¥¼ ImageIcon ê°ì²´ë¡œ ì¬ìƒì„±
         
         return images;
 	}
