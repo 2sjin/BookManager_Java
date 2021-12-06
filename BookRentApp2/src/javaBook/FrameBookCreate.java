@@ -6,7 +6,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.awt.event.*;
 // 안녕
-public class FrameBookCreate {
+public class FrameBookCreate{
 
 	private JFrame frame;
 	private JTextField ISBN_FIELD;
@@ -19,6 +19,7 @@ public class FrameBookCreate {
 	private JButton Book_CANCEL;
 	private JLabel Image_Label;
 	private JButton Image_Change;
+	private JPanel panel;
 	/**
 	 * Launch the application.
 	 */
@@ -48,9 +49,8 @@ public class FrameBookCreate {
 	private void initialize() {
 		frame = new JFrame("도서 추가");
 		frame.setVisible(true);
-		
+		frame.setLocationRelativeTo(null);
 		frame.setBounds(100, 100, 550, 340);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel Book_ISBN = new JLabel("ISBN:");
@@ -123,6 +123,13 @@ public class FrameBookCreate {
 				JOptionPane.showConfirmDialog(null,"도서를 추가 하시겠습니까?","도서 추가",JOptionPane.YES_NO_OPTION);
 			}
 		});
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				// TODO Auto-generated method stub
+				e.getWindow().dispose(); //해당 창만 완전 종료함 
+			}
+		});
 		frame.getContentPane().add(Book_CREATE);
 		
 		Book_CANCEL = new JButton("취소");
@@ -135,6 +142,8 @@ public class FrameBookCreate {
 		});
 		
 		Image_Label = new JLabel("");
+		Image_Label.setOpaque(true);
+		Image_Label.setBackground(UIManager.getColor("CheckBoxMenuItem.selectionBackground"));
 		Image_Label.setBounds(24, 30, 155, 207);
 		frame.getContentPane().add(Image_Label);
 		
@@ -154,5 +163,18 @@ public class FrameBookCreate {
 			}
 		});
 		frame.getContentPane().add(Image_Change);
+		
+		panel = new JPanel();
+		panel.setBackground(UIManager.getColor("CheckBoxMenuItem.selectionBackground"));
+		panel.setBounds(0, 0, 536, 25);
+		frame.getContentPane().add(panel);
+		
+		JLabel lblNewLabel = new JLabel("도서 추가");
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		panel.add(lblNewLabel);
+	}
+	public JFrame getFrame() {
+		return frame;
 	}
 }

@@ -11,50 +11,21 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.Color;
 import javax.swing.UIManager;
 import javax.swing.JButton;
 
-public class FrameBookDelete {
-
+public class FrameBookDelete{
 	private JFrame frame;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FrameBookDelete window = new FrameBookDelete();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
+	private JPanel panel_1 = new JPanel();
 	public FrameBookDelete() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
 		frame = new JFrame();
 		frame.setVisible(true);
-		
 		frame.setBounds(100, 100, 555, 689);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 		PanelBookInfo book_panel = new PanelBookInfo(frame);
 		frame.getContentPane().add(book_panel, BorderLayout.CENTER);
-		
 		JButton DELETE_BUTTON = new JButton("\uC0AD\uC81C");
 		DELETE_BUTTON.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		DELETE_BUTTON.setBounds(342, 574, 80, 28);
@@ -64,14 +35,22 @@ public class FrameBookDelete {
 				JOptionPane.showConfirmDialog(null,"도서를 삭제 하시겠습니까?","도서 삭제",JOptionPane.ERROR_MESSAGE);
 			}
 		});
-		
-		JPanel panel_1 = new JPanel();
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println("Closed sub windows");
+				e.getWindow().dispose(); //해당 창만 완전 종료함 
+			}
+		});
 		panel_1.setBackground(UIManager.getColor("CheckBoxMenuItem.selectionBackground"));
 		frame.getContentPane().add(panel_1, BorderLayout.NORTH);
-		
-		JLabel lblNewLabel = new JLabel("\uB3C4\uC11C \uC0AD\uC81C");
-		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setFont(new Font("맑은 고딕", Font.BOLD, 17));
-		panel_1.add(lblNewLabel);
+		JLabel Delete_Label = new JLabel("\uB3C4\uC11C \uC0AD\uC81C");
+		Delete_Label.setForeground(Color.WHITE);
+		Delete_Label.setFont(new Font("맑은 고딕", Font.BOLD, 17));
+		panel_1.add(Delete_Label);
+	}
+	public JFrame getFrame() {
+		return frame;
 	}
 }

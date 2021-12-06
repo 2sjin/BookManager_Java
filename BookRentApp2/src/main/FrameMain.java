@@ -88,7 +88,8 @@ public class FrameMain extends JFrame {
 		menuItemBook_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new FrameBookCreate();
-			}			
+			}
+			
 		});
 		menuItemBook_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -98,7 +99,7 @@ public class FrameMain extends JFrame {
 		menuItemBook_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new FrameBookDelete();
-			}			
+			}
 		});
 
 		// [도서대여] 메뉴아이템 생성
