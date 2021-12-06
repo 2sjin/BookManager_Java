@@ -139,7 +139,7 @@ public class FrameBookCreate{
 		Image_Change.setBounds(24, 254, 155, 30);
 		Image_Change.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ImageIcon images = FileChooser.getImageIcon();	// 파일 선택기를 통해 이미지 리턴
+				ImageIcon images = FileChooser.getImageIcon(155, 207);	// 파일 선택기를 통해 이미지 리턴(매개변수는 가로, 세로 크기)
 				Image_Label.setIcon(images);
 			}
 		});

@@ -3,6 +3,8 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import other.FileChooser;
+
 import java.awt.*;
 
 public class FrameBookEdit {
@@ -30,16 +32,13 @@ public class FrameBookEdit {
 		frame.getContentPane().add(book_panel, BorderLayout.CENTER);
 		
 		// 이미지 변경
-		JFileChooser bookImg = new JFileChooser();
-		FileNameExtensionFilter fileFilter = new FileNameExtensionFilter("All Images", "jpg","jpge","png","gif","svg");
-		bookImg.setFileFilter(fileFilter);
 		JButton IMAGE_UPDATE_BUTTON = new JButton("이미지 변경");
 		IMAGE_UPDATE_BUTTON.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		IMAGE_UPDATE_BUTTON.setBounds(22, 438, 141, 23);
 		IMAGE_UPDATE_BUTTON.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				bookImg.showOpenDialog(null);
-				String filePath = bookImg.getSelectedFile().getPath();
+				ImageIcon images = FileChooser.getImageIcon(141, 227);	// 파일 선택기를 통해 이미지 리턴(매개변수는 가로, 세로 크기)
+				book_panel.setBookIcon(images);
 			}
 		});
 		
