@@ -4,6 +4,8 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import other.FileChooser;
+
 import java.awt.event.*;
 // 안녕
 public class FrameBookCreate{
@@ -133,17 +135,11 @@ public class FrameBookCreate{
 		frame.getContentPane().add(Image_Label);
 		
 		// 이미지 파일 선택
-		JFileChooser bookImg = new JFileChooser();
-		FileNameExtensionFilter fileFilter = new FileNameExtensionFilter("All Images", "jpg","jpge","png","gif","svg");
-		bookImg.setFileFilter(fileFilter);
-		
 		Image_Change = new JButton("이미지 변경");
 		Image_Change.setBounds(24, 254, 155, 30);
 		Image_Change.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				bookImg.showOpenDialog(null);
-				String filePath = bookImg.getSelectedFile().getPath();
-				ImageIcon images = new ImageIcon(filePath);
+				ImageIcon images = FileChooser.getImageIcon();	// 파일 선택기를 통해 이미지 리턴
 				Image_Label.setIcon(images);
 			}
 		});

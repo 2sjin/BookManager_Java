@@ -43,7 +43,7 @@ public class FrameReturn extends JFrame {
 		book_panel.add(UPDATE_BUTTON);
 		UPDATE_BUTTON.addActionListener(new  ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showConfirmDialog(null,"도서를 반납 하시겠습니까?","도서 반납",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showConfirmDialog(null,"도서를 반납하였습니다.","도서 반납",JOptionPane.CLOSED_OPTION);
 			}
 		});
 	}
