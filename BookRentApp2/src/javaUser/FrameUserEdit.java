@@ -1,30 +1,9 @@
 package javaUser;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import java.awt.BorderLayout;
-import javax.swing.JPanel;
-import java.awt.Color;
-import java.awt.Dimension;
-
-import javax.swing.UIManager;
-import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.border.TitledBorder;
-import javax.swing.border.EtchedBorder;
-import java.awt.SystemColor;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
-import javax.swing.border.LineBorder;
-import javax.swing.JTable;
-import javax.swing.JButton;
-import javax.swing.JScrollPane;
-import javax.swing.table.DefaultTableModel;
-import java.awt.FlowLayout;
-import javax.swing.ScrollPaneConstants;
+import java.awt.event.*;
+import javax.swing.*;
+import java.awt.*;
+import javax.swing.border.*;
 public class FrameUserEdit {
 
 	private JFrame frame;

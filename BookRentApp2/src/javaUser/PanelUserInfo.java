@@ -1,24 +1,10 @@
 package javaUser;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.UIManager;
-import java.awt.SystemColor;
-import javax.swing.border.LineBorder;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.border.*;
 import javax.swing.table.DefaultTableModel;
-
-import java.awt.Color;
-import java.awt.FlowLayout;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.BorderLayout;
-import javax.swing.JButton;
+import java.awt.*;
 
 public class PanelUserInfo extends JPanel {
 	private JTextField textField;

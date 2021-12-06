@@ -1,21 +1,9 @@
 package javaUser;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import java.awt.BorderLayout;
-import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.border.LineBorder;
-
-import java.awt.Font;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.Color;
-import javax.swing.JButton;
-import javax.swing.JTextField;
-
+import java.awt.event.*;
+import javax.swing.*;
+import java.awt.*;
+import javax.swing.border.*;
 public class FrameUserCreate {
 
 	private JFrame frame;
