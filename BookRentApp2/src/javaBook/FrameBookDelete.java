@@ -7,12 +7,12 @@ public class FrameBookDelete{
 	private JFrame frame;
 	private JPanel panel_1 = new JPanel();
 	public FrameBookDelete() {
-		frame = new JFrame();
+		frame = new JFrame("도서 삭제");
 		frame.setVisible(true);
 		frame.setBounds(100, 100, 555, 689);
 		PanelBookInfo book_panel = new PanelBookInfo(frame);
 		frame.getContentPane().add(book_panel, BorderLayout.CENTER);
-		JButton DELETE_BUTTON = new JButton("\uC0AD\uC81C");
+		JButton DELETE_BUTTON = new JButton("삭제");
 		DELETE_BUTTON.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		DELETE_BUTTON.setBounds(342, 574, 80, 28);
 		book_panel.add(DELETE_BUTTON);
@@ -29,7 +29,7 @@ public class FrameBookDelete{
 		});
 		panel_1.setBackground(UIManager.getColor("CheckBoxMenuItem.selectionBackground"));
 		frame.getContentPane().add(panel_1, BorderLayout.NORTH);
-		JLabel Delete_Label = new JLabel("\uB3C4\uC11C \uC0AD\uC81C");
+		JLabel Delete_Label = new JLabel("도서 삭제");
 		Delete_Label.setForeground(Color.WHITE);
 		Delete_Label.setFont(new Font("맑은 고딕", Font.BOLD, 17));
 		panel_1.add(Delete_Label);

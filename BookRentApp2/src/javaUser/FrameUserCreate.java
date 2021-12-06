@@ -27,7 +27,7 @@ public class FrameUserCreate {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
+		frame = new JFrame("회원 등록");
 		frame.setVisible(true);
 		frame.getContentPane().setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
 		frame.setBounds(100, 100, 600, 333);
@@ -45,7 +45,7 @@ public class FrameUserCreate {
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("\uD68C\uC6D0 \uB4F1\uB85D");
+		JLabel lblNewLabel = new JLabel("회원 등록");
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		lblNewLabel.setBounds(240, 10, 93, 28);
@@ -57,48 +57,48 @@ public class FrameUserCreate {
 		Image.setBounds(12, 63, 124, 160);
 		frame.getContentPane().add(Image);
 		
-		JButton ImageButton = new JButton("\uC774\uBBF8\uC9C0 \uBCC0\uACBD");
+		JButton ImageButton = new JButton("이미지 변경");
 		ImageButton.setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
 		ImageButton.setBorder(new LineBorder(Color.BLUE));
 		ImageButton.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
 		ImageButton.setBounds(12, 250, 124, 30);
 		frame.getContentPane().add(ImageButton);
 		
-		JButton PushButton = new JButton("\uB4F1\uB85D");
+		JButton PushButton = new JButton("등록");
 		PushButton.setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
 		PushButton.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
 		PushButton.setBorder(new LineBorder(Color.BLUE));
 		PushButton.setBounds(378, 250, 92, 30);
 		frame.getContentPane().add(PushButton);
 		
-		JButton CancelButton = new JButton("\uCDE8\uC18C");
+		JButton CancelButton = new JButton("취소");
 		CancelButton.setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
 		CancelButton.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
 		CancelButton.setBorder(new LineBorder(Color.BLUE));
 		CancelButton.setBounds(482, 250, 92, 30);
 		frame.getContentPane().add(CancelButton);
 		
-		JLabel lblNewLabel_1 = new JLabel("\uC804\uD654\uBC88\uD638 :");
+		JLabel lblNewLabel_1 = new JLabel("전화번호 :");
 		lblNewLabel_1.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		lblNewLabel_1.setBounds(166, 64, 92, 18);
 		frame.getContentPane().add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("\uC774\uB984 :");
+		JLabel lblNewLabel_1_1 = new JLabel("이름 :");
 		lblNewLabel_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		lblNewLabel_1_1.setBounds(166, 99, 92, 18);
 		frame.getContentPane().add(lblNewLabel_1_1);
 		
-		JLabel lblNewLabel_1_2 = new JLabel("\uC0DD\uB144\uC6D4\uC77C :");
+		JLabel lblNewLabel_1_2 = new JLabel("생년월일 :");
 		lblNewLabel_1_2.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		lblNewLabel_1_2.setBounds(166, 134, 92, 18);
 		frame.getContentPane().add(lblNewLabel_1_2);
 		
-		JLabel lblNewLabel_1_3 = new JLabel("\uC131\uBCC4 :");
+		JLabel lblNewLabel_1_3 = new JLabel("성별 :");
 		lblNewLabel_1_3.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		lblNewLabel_1_3.setBounds(166, 169, 92, 18);
 		frame.getContentPane().add(lblNewLabel_1_3);
 		
-		JLabel lblNewLabel_1_4 = new JLabel("\uC774\uBA54\uC77C :");
+		JLabel lblNewLabel_1_4 = new JLabel("이메일 :");
 		lblNewLabel_1_4.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		lblNewLabel_1_4.setBounds(166, 205, 92, 18);
 		frame.getContentPane().add(lblNewLabel_1_4);

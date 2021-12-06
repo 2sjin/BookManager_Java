@@ -19,7 +19,7 @@ public class FrameBookSearch {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame("도서 정보");
+		frame = new JFrame("도서 조회");
 		frame.setVisible(true);
 		
 		frame.setBounds(100, 100, 555, 689);
@@ -38,7 +38,7 @@ public class FrameBookSearch {
 				e.getWindow().dispose(); //해당 창만 완전 종료함 
 			}
 		});
-		JLabel BOOK_Imformation = new JLabel("\uB3C4\uC11C \uC815\uBCF4");
+		JLabel BOOK_Imformation = new JLabel("도서 조회");
 		BOOK_Imformation.setForeground(Color.WHITE);
 		BOOK_Imformation.setFont(new Font("맑은 고딕", Font.BOLD, 17));
 		panel.add(BOOK_Imformation);
