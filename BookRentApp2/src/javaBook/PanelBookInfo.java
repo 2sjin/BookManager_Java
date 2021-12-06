@@ -208,4 +208,8 @@ public class PanelBookInfo extends JPanel {
 		LINK_FIELD.setEnabled(boo);
 		DESCRIPTION_FIELD.setEnabled(boo);
 	}
+	
+	public void setBookIcon(ImageIcon img) {
+		BOOK_IMAGE.setIcon(img);
+	}
 }

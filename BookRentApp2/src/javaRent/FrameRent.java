@@ -60,7 +60,7 @@ public class FrameRent extends JFrame {
 		book_panel.add(UPDATE_BUTTON);
 		UPDATE_BUTTON.addActionListener(new  ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showConfirmDialog(null,"도서를 대여 하시겠습니까?","도서 대여",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showConfirmDialog(null,"도서를 대여하였습니다.","도서 대여",JOptionPane.CLOSED_OPTION);
 			}
 		});
 	}
