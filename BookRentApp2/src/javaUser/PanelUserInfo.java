@@ -26,7 +26,7 @@ public class PanelUserInfo extends JPanel {
 		Center_Panel.setForeground(Color.WHITE);
 		Center_Panel.setBorder(new LineBorder(UIManager.getColor("CheckBoxMenuItem.selectionBackground")));
 		Center_Panel.setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
-		Center_Panel.setBounds(12, 10, 518, 539);
+		Center_Panel.setBounds(12, 10, 516, 537);
 		add(Center_Panel);
 		Center_Panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 		
