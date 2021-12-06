@@ -2,7 +2,7 @@ package javaBook;
 
 import java.awt.*;
 import java.awt.event.*;
-
+import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -40,8 +40,14 @@ public class PanelBookInfo extends JPanel {
 		Book_Search.setBounds(12, 10, 80, 15);
 		add(Book_Search);
 		
+		
 		Search_Field = new JTextField();
 		Search_Field.setBounds(104, 7, 414, 21);
+		Search_Field.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		add(Search_Field);
 		Search_Field.setColumns(10);
 		
