@@ -122,7 +122,7 @@ public class FrameBookCreate{
 		frame.getContentPane().add(Book_CANCEL);
 		Book_CANCEL.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.setVisible(false);
+				frame.dispose();
 			}
 		});
 		

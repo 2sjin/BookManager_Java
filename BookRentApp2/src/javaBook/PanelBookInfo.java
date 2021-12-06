@@ -176,7 +176,7 @@ public class PanelBookInfo extends JPanel {
 		add(CANCEL_BUTTON);
 		CANCEL_BUTTON.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame2.setVisible(false);
+				frame2.dispose();
 			}
 		});
 		panel = new JPanel();
