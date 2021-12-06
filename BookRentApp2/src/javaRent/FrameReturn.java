@@ -1,10 +1,12 @@
 package javaRent;
 
+// 패키지 불러오기(GUI 구현 목적)
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
+// 패키지 불러오기(다른 사용자 정의 패키지 사용 목적)
 import javaBook.*;
 
 // [도서 반납] 프레임 클래스 

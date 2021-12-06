@@ -1,20 +1,14 @@
 package javaRent;
 
-import java.awt.BorderLayout;
+// 패키지 불러오기(GUI 구현 목적)
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.border.*;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import javaBook.PanelBookInfo;
-import java.awt.FlowLayout;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+// 패키지 불러오기(다른 사용자 정의 패키지 사용 목적)
+import javaBook.*;
+import javaUser.*;
 
 // [도서 대여] 프레임 클래스 
 public class FrameRent extends JFrame {
@@ -32,7 +26,7 @@ public class FrameRent extends JFrame {
 		setVisible(true);
 		
 		// '회원 정보' 패널 추가
-		JPanel user_panel = new PanelBookInfo(this);
+		JPanel user_panel = new PanelUserInfo();
 		user_panel.setBounds(5, 39, 531, 608);
 		getContentPane().add(user_panel);
 		
