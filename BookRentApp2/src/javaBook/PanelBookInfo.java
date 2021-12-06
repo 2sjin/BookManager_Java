@@ -35,7 +35,7 @@ public class PanelBookInfo extends JPanel {
 	public PanelBookInfo(JFrame frame2) {
 		setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
 		setLayout(null);
-		JLabel Book_Search = new JLabel("\uB3C4\uC11C \uAC80\uC0C9");
+		JLabel Book_Search = new JLabel("도서 검색");
 		Book_Search.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		Book_Search.setBounds(12, 10, 80, 15);
 		add(Book_Search);
@@ -45,7 +45,7 @@ public class PanelBookInfo extends JPanel {
 		add(Search_Field);
 		Search_Field.setColumns(10);
 		
-		JLabel Search_result = new JLabel("\uB3C4\uC11C \uAC80\uC0C9 \uACB0\uACFC");
+		JLabel Search_result = new JLabel("도서 검색 결과");
 		Search_result.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		Search_result.setBounds(12, 35, 118, 15);
 		add(Search_result);
@@ -55,32 +55,32 @@ public class PanelBookInfo extends JPanel {
 		Book_ISBN.setBounds(175, 202, 77, 15);
 		add(Book_ISBN);
 		
-		JLabel Book_TITLE = new JLabel("\uC81C\uBAA9:");
+		JLabel Book_TITLE = new JLabel("제목:");
 		Book_TITLE.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		Book_TITLE.setBounds(175, 232, 77, 15);
 		add(Book_TITLE);
 		
-		JLabel Book_AUTHOR = new JLabel("\uC800\uC790:");
+		JLabel Book_AUTHOR = new JLabel("저자:");
 		Book_AUTHOR.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		Book_AUTHOR.setBounds(175, 262, 77, 15);
 		add(Book_AUTHOR);
 		
-		JLabel Book_PUB = new JLabel("\uCD9C\uD310\uC0AC:");
+		JLabel Book_PUB = new JLabel("출판사:");
 		Book_PUB.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		Book_PUB.setBounds(175, 292, 77, 15);
 		add(Book_PUB);
 		
-		JLabel Book_PRICE = new JLabel("\uAC00\uACA9(\uC6D0):");
+		JLabel Book_PRICE = new JLabel("가격(원):");
 		Book_PRICE.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		Book_PRICE.setBounds(175, 322, 77, 17);
 		add(Book_PRICE);
 		
-		JLabel Book_LINK = new JLabel("\uAD00\uB828\uB9C1\uD06C:");
+		JLabel Book_LINK = new JLabel("관련링크:");
 		Book_LINK.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		Book_LINK.setBounds(175, 352, 77, 15);
 		add(Book_LINK);
 		
-		JLabel Book_DESCRIPTION = new JLabel("\uB3C4\uC11C\uC124\uBA85:");
+		JLabel Book_DESCRIPTION = new JLabel("도서설명:");
 		Book_DESCRIPTION.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		Book_DESCRIPTION.setBounds(175, 382, 77, 15);
 		add(Book_DESCRIPTION);
@@ -140,7 +140,7 @@ public class PanelBookInfo extends JPanel {
 		BOOK_IMAGE.setBounds(22, 190, 141, 227);
 		add(BOOK_IMAGE);
 		
-		Book_LENDER = new JLabel("\uB300\uC5EC\uC790");
+		Book_LENDER = new JLabel("대여자");
 		Book_LENDER.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		Book_LENDER.setBounds(80, 483, 62, 15);
 		add(Book_LENDER);
@@ -150,7 +150,7 @@ public class PanelBookInfo extends JPanel {
 		LENDER_LABEL.setBounds(45, 508, 141, 15);
 		add(LENDER_LABEL);
 		
-		Book_RENTAL_DATE = new JLabel("\uB300\uC5EC\uC77C");
+		Book_RENTAL_DATE = new JLabel("대여일");
 		Book_RENTAL_DATE.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		Book_RENTAL_DATE.setBounds(252, 483, 70, 17);
 		add(Book_RENTAL_DATE);
@@ -160,7 +160,7 @@ public class PanelBookInfo extends JPanel {
 		RENTAL_DATE_LABEL.setBounds(212, 508, 141, 15);
 		add(RENTAL_DATE_LABEL);
 		
-		Book_RETURN_DATE = new JLabel("\uBC18\uB0A9 \uC608\uC815\uC77C");
+		Book_RETURN_DATE = new JLabel("반납 예정일");
 		Book_RETURN_DATE.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		Book_RETURN_DATE.setBounds(408, 483, 110, 17);
 		add(Book_RETURN_DATE);
@@ -170,7 +170,7 @@ public class PanelBookInfo extends JPanel {
 		RETURN_DATE_LABEL.setBounds(372, 508, 146, 15);
 		add(RETURN_DATE_LABEL);
 		
-		CANCEL_BUTTON = new JButton("\uCDE8\uC18C");
+		CANCEL_BUTTON = new JButton("취소");
 		CANCEL_BUTTON.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		CANCEL_BUTTON.setBounds(438, 574, 80, 28);
 		add(CANCEL_BUTTON);

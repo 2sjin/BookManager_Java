@@ -21,7 +21,7 @@ public class FrameUserSearch {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
+		frame = new JFrame("회원 조회");
 		frame.setVisible(true);
 		frame.getContentPane().setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
 		frame.setBounds(100, 100, 555, 689);
@@ -33,7 +33,7 @@ public class FrameUserSearch {
         });
 		frame.getContentPane().setLayout(null);
 		
-		JLabel TitleLabel = new JLabel("\uD68C\uC6D0 \uC815\uBCF4");
+		JLabel TitleLabel = new JLabel("회원 정보");
 		TitleLabel.setForeground(Color.BLACK);
 		TitleLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		TitleLabel.setBounds(12, 43, 95, 22);
@@ -44,13 +44,13 @@ public class FrameUserSearch {
 		TitlePanel.setBounds(0, 0, 541, 33);
 		frame.getContentPane().add(TitlePanel);
 		
-		JLabel lblNewLabel = new JLabel("\uD68C\uC6D0 \uC870\uD68C");
+		JLabel lblNewLabel = new JLabel("회원 조회");
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		lblNewLabel.setBackground(new Color(255, 255, 255));
 		TitlePanel.add(lblNewLabel);
 		
-		JButton CancelButton = new JButton("\uCDE8\uC18C");
+		JButton CancelButton = new JButton("취소");
 		CancelButton.setBorder(new LineBorder(UIManager.getColor("CheckBoxMenuItem.selectionBackground")));
 		CancelButton.setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
 		CancelButton.setFont(new Font("굴림", Font.PLAIN, 17));

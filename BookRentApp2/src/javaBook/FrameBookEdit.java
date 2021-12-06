@@ -33,7 +33,7 @@ public class FrameBookEdit {
 		JFileChooser bookImg = new JFileChooser();
 		FileNameExtensionFilter fileFilter = new FileNameExtensionFilter("All Images", "jpg","jpge","png","gif","svg");
 		bookImg.setFileFilter(fileFilter);
-		JButton IMAGE_UPDATE_BUTTON = new JButton("\uC774\uBBF8\uC9C0 \uBCC0\uACBD");
+		JButton IMAGE_UPDATE_BUTTON = new JButton("이미지 변경");
 		IMAGE_UPDATE_BUTTON.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		IMAGE_UPDATE_BUTTON.setBounds(22, 438, 141, 23);
 		IMAGE_UPDATE_BUTTON.addActionListener(new ActionListener() {
@@ -46,7 +46,7 @@ public class FrameBookEdit {
 		book_panel.true_flase_enabled(true);
 		book_panel.add(IMAGE_UPDATE_BUTTON);
 		
-		JButton UPDATE_BUTTON = new JButton("\uC218\uC815");
+		JButton UPDATE_BUTTON = new JButton("수정");
 		UPDATE_BUTTON.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		UPDATE_BUTTON.setBounds(342, 574, 80, 28);
 		UPDATE_BUTTON.addActionListener(new  ActionListener() {
@@ -66,7 +66,7 @@ public class FrameBookEdit {
 		panel.setBackground(UIManager.getColor("CheckBoxMenuItem.selectionBackground"));
 		frame.getContentPane().add(panel, BorderLayout.NORTH);
 		
-		JLabel BOOK_UPDATE = new JLabel("\uB3C4\uC11C \uC218\uC815");
+		JLabel BOOK_UPDATE = new JLabel("도서 수정");
 		BOOK_UPDATE.setForeground(Color.WHITE);
 		BOOK_UPDATE.setFont(new Font("맑은 고딕", Font.BOLD, 17));
 		panel.add(BOOK_UPDATE);

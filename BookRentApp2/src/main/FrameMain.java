@@ -18,7 +18,7 @@ public class FrameMain extends JFrame {
 		// 프레임 설정
 		setTitle("도서 대여 프로그램");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 300, 200);
+		setBounds(100, 100, 300, 160);
 		setVisible(true);
 		
 		// 메뉴바 생성

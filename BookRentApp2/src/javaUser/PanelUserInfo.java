@@ -30,7 +30,7 @@ public class PanelUserInfo extends JPanel {
 		add(Center_Panel);
 		Center_Panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 		
-		JLabel lblNewLabel_2 = new JLabel("\uD68C\uC6D0 \uAC80\uC0C9");
+		JLabel lblNewLabel_2 = new JLabel("회원 검색");
 		lblNewLabel_2.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		Center_Panel.add(lblNewLabel_2);
 		
@@ -38,7 +38,7 @@ public class PanelUserInfo extends JPanel {
 		textField.setColumns(41);
 		Center_Panel.add(textField);
 		
-		JLabel lblNewLabel_3 = new JLabel("\uD68C\uC6D0 \uAC80\uC0C9 \uACB0\uACFC");
+		JLabel lblNewLabel_3 = new JLabel("회원 검색 결과");
 		lblNewLabel_3.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		Center_Panel.add(lblNewLabel_3);
 		
@@ -55,7 +55,7 @@ public class PanelUserInfo extends JPanel {
 				{null, null, null, null, null, null},
 			},
 			new String[] {
-				"ISBN", "\uC81C\uBAA9", "\uC800\uC790", "\uCD9C\uD310\uC0AC", "\uB300\uC5EC\uC77C", "\uBC18\uB0A9\uC608\uC815\uC77C"
+				"ISBN", "제목", "저자", "출판사", "대여일", "반납예정일"
 			}
 		));
 		table = new JTable();
@@ -71,7 +71,7 @@ public class PanelUserInfo extends JPanel {
 				{null, null, null, null, null, null},
 			},
 			new String[] {
-				"\uC804\uD654\uBC88\uD638", "\uC774\uB984", "\uC0DD\uB144\uC6D4\uC77C", "\uC131\uBCC4", "\uB4F1\uB85D\uC5EC\uBD80", "\uB300\uC5EC\uB3C4\uC11C"
+				"전화번호", "이름", "생년월일", "성별", "등록여부", "대여도서"
 			}
 		));
 		JScrollPane scrollPane = new JScrollPane(table);
@@ -91,37 +91,37 @@ public class PanelUserInfo extends JPanel {
 		Image.setBounds(12, 10, 119, 140);
 		panel.add(Image);
 		
-		JLabel lblNewLabel_4 = new JLabel("\uC804\uD654\uBC88\uD638 :");
+		JLabel lblNewLabel_4 = new JLabel("전화번호 :");
 		lblNewLabel_4.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		lblNewLabel_4.setBounds(143, 10, 105, 22);
 		panel.add(lblNewLabel_4);
 		
-		JLabel lblNewLabel_4_2 = new JLabel("\uC774\uB984 :");
+		JLabel lblNewLabel_4_2 = new JLabel("이름 :");
 		lblNewLabel_4_2.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		lblNewLabel_4_2.setBounds(143, 42, 105, 22);
 		panel.add(lblNewLabel_4_2);
 		
-		JLabel lblNewLabel_4_4 = new JLabel("\uC0DD\uB144\uC6D4\uC77C :");
+		JLabel lblNewLabel_4_4 = new JLabel("생년월일 :");
 		lblNewLabel_4_4.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		lblNewLabel_4_4.setBounds(143, 74, 105, 22);
 		panel.add(lblNewLabel_4_4);
 		
-		JLabel lblNewLabel_4_6 = new JLabel("\uC131\uBCC4 :");
+		JLabel lblNewLabel_4_6 = new JLabel("성별 :");
 		lblNewLabel_4_6.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		lblNewLabel_4_6.setBounds(143, 106, 105, 22);
 		panel.add(lblNewLabel_4_6);
 		
-		JLabel lblNewLabel_4_7 = new JLabel("\uC774\uBA54\uC77C :");
+		JLabel lblNewLabel_4_7 = new JLabel("이메일 :");
 		lblNewLabel_4_7.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		lblNewLabel_4_7.setBounds(143, 138, 105, 22);
 		panel.add(lblNewLabel_4_7);
 		
-		JLabel lblNewLabel_4_10 = new JLabel("\uB4F1\uB85D\uC5EC\uBD80 :");
+		JLabel lblNewLabel_4_10 = new JLabel("등록여부 :");
 		lblNewLabel_4_10.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		lblNewLabel_4_10.setBounds(143, 170, 105, 22);
 		panel.add(lblNewLabel_4_10);
 		
-		JLabel lblNewLabel_4_11 = new JLabel("\uB4F1\uB85D");
+		JLabel lblNewLabel_4_11 = new JLabel("등록");
 		lblNewLabel_4_11.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		lblNewLabel_4_11.setBounds(260, 170, 105, 22);
 		panel.add(lblNewLabel_4_11);
@@ -132,7 +132,7 @@ public class PanelUserInfo extends JPanel {
 		panel.add(List_Panel);
 		List_Panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 		
-		JLabel lblNewLabel_5 = new JLabel("\uB300\uC5EC\uC911\uC778 \uB3C4\uC11C \uBAA9\uB85D");
+		JLabel lblNewLabel_5 = new JLabel("대여중인 도서 목록");
 		lblNewLabel_5.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		List_Panel.add(lblNewLabel_5);
 		
@@ -140,7 +140,7 @@ public class PanelUserInfo extends JPanel {
 		jp.setPreferredSize(new Dimension(460, 120));
 		List_Panel.add(jp);
 		
-		JButton CancelButton_1_1 = new JButton("\uC774\uBBF8\uC9C0 \uBCC0\uACBD");
+		JButton CancelButton_1_1 = new JButton("이미지 변경");
 		CancelButton_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
 		CancelButton_1_1.setBorder(new LineBorder(UIManager.getColor("CheckBoxMenuItem.selectionBackground")));
 		CancelButton_1_1.setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
