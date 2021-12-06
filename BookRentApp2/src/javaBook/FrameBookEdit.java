@@ -20,6 +20,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.UIManager;
+import java.awt.Color;
 
 public class FrameBookEdit {
 
@@ -88,8 +89,6 @@ public class FrameBookEdit {
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				// TODO Auto-generated method stub
-				System.out.println("Closed sub windows");
 				e.getWindow().dispose(); //해당 창만 완전 종료함 
 			}
 		});
@@ -100,7 +99,7 @@ public class FrameBookEdit {
 		frame.getContentPane().add(panel, BorderLayout.NORTH);
 		
 		JLabel BOOK_UPDATE = new JLabel("\uB3C4\uC11C \uC218\uC815");
-		BOOK_UPDATE.setForeground(UIManager.getColor("CheckBox.highlight"));
+		BOOK_UPDATE.setForeground(Color.WHITE);
 		BOOK_UPDATE.setFont(new Font("맑은 고딕", Font.BOLD, 17));
 		panel.add(BOOK_UPDATE);
 	}

@@ -38,8 +38,6 @@ public class FrameBookDelete{
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				// TODO Auto-generated method stub
-				System.out.println("Closed sub windows");
 				e.getWindow().dispose(); //해당 창만 완전 종료함 
 			}
 		});
