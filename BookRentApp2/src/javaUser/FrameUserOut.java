@@ -28,21 +28,7 @@ import javax.swing.ScrollPaneConstants;
 public class FrameUserOut {
 
 	private JFrame frame;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FrameUserOut window = new FrameUserOut();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the application.

@@ -28,21 +28,7 @@ import javax.swing.ScrollPaneConstants;
 public class FrameUserEdit {
 
 	private JFrame frame;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FrameUserEdit window = new FrameUserEdit();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the application.

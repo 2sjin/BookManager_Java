@@ -20,21 +20,6 @@ public class FrameBookCreate{
 	private JLabel Image_Label;
 	private JButton Image_Change;
 	private JPanel panel;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FrameBookCreate window = new FrameBookCreate();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.

@@ -7,6 +7,11 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 public class PanelBookInfo extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private JTextField Search_Field;
 	private JTextField ISBN_FIELD;
 	private JTextField TITLE_FIELD;
