@@ -2,10 +2,11 @@ package javaBook;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.InputStream;
 import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-
+import other.*;
 public class PanelBookInfo extends JPanel {
 	/**
 	 * 
@@ -29,9 +30,14 @@ public class PanelBookInfo extends JPanel {
 	private JLabel RETURN_DATE_LABEL;
 	private JButton CANCEL_BUTTON;
 	private JTable table;
+	private DefaultTableModel tableModel;
 	private String header[] = {"ISBN","제목","저자","출판사","대여자","대여일","반납예정일"};
 	private JScrollPane jp;
 	private JPanel panel;
+	private String BookName;
+	private Object[][] data = new Object[0][8];
+	private ResultSet src=null;
+	private dbConnector dbConn = new dbConnector();
 	public PanelBookInfo(JFrame frame2) {
 		setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
 		setLayout(null);
@@ -39,13 +45,28 @@ public class PanelBookInfo extends JPanel {
 		Book_Search.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		Book_Search.setBounds(12, 10, 80, 15);
 		add(Book_Search);
-		
-		
+		tableModel = new DefaultTableModel(data, header);
+		table = new JTable(tableModel);
 		Search_Field = new JTextField();
 		Search_Field.setBounds(104, 7, 414, 21);
 		Search_Field.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				BookName = Search_Field.getText();
+				src = dbConn.executeQurey("select * from BOOK where BOOK_TITLE LIKE '%"+BookName+"%';");
+				try {
+					while(src.next()) {
+						System.out.println(src.getString("BOOK_TITLE"));
+						Object[] tmp = {src.getString(1),src.getString(2),src.getString(3),src.getString(4),
+								src.getInt(5),src.getString(6),"Click",src.getString(8)};
+						tableModel.addRow(tmp);
+						// DB에서 BLOB 자료형으로 저장된 데이터 그림 데이터로 변환
+						InputStream inputStream = src.getBinaryStream(7);
+					}
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		add(Search_Field);
@@ -189,11 +210,6 @@ public class PanelBookInfo extends JPanel {
 		panel.setBounds(12, 60, 506, 110);
 		add(panel);
 		panel.setLayout(new BorderLayout(0, 0));
-		table = new JTable(new DefaultTableModel(
-			new Object[][] {
-			},
-			header
-		));
 		table.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		jp = new JScrollPane(table);
 		jp.setEnabled(false);

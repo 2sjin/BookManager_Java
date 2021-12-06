@@ -14,7 +14,8 @@ public class dbConnector {
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://jdb.deu.monster:60001/java03_team02", "java03_team02","whdldl123!");
+			conn = DriverManager.getConnection("jdbc:mysql://jdb.deu.monster:60001/j20194146",
+					"20194146","!!!!20194146");
 			System.out.println("DB 연결 완료");
 			stmt = conn.createStatement();
 
