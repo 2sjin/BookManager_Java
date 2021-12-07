@@ -26,9 +26,10 @@ public class FrameRent extends JFrame {
 		setVisible(true);
 		
 		// '회원 정보' 패널 추가
-		JPanel user_panel = new PanelUserInfo();
+		PanelUserInfo user_panel = new PanelUserInfo();
 		user_panel.setBounds(5, 39, 531, 608);
 		getContentPane().add(user_panel);
+		user_panel.tf_enabled(false);	// [이미지 변경] 버튼 숨기기, 텍스트필드 입력 비활성화
 		
 		// '회원 정보' 제목 패널 추가
 		JPanel panelL = new JPanel();
@@ -40,7 +41,7 @@ public class FrameRent extends JFrame {
 		panelL.add(USER_Imformation);
 		
 		// '도서 정보' 패널 추가
-		JPanel book_panel = new PanelBookInfo(this);
+		PanelBookInfo book_panel = new PanelBookInfo(this);
 		book_panel.setBounds(550, 39, 531, 608);
 		getContentPane().add(book_panel);
 		

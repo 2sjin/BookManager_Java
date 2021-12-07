@@ -11,8 +11,7 @@ public class Start {
 					new FrameMain();
 				} catch (Exception e) {
 					e.printStackTrace();
-				}
-			}
+				}			}
 		});
 	}
 }
