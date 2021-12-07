@@ -38,10 +38,12 @@ public class PanelBookInfo extends JPanel {
 	private Object[][] data = new Object[0][8];
 	private ResultSet src=null;
 	private dbConnector dbConn = new dbConnector();
+	private JLabel Book_Search;
+	private JLabel Search_result;
 	public PanelBookInfo(JFrame frame2) {
 		setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
 		setLayout(null);
-		JLabel Book_Search = new JLabel("도서 검색");
+		Book_Search = new JLabel("도서 검색");
 		Book_Search.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		Book_Search.setBounds(12, 10, 80, 15);
 		add(Book_Search);
@@ -72,7 +74,7 @@ public class PanelBookInfo extends JPanel {
 		add(Search_Field);
 		Search_Field.setColumns(10);
 		
-		JLabel Search_result = new JLabel("도서 검색 결과");
+		Search_result = new JLabel("도서 검색 결과");
 		Search_result.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		Search_result.setBounds(12, 35, 118, 15);
 		add(Search_result);
@@ -224,7 +226,18 @@ public class PanelBookInfo extends JPanel {
 		LINK_FIELD.setEnabled(boo);
 		DESCRIPTION_FIELD.setEnabled(boo);
 	}
-	
+	public void ComponentSetVisible(boolean boo) {
+		Book_Search.setVisible(boo);
+		Search_Field.setVisible(boo);
+		Search_result.setVisible(boo);
+		panel.setVisible(boo);
+		Book_LENDER.setVisible(boo);
+		LENDER_LABEL.setVisible(boo);
+		Book_RENTAL_DATE.setVisible(boo);
+		RENTAL_DATE_LABEL.setVisible(boo);
+		Book_RETURN_DATE.setVisible(boo);
+		RETURN_DATE_LABEL.setVisible(boo);
+	}
 	public void setBookIcon(ImageIcon img) {
 		BOOK_IMAGE.setIcon(img);
 	}

@@ -43,5 +43,4 @@ public class FrameBookSearch {
 		BOOK_Imformation.setFont(new Font("맑은 고딕", Font.BOLD, 17));
 		panel.add(BOOK_Imformation);
 	}
-
 }
