@@ -7,14 +7,15 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 public class PanelUserInfo extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTable table_1;
-	private JTable table;
+	JTextField UserSearch;
+	JTextField Phone;
+	JTextField Name;
+	JTextField Birth;
+	JTextField Sex;
+	JTextField Email;
+	JTable UserSearchResult;
+	JTable BookList;
+	JButton ImageChange;
 	/**
 	 * Create the panel.
 	 */
@@ -34,18 +35,18 @@ public class PanelUserInfo extends JPanel {
 		lblNewLabel_2.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		Center_Panel.add(lblNewLabel_2);
 		
-		textField = new JTextField();
-		textField.setColumns(41);
-		Center_Panel.add(textField);
+		UserSearch = new JTextField();
+		UserSearch.setColumns(41);
+		Center_Panel.add(UserSearch);
 		
 		JLabel lblNewLabel_3 = new JLabel("회원 검색 결과");
 		lblNewLabel_3.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		Center_Panel.add(lblNewLabel_3);
 		
-		table_1 = new JTable();
-		table_1.setEnabled(false);
-		table_1.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
-		table_1.setModel(new DefaultTableModel(
+		UserSearchResult = new JTable();
+		UserSearchResult.setEnabled(false);
+		UserSearchResult.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
+		UserSearchResult.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null, null, null, null},
 				{null, null, null, null, null, null},
@@ -58,10 +59,10 @@ public class PanelUserInfo extends JPanel {
 				"ISBN", "제목", "저자", "출판사", "대여일", "반납예정일"
 			}
 		));
-		table = new JTable();
-		table.setEnabled(false);
-		table.setFont(new Font("굴림", Font.PLAIN, 17));
-		table.setModel(new DefaultTableModel(
+		BookList = new JTable();
+		BookList.setEnabled(false);
+		BookList.setFont(new Font("굴림", Font.PLAIN, 17));
+		BookList.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null, null, null, null},
 				{null, null, null, null, null, null},
@@ -74,7 +75,7 @@ public class PanelUserInfo extends JPanel {
 				"전화번호", "이름", "생년월일", "성별", "등록여부", "대여도서"
 			}
 		));
-		JScrollPane scrollPane = new JScrollPane(table);
+		JScrollPane scrollPane = new JScrollPane(BookList);
 		scrollPane.setPreferredSize(new Dimension(500, 90));
 		Center_Panel.add(scrollPane);
 		
@@ -87,7 +88,7 @@ public class PanelUserInfo extends JPanel {
 		
 		JLabel Image = new JLabel("");
 		Image.setOpaque(true);
-		Image.setBackground(SystemColor.textHighlight);
+		Image.setBackground(UIManager.getColor("CheckBoxMenuItem.selectionBackground"));
 		Image.setBounds(12, 10, 119, 140);
 		panel.add(Image);
 		
@@ -136,10 +137,11 @@ public class PanelUserInfo extends JPanel {
 		lblNewLabel_5.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		List_Panel.add(lblNewLabel_5);
 		
-		JScrollPane jp = new JScrollPane(table_1);
+		JScrollPane jp = new JScrollPane(UserSearchResult);
 		jp.setPreferredSize(new Dimension(460, 120));
 		List_Panel.add(jp);
 		
+<<<<<<< HEAD
 		JButton CancelButton_1_1 = new JButton("이미지 변경");
 		CancelButton_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
 		CancelButton_1_1.setBorder(new LineBorder(UIManager.getColor("CheckBoxMenuItem.selectionBackground")));
@@ -176,6 +178,44 @@ public class PanelUserInfo extends JPanel {
 		textField_5.setBorder(new LineBorder(Color.BLUE));
 		textField_5.setBounds(260, 138, 210, 22);
 		panel.add(textField_5);
+=======
+		ImageChange = new JButton("\uC774\uBBF8\uC9C0 \uBCC0\uACBD");
+		ImageChange.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
+		ImageChange.setBorder(new LineBorder(UIManager.getColor("CheckBoxMenuItem.selectionBackground")));
+		ImageChange.setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
+		ImageChange.setBounds(12, 163, 119, 29);
+		panel.add(ImageChange);
+		
+		Phone = new JTextField();
+		Phone.setColumns(10);
+		Phone.setBorder(new LineBorder(Color.BLUE));
+		Phone.setBounds(260, 10, 210, 22);
+		panel.add(Phone);
+		
+		Name = new JTextField();
+		Name.setColumns(10);
+		Name.setBorder(new LineBorder(Color.BLUE));
+		Name.setBounds(260, 42, 210, 22);
+		panel.add(Name);
+		
+		Birth = new JTextField();
+		Birth.setColumns(10);
+		Birth.setBorder(new LineBorder(Color.BLUE));
+		Birth.setBounds(260, 74, 210, 22);
+		panel.add(Birth);
+		
+		Sex = new JTextField();
+		Sex.setColumns(10);
+		Sex.setBorder(new LineBorder(Color.BLUE));
+		Sex.setBounds(260, 106, 210, 22);
+		panel.add(Sex);
+		
+		Email = new JTextField();
+		Email.setColumns(10);
+		Email.setBorder(new LineBorder(Color.BLUE));
+		Email.setBounds(260, 138, 210, 22);
+		panel.add(Email);
+>>>>>>> 76aa8e6 (4차 회원관리수정)
 		setVisible(true);
 	}
 }

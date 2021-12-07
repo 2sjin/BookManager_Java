@@ -62,8 +62,34 @@ public class FrameUserOut {
 		CancelButton_1.setBorder(new LineBorder(UIManager.getColor("CheckBoxMenuItem.selectionBackground")));
 		CancelButton_1.setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
 		CancelButton_1.setBounds(329, 613, 95, 29);
+<<<<<<< HEAD
 		frame.getContentPane().add(CancelButton_1);	
+=======
+		CancelButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+			}
+		});
+		frame.getContentPane().add(CancelButton);
+		JButton UserOut = new JButton("\uD68C\uC6D0 \uD0C8\uD1F4");
+        UserOut.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
+        UserOut.setBorder(new LineBorder(UIManager.getColor("CheckBoxMenuItem.selectionBackground")));
+        UserOut.setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
+        UserOut.setBounds(325, 613, 95, 29);
+        UserOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int result = JOptionPane.showConfirmDialog(null," 회원을 탈퇴 처리 하시겠습니까?","회원 탈퇴",JOptionPane.YES_NO_OPTION);
+			}
+		});
+        frame.getContentPane().add(UserOut);
+>>>>>>> 76aa8e6 (4차 회원관리수정)
 		PanelUserInfo ct = new PanelUserInfo();
+		ct.Phone.setEnabled(false);
+		ct.Name.setEnabled(false);
+		ct.Birth.setEnabled(false);
+		ct.Sex.setEnabled(false);
+		ct.Email.setEnabled(false);
+		ct.ImageChange.setVisible(false);
         ct.setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
         ct.setBounds(0, 56, 541, 554);
         frame.getContentPane().add(ct);

@@ -55,9 +55,20 @@ public class FrameUserSearch {
 		CancelButton.setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
 		CancelButton.setFont(new Font("굴림", Font.PLAIN, 17));
 		CancelButton.setBounds(432, 613, 95, 29);
+		CancelButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+			}
+		});
 		frame.getContentPane().add(CancelButton);
 		
 		PanelUserInfo ct = new PanelUserInfo();
+		ct.Phone.setEnabled(false);
+		ct.Name.setEnabled(false);
+		ct.Birth.setEnabled(false);
+		ct.Sex.setEnabled(false);
+		ct.Email.setEnabled(false);
+		ct.ImageChange.setVisible(false);
         ct.setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
         ct.setBounds(0, 56, 541, 554);
         frame.getContentPane().add(ct);

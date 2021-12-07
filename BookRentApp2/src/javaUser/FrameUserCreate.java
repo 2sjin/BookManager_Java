@@ -70,12 +70,22 @@ public class FrameUserCreate {
 		PushButton.setBorder(new LineBorder(Color.BLUE));
 		PushButton.setBounds(378, 250, 92, 30);
 		frame.getContentPane().add(PushButton);
+		PushButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int result = JOptionPane.showConfirmDialog(null," 회원을 등록 하시겠습니까?","회원 등록",JOptionPane.YES_NO_OPTION);
+			}
+		});
 		
 		JButton CancelButton = new JButton("취소");
 		CancelButton.setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
 		CancelButton.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
 		CancelButton.setBorder(new LineBorder(Color.BLUE));
 		CancelButton.setBounds(482, 250, 92, 30);
+		CancelButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+			}
+		});
 		frame.getContentPane().add(CancelButton);
 		
 		JLabel lblNewLabel_1 = new JLabel("전화번호 :");

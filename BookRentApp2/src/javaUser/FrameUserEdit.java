@@ -55,14 +55,33 @@ public class FrameUserEdit {
 		CancelButton.setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
 		CancelButton.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		CancelButton.setBounds(432, 613, 95, 29);
+		CancelButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+			}
+		});
 		frame.getContentPane().add(CancelButton);
 		
+<<<<<<< HEAD
 		JButton CancelButton_1 = new JButton("수정");
 		CancelButton_1.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		CancelButton_1.setBorder(new LineBorder(UIManager.getColor("CheckBoxMenuItem.selectionBackground")));
 		CancelButton_1.setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
 		CancelButton_1.setBounds(325, 613, 95, 29);
 		frame.getContentPane().add(CancelButton_1);
+=======
+		JButton EditButton = new JButton("\uC218\uC815");
+		EditButton.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
+		EditButton.setBorder(new LineBorder(UIManager.getColor("CheckBoxMenuItem.selectionBackground")));
+		EditButton.setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
+		EditButton.setBounds(325, 613, 95, 29);
+		EditButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int result = JOptionPane.showConfirmDialog(null," 회원 정보를 수정 하시겠습니까?","회원 정보 수정",JOptionPane.YES_NO_OPTION);
+			}
+		});
+		frame.getContentPane().add(EditButton);
+>>>>>>> 76aa8e6 (4차 회원관리수정)
 		
 		PanelUserInfo ct = new PanelUserInfo();
         ct.setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
