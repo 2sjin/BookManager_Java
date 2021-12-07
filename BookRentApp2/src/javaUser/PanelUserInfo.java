@@ -4,6 +4,9 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.table.DefaultTableModel;
+
+import other.FileChooser;
+
 import java.awt.*;
 
 public class PanelUserInfo extends JPanel {
@@ -140,50 +143,18 @@ public class PanelUserInfo extends JPanel {
 		JScrollPane jp = new JScrollPane(UserSearchResult);
 		jp.setPreferredSize(new Dimension(460, 120));
 		List_Panel.add(jp);
-		
 
-		JButton CancelButton_1_1 = new JButton("이미지 변경");
-		CancelButton_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
-		CancelButton_1_1.setBorder(new LineBorder(UIManager.getColor("CheckBoxMenuItem.selectionBackground")));
-		CancelButton_1_1.setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
-		CancelButton_1_1.setBounds(12, 163, 119, 29);
-		panel.add(CancelButton_1_1);
-		
-		JTextField textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBorder(new LineBorder(Color.BLUE));
-		textField_1.setBounds(260, 10, 210, 22);
-		panel.add(textField_1);
-		
-		JTextField textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBorder(new LineBorder(Color.BLUE));
-		textField_2.setBounds(260, 42, 210, 22);
-		panel.add(textField_2);
-		
-		JTextField textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBorder(new LineBorder(Color.BLUE));
-		textField_3.setBounds(260, 74, 210, 22);
-		panel.add(textField_3);
-		
-		JTextField textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBorder(new LineBorder(Color.BLUE));
-		textField_4.setBounds(260, 106, 210, 22);
-		panel.add(textField_4);
-		
-		JTextField textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBorder(new LineBorder(Color.BLUE));
-		textField_5.setBounds(260, 138, 210, 22);
-		panel.add(textField_5);
-
-		ImageChange = new JButton("\uC774\uBBF8\uC9C0 \uBCC0\uACBD");
+		ImageChange = new JButton("이미지 변경");
 		ImageChange.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
 		ImageChange.setBorder(new LineBorder(UIManager.getColor("CheckBoxMenuItem.selectionBackground")));
 		ImageChange.setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
 		ImageChange.setBounds(12, 163, 119, 29);
+		ImageChange.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ImageIcon images = FileChooser.getImageIcon(119, 140);	// 파일 선택기를 통해 이미지 리턴(매개변수는 가로, 세로 크기)
+				Image.setIcon(images);
+			}
+		});
 		panel.add(ImageChange);
 		
 		Phone = new JTextField();
@@ -217,5 +188,13 @@ public class PanelUserInfo extends JPanel {
 		panel.add(Email);
 
 		setVisible(true);
+	}
+	public void tf_enabled(boolean boo) {
+		Phone.setEnabled(boo);
+		Name.setEnabled(boo);
+		Birth.setEnabled(boo);
+		Sex.setEnabled(boo);
+		Email.setEnabled(boo);
+		ImageChange.setVisible(boo);
 	}
 }

@@ -4,14 +4,16 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.*;
+
+import other.FileChooser;
 public class FrameUserCreate {
 
 	private JFrame frame;
 	private JTextField PhoneTextField;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField NametextField;
+	private JTextField BirthtextField;
+	private JTextField SextextField;
+	private JTextField EmailtextField;
 
 
 
@@ -62,6 +64,12 @@ public class FrameUserCreate {
 		ImageButton.setBorder(new LineBorder(Color.BLUE));
 		ImageButton.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
 		ImageButton.setBounds(12, 250, 124, 30);
+		ImageButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ImageIcon images = FileChooser.getImageIcon(124, 160);	// 파일 선택기를 통해 이미지 리턴(매개변수는 가로, 세로 크기)
+				Image.setIcon(images);
+			}
+		});
 		frame.getContentPane().add(ImageButton);
 		
 		JButton PushButton = new JButton("등록");
@@ -119,28 +127,28 @@ public class FrameUserCreate {
 		frame.getContentPane().add(PhoneTextField);
 		PhoneTextField.setColumns(10);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBorder(new LineBorder(Color.BLUE));
-		textField.setBounds(294, 97, 280, 30);
-		frame.getContentPane().add(textField);
+		NametextField = new JTextField();
+		NametextField.setColumns(10);
+		NametextField.setBorder(new LineBorder(Color.BLUE));
+		NametextField.setBounds(294, 97, 280, 30);
+		frame.getContentPane().add(NametextField);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBorder(new LineBorder(Color.BLUE));
-		textField_1.setBounds(294, 132, 280, 30);
-		frame.getContentPane().add(textField_1);
+		BirthtextField = new JTextField();
+		BirthtextField.setColumns(10);
+		BirthtextField.setBorder(new LineBorder(Color.BLUE));
+		BirthtextField.setBounds(294, 132, 280, 30);
+		frame.getContentPane().add(BirthtextField);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBorder(new LineBorder(Color.BLUE));
-		textField_2.setBounds(294, 167, 280, 30);
-		frame.getContentPane().add(textField_2);
+		SextextField = new JTextField();
+		SextextField.setColumns(10);
+		SextextField.setBorder(new LineBorder(Color.BLUE));
+		SextextField.setBounds(294, 167, 280, 30);
+		frame.getContentPane().add(SextextField);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBorder(new LineBorder(Color.BLUE));
-		textField_3.setBounds(294, 203, 280, 30);
-		frame.getContentPane().add(textField_3);
+		EmailtextField = new JTextField();
+		EmailtextField.setColumns(10);
+		EmailtextField.setBorder(new LineBorder(Color.BLUE));
+		EmailtextField.setBounds(294, 203, 280, 30);
+		frame.getContentPane().add(EmailtextField);
 	}
 }

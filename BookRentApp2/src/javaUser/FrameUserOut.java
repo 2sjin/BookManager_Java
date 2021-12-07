@@ -79,7 +79,7 @@ public class FrameUserOut {
 		ct.Birth.setEnabled(false);
 		ct.Sex.setEnabled(false);
 		ct.Email.setEnabled(false);
-		ct.ImageChange.setVisible(false);
+		ct.tf_enabled(false);
         ct.setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
         ct.setBounds(0, 56, 541, 554);
         frame.getContentPane().add(ct);

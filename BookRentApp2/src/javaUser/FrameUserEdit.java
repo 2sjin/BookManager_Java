@@ -61,16 +61,7 @@ public class FrameUserEdit {
 			}
 		});
 		frame.getContentPane().add(CancelButton);
-		
-
-		JButton CancelButton_1 = new JButton("수정");
-		CancelButton_1.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
-		CancelButton_1.setBorder(new LineBorder(UIManager.getColor("CheckBoxMenuItem.selectionBackground")));
-		CancelButton_1.setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
-		CancelButton_1.setBounds(325, 613, 95, 29);
-		frame.getContentPane().add(CancelButton_1);
-
-		JButton EditButton = new JButton("\uC218\uC815");
+		JButton EditButton = new JButton("수정");
 		EditButton.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		EditButton.setBorder(new LineBorder(UIManager.getColor("CheckBoxMenuItem.selectionBackground")));
 		EditButton.setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));

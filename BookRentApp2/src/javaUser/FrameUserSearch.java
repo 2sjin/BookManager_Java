@@ -63,14 +63,9 @@ public class FrameUserSearch {
 		frame.getContentPane().add(CancelButton);
 		
 		PanelUserInfo ct = new PanelUserInfo();
-		ct.Phone.setEnabled(false);
-		ct.Name.setEnabled(false);
-		ct.Birth.setEnabled(false);
-		ct.Sex.setEnabled(false);
-		ct.Email.setEnabled(false);
-		ct.ImageChange.setVisible(false);
         ct.setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
         ct.setBounds(0, 56, 541, 554);
+        ct.tf_enabled(false);
         frame.getContentPane().add(ct);
 	}
 }
