@@ -56,15 +56,6 @@ public class FrameUserOut {
 		CancelButton.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		CancelButton.setBounds(432, 613, 95, 29);
 		frame.getContentPane().add(CancelButton);
-		
-		JButton CancelButton_1 = new JButton("회원 탈퇴");
-		CancelButton_1.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
-		CancelButton_1.setBorder(new LineBorder(UIManager.getColor("CheckBoxMenuItem.selectionBackground")));
-		CancelButton_1.setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
-		CancelButton_1.setBounds(329, 613, 95, 29);
-<<<<<<< HEAD
-		frame.getContentPane().add(CancelButton_1);	
-=======
 		CancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
@@ -82,7 +73,6 @@ public class FrameUserOut {
 			}
 		});
         frame.getContentPane().add(UserOut);
->>>>>>> 76aa8e6 (4차 회원관리수정)
 		PanelUserInfo ct = new PanelUserInfo();
 		ct.Phone.setEnabled(false);
 		ct.Name.setEnabled(false);

@@ -141,7 +141,7 @@ public class PanelUserInfo extends JPanel {
 		jp.setPreferredSize(new Dimension(460, 120));
 		List_Panel.add(jp);
 		
-<<<<<<< HEAD
+
 		JButton CancelButton_1_1 = new JButton("이미지 변경");
 		CancelButton_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
 		CancelButton_1_1.setBorder(new LineBorder(UIManager.getColor("CheckBoxMenuItem.selectionBackground")));
@@ -149,36 +149,36 @@ public class PanelUserInfo extends JPanel {
 		CancelButton_1_1.setBounds(12, 163, 119, 29);
 		panel.add(CancelButton_1_1);
 		
-		textField_1 = new JTextField();
+		JTextField textField_1 = new JTextField();
 		textField_1.setColumns(10);
 		textField_1.setBorder(new LineBorder(Color.BLUE));
 		textField_1.setBounds(260, 10, 210, 22);
 		panel.add(textField_1);
 		
-		textField_2 = new JTextField();
+		JTextField textField_2 = new JTextField();
 		textField_2.setColumns(10);
 		textField_2.setBorder(new LineBorder(Color.BLUE));
 		textField_2.setBounds(260, 42, 210, 22);
 		panel.add(textField_2);
 		
-		textField_3 = new JTextField();
+		JTextField textField_3 = new JTextField();
 		textField_3.setColumns(10);
 		textField_3.setBorder(new LineBorder(Color.BLUE));
 		textField_3.setBounds(260, 74, 210, 22);
 		panel.add(textField_3);
 		
-		textField_4 = new JTextField();
+		JTextField textField_4 = new JTextField();
 		textField_4.setColumns(10);
 		textField_4.setBorder(new LineBorder(Color.BLUE));
 		textField_4.setBounds(260, 106, 210, 22);
 		panel.add(textField_4);
 		
-		textField_5 = new JTextField();
+		JTextField textField_5 = new JTextField();
 		textField_5.setColumns(10);
 		textField_5.setBorder(new LineBorder(Color.BLUE));
 		textField_5.setBounds(260, 138, 210, 22);
 		panel.add(textField_5);
-=======
+
 		ImageChange = new JButton("\uC774\uBBF8\uC9C0 \uBCC0\uACBD");
 		ImageChange.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
 		ImageChange.setBorder(new LineBorder(UIManager.getColor("CheckBoxMenuItem.selectionBackground")));
@@ -215,7 +215,7 @@ public class PanelUserInfo extends JPanel {
 		Email.setBorder(new LineBorder(Color.BLUE));
 		Email.setBounds(260, 138, 210, 22);
 		panel.add(Email);
->>>>>>> 76aa8e6 (4차 회원관리수정)
+
 		setVisible(true);
 	}
 }
