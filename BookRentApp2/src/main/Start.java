@@ -1,6 +1,6 @@
 package main;
 
-import java.awt.EventQueue;
+import java.awt.*;
 
 // 프로그램 시작 시 Main 메소드를 호출하는 클래스
 public class Start {
