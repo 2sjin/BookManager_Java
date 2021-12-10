@@ -34,7 +34,6 @@ public class PanelBookInfo extends JPanel {
 	private String header[] = {"ISBN","제목","저자","출판사","대여자","대여일","반납예정일"};
 	private JScrollPane jp;
 	private JPanel panel;
-	private String BookName;
 	private Object[][] data = new Object[0][8];
 	private ResultSet src=null;
 	private dbConnector dbConn = new dbConnector();
@@ -50,27 +49,8 @@ public class PanelBookInfo extends JPanel {
 		tableModel = new DefaultTableModel(data, header);
 		table = new JTable(tableModel);
 		Search_Field = new JTextField();
-		Search_Field.setBounds(104, 7, 414, 21);
-		Search_Field.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				BookName = Search_Field.getText();
-				src = dbConn.executeQurey("select * from BOOK where BOOK_TITLE LIKE '%"+BookName+"%';");
-				try {
-					while(src.next()) {
-						System.out.println(src.getString("BOOK_TITLE"));
-						Object[] tmp = {src.getString(1),src.getString(2),src.getString(3),src.getString(4),
-								src.getInt(5),src.getString(6),"Click",src.getString(8)};
-						tableModel.addRow(tmp);
-						// DB에서 BLOB 자료형으로 저장된 데이터 그림 데이터로 변환
-						InputStream inputStream = src.getBinaryStream(7);
-					}
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
+		Search_Field.setBounds(104, 7, 350, 21);
+		Search_Field.addActionListener(new BookActionListener());
 		add(Search_Field);
 		Search_Field.setColumns(10);
 		
@@ -212,10 +192,15 @@ public class PanelBookInfo extends JPanel {
 		panel.setBounds(12, 60, 506, 110);
 		add(panel);
 		panel.setLayout(new BorderLayout(0, 0));
-		table.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
+		table.setFont(new Font("맑은 고딕", Font.PLAIN, 10));
 		jp = new JScrollPane(table);
 		jp.setEnabled(false);
 		panel.add(jp,BorderLayout.CENTER);
+		
+		JButton Search_Button = new JButton("검색");
+		Search_Button.setBounds(466, 9, 69, 22);
+		Search_Button.addActionListener(new BookActionListener());
+		add(Search_Button);
 	}
 	public void true_flase_enabled(boolean boo) {
 		ISBN_FIELD.setEnabled(boo);
@@ -241,4 +226,30 @@ public class PanelBookInfo extends JPanel {
 	public void setBookIcon(ImageIcon img) {
 		BOOK_IMAGE.setIcon(img);
 	}
+	// 내부 클래서로 이벤트 리스너 작성 with 검색필드, 검색버튼
+	private class BookActionListener implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			// 검색필드의 text값 db명령문을 Search 수행
+			src = dbConn.executeQurey("select * from BOOK where BOOK_TITLE LIKE '%"+Search_Field.getText()+"%';");
+			try {
+				int RowCount = tableModel.getRowCount();	// 행 갯수 반환
+				if(RowCount>0) {	//행 갯수가 0보다 크다면 모든 행 삭제
+					for(int i= RowCount -1;i>=0;i--)
+						tableModel.removeRow(i);
+				}
+				while(src.next()) {
+					System.out.println(src.getString("BOOK_TITLE"));
+					Object[] tmp = {src.getString(1),src.getString(2),src.getString(3),src.getString(4),
+							src.getInt(5),src.getString(6),"Click",src.getString(8)};
+					tableModel.addRow(tmp);
+					// DB에서 BLOB 자료형으로 저장된 데이터 그림 데이터로 변환
+					InputStream inputStream = src.getBinaryStream(7);
+				}
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	}
 }
+
