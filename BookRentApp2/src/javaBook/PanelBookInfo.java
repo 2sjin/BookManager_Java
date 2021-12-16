@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.InputStream;
 import java.sql.*;
+import java.util.Vector;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -24,7 +26,7 @@ public class PanelBookInfo extends JPanel {
 	private JTextField PUB_FIELD;
 	private JTextField PRICE_FIELD;
 	private JTextField LINK_FIELD;
-	private JTextField DESCRIPTION_FIELD;
+	private JTextArea DESCRIPTION_FIELD;
 	private JLabel BOOK_IMAGE;
 	private JLabel Book_LENDER;
 	private JLabel LENDER_LABEL;
@@ -44,7 +46,11 @@ public class PanelBookInfo extends JPanel {
 	private dbConnector dbConn = new dbConnector();
 	private JLabel Book_Search;
 	private JLabel Search_result;
+	private Object F[][];
 	private Object[] tmp =null;
+	private Vector<Integer> v1 = new Vector<Integer>();
+	private Vector<String> v2 = new Vector<String>();
+	private Vector<String> v3 = new Vector<String>();
 	public PanelBookInfo(JFrame frame2) {
 		setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
 		setLayout(null);
@@ -101,52 +107,60 @@ public class PanelBookInfo extends JPanel {
 		add(Book_DESCRIPTION);
 
 		ISBN_FIELD = new JTextField();
-		ISBN_FIELD.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
+		ISBN_FIELD.setForeground(SystemColor.windowText);
+		ISBN_FIELD.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
 		ISBN_FIELD.setEnabled(false);
 		ISBN_FIELD.setBounds(259, 200, 259, 21);
 		add(ISBN_FIELD);
 		ISBN_FIELD.setColumns(10);
 
 		TITLE_FIELD = new JTextField();
-		TITLE_FIELD.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
+		TITLE_FIELD.setForeground(SystemColor.windowText);
+		TITLE_FIELD.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
 		TITLE_FIELD.setEnabled(false);
 		TITLE_FIELD.setColumns(10);
 		TITLE_FIELD.setBounds(259, 230, 259, 21);
 		add(TITLE_FIELD);
 
 		AUTHOR_FIELD = new JTextField();
-		AUTHOR_FIELD.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
+		AUTHOR_FIELD.setForeground(SystemColor.windowText);
+		AUTHOR_FIELD.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
 		AUTHOR_FIELD.setEnabled(false);
 		AUTHOR_FIELD.setColumns(10);
 		AUTHOR_FIELD.setBounds(259, 260, 259, 21);
 		add(AUTHOR_FIELD);
 
 		PUB_FIELD = new JTextField();
-		PUB_FIELD.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
+		PUB_FIELD.setForeground(SystemColor.windowText);
+		PUB_FIELD.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
 		PUB_FIELD.setEnabled(false);
 		PUB_FIELD.setColumns(10);
 		PUB_FIELD.setBounds(259, 290, 259, 21);
 		add(PUB_FIELD);
 
 		PRICE_FIELD = new JTextField();
-		PRICE_FIELD.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
+		PRICE_FIELD.setForeground(SystemColor.windowText);
+		PRICE_FIELD.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
 		PRICE_FIELD.setEnabled(false);
 		PRICE_FIELD.setColumns(10);
 		PRICE_FIELD.setBounds(259, 320, 259, 21);
 		add(PRICE_FIELD);
 
 		LINK_FIELD = new JTextField();
-		LINK_FIELD.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
+		LINK_FIELD.setForeground(SystemColor.windowText);
+		LINK_FIELD.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
 		LINK_FIELD.setEnabled(false);
 		LINK_FIELD.setColumns(10);
 		LINK_FIELD.setBounds(259, 350, 259, 21);
 		add(LINK_FIELD);
 
-		DESCRIPTION_FIELD = new JTextField();
-		DESCRIPTION_FIELD.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
+		DESCRIPTION_FIELD = new JTextArea();
+		DESCRIPTION_FIELD.setForeground(SystemColor.windowText);
+		DESCRIPTION_FIELD.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
 		DESCRIPTION_FIELD.setEnabled(false);
 		DESCRIPTION_FIELD.setColumns(10);
 		DESCRIPTION_FIELD.setBounds(259, 380, 259, 80);
+		DESCRIPTION_FIELD.setLineWrap(true);
 		add(DESCRIPTION_FIELD);
 
 		BOOK_IMAGE = new JLabel("");
@@ -201,6 +215,27 @@ public class PanelBookInfo extends JPanel {
 		table.setFont(new Font("맑은 고딕", Font.PLAIN, 10));
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		resizeColumnWidth(table);
+		table.addMouseListener(new MouseAdapter() {
+
+			public void mouseClicked(MouseEvent e) {
+				// 이벤트 처리를 위한 table 관련 객제 정보 받기
+				JTable sourceTable = (JTable) e.getSource();
+				DefaultTableModel sourceModel = (DefaultTableModel) sourceTable.getModel();
+
+				// 클릭한 행 및 컬럼 위치 확보
+				int clickedTableRow = sourceTable.getSelectedRow(); // 행
+				int clickedTableColumn = sourceTable.getSelectedColumn();// 필드
+				System.out.print(clickedTableRow+"\t");
+				System.out.println(clickedTableColumn);
+				ISBN_FIELD.setText((String)sourceModel.getValueAt(clickedTableRow, 0));
+				TITLE_FIELD.setText((String)sourceModel.getValueAt(clickedTableRow, 1));
+				AUTHOR_FIELD.setText((String)sourceModel.getValueAt(clickedTableRow, 2));
+				PUB_FIELD.setText((String)sourceModel.getValueAt(clickedTableRow, 3));
+				PRICE_FIELD.setText(v1.get(clickedTableRow).toString());
+				LINK_FIELD.setText(v2.get(clickedTableRow));
+				DESCRIPTION_FIELD.setText(v3.get(clickedTableRow));
+			}
+		});
 		jp = new JScrollPane(table);
 		jp.setEnabled(false);
 		
@@ -241,14 +276,18 @@ public class PanelBookInfo extends JPanel {
 	}
 
 	// 내부 클래서로 이벤트 리스너 작성 with 검색필드, 검색버튼
-	private class BookActionListener implements ActionListener {
+	private class BookActionListener<F> implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			
 			// 검색필드(책의 제목, 책의 저자,책의 ISBN) text값 db명령문을 Search 수행
 			String BookSearch = Search_Field.getText();
-			src = dbConn.executeQurey(
-					"select * from BOOK where BOOK_TITLE LIKE '%" + BookSearch + "%' or "
-							+ "BOOK_AUTHOR LIKE '%" + BookSearch + "%' or BOOK_ISBN = '" + BookSearch + "';");
+			
 			try {
+				src = dbConn.executeQurey(
+						"select BOOK.*,RENT_DATE,RENT_DUE_DATE from BOOK"
+						+ " LEFT JOIN RENT ON BOOK.BOOK_ISBN = RENT.BOOK_ISBN"
+						+ " where BOOK.BOOK_TITLE LIKE '%" + BookSearch + "%' or "
+								+ "BOOK.BOOK_AUTHOR LIKE '%" + BookSearch + "%' or BOOK.BOOK_ISBN = '" + BookSearch + "';");
 				int RowCount = tableModel.getRowCount(); // 행 갯수 반환
 				if (RowCount > 0) { // 행 갯수가 0보다 크다면 모든 행 삭제
 					for (int i = RowCount - 1; i >= 0; i--)
@@ -256,9 +295,12 @@ public class PanelBookInfo extends JPanel {
 				}
 				while (src.next()) {
 					Object data [] = { src.getString(1), src.getString(2), src.getString(3), src.getString(4),
-							src.getInt(5), src.getString(6), "Click", src.getString(8) };
+							" ",src.getString(9),src.getString(10)};
 					tmp = data;
 					tableModel.addRow(tmp);
+					v1.add(src.getInt(5));
+					v2.add(src.getString(8));
+					v3.add(src.getString(6));
 					// DB에서 BLOB 자료형으로 저장된 데이터 그림 데이터로 변환
 					InputStream inputStream = src.getBinaryStream(7);
 				}
