@@ -189,11 +189,11 @@ public class PanelUserInfo extends JPanel {
 		setVisible(true);
 	}
 	public void tf_enabled(boolean boo) {
-		Phone.setEnabled(boo);
-		Name.setEnabled(boo);
-		Birth.setEnabled(boo);
-		Sex.setEnabled(boo);
-		Email.setEnabled(boo);
+		Phone.setEditable(boo);
+		Name.setEditable(boo);
+		Birth.setEditable(boo);
+		Sex.setEditable(boo);
+		Email.setEditable(boo);
 		ImageChange.setVisible(boo);
 	}
 }
