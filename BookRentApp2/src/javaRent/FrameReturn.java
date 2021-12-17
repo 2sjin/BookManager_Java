@@ -3,10 +3,11 @@ package javaRent;
 // 패키지 불러오기(GUI 구현 목적)
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.*;
-
 import javax.swing.*;
 import javax.swing.border.*;
+
+// 패키지 불러오기(DB 구현 목적)
+import java.sql.*;
 
 // 패키지 불러오기(다른 사용자 정의 패키지 사용 목적)
 import javaBook.*;
@@ -16,6 +17,7 @@ import other.dbConnector;
 public class FrameReturn extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	dbConnector dbConn = new dbConnector();
 	
 	// 생성자
 	public FrameReturn() {
@@ -46,7 +48,6 @@ public class FrameReturn extends JFrame {
 		book_panel.add(UPDATE_BUTTON);
 		UPDATE_BUTTON.addActionListener(new  ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dbConnector dbConn = new dbConnector();
 				String clicked_ISBN = book_panel.getBookISBN();
 				
 				try {
@@ -56,28 +57,26 @@ public class FrameReturn extends JFrame {
 					// 이미 반납된 도서일 경우 메시지 출력
 					if(srcRent.next() == false)
 						JOptionPane.showConfirmDialog(null,"이미 반납한 도서입니다.","도서 반납",JOptionPane.CLOSED_OPTION);						
-					// 반납 SQL 수행
+					// 반납되지 않은(대여중인) 도서일 경우
 					else {
 						// 반납 SQL 수행
 						dbConn.executeUpdate("UPDATE RENT "
 								+ "SET RENT_RETURN_DATE = CURDATE() "
-								+ "WHERE RENT.BOOK_ISBN = '" + clicked_ISBN + "' and RENT_RETURN_DATE is null;"
-//								+ "UPDATE USER "
-//								+ "SET USER_RENT_CNT = USER-RENT-CNT - 1"
-//								+ "WHERE USER_PHONE = '01025773617';"
-						);
-						// 메시지 출력
+								+ "WHERE RENT.BOOK_ISBN = '" + clicked_ISBN + "' and RENT_RETURN_DATE is null;");
+						// 대여 카운트 감소 SQL 수행
+						dbConn.executeUpdate("UPDATE USER SET USER_RENT_CNT = USER-RENT-CNT - 1 "
+								+ "WHERE USER_PHONE = '01025773617';");
+						// 특정 ISBN에 해당하는 도서 제목 저장 
 						ResultSet srcName = dbConn.executeQurey("SELECT BOOK.BOOK_ISBN, BOOK.BOOK_TITLE FROM BOOK, RENT "
-								+ "WHERE BOOK.BOOK_ISBN = RENT.BOOK_ISBN and RENT.BOOK_ISBN = '9788970509563';");
+								+ "WHERE BOOK.BOOK_ISBN = RENT.BOOK_ISBN and RENT.BOOK_ISBN = " + clicked_ISBN + ";");
 						String tmpName = null;
 						while(srcName.next())
 							tmpName = srcName.getString(2);
+						// 메시지 출력
 						JOptionPane.showConfirmDialog(null, tmpName + "(" + clicked_ISBN + ") 도서를 반납하였습니다.","도서 반납",JOptionPane.CLOSED_OPTION);
 					}										
 
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
+				} catch (SQLException e1) { e1.printStackTrace(); }
 			}
 		});
 	}

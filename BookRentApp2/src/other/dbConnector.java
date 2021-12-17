@@ -44,7 +44,7 @@ public class dbConnector {
 		return src;
 	}
 	
-	// 데이터 수정 및 레코드 삭제를 위한 SQL 실행 메소드
+	// 데이터 삽입, 수정, 삭제를 위한 SQL 실행 메소드
 	public void executeUpdate(String sql) {
 		// SQL문 실행하기 위한 메소드 - Parameter : String객체로 만든 SQL문
 
