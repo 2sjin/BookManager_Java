@@ -338,4 +338,8 @@ public class PanelBookInfo extends JPanel {
 	public JLabel getJLabel() {
 		return BOOK_IMAGE;
 	}
+	
+	public String getBookISBN() {
+		return jf[0].getText();
+	}
 }

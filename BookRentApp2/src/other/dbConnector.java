@@ -29,10 +29,9 @@ public class dbConnector {
 	}
 	
 	
+	// SQL문 실행하기 위한 메소드 - Parameter : String객체로 만든 SQL문
+	// 실행결과는 ResultSet으로 반환
 	public ResultSet executeQurey(String sql) {
-		//SQL문 실행하기 위한 메소드 - Parameter : String객체로 만든 SQL문
-		//실행결과는 ResultSet으로 반환
-		
 		ResultSet src = null;
 		try {
 			src = stmt.executeQuery(sql); // 매개변수로 받은 SQL문 실행
@@ -43,6 +42,17 @@ public class dbConnector {
 		}
 		
 		return src;
+	}
+	
+	// 데이터 수정 및 레코드 삭제를 위한 SQL 실행 메소드
+	public void executeUpdate(String sql) {
+		// SQL문 실행하기 위한 메소드 - Parameter : String객체로 만든 SQL문
+
+		try {
+			stmt.executeUpdate(sql); // 매개변수로 받은 SQL문 실행
+		} catch (SQLException e) {
+			System.out.println("SQL 실행 에러");
+		}
 	}
 	
 	public Connection getConnection() {
