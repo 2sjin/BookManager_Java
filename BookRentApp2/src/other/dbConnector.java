@@ -15,11 +15,11 @@ public class dbConnector {
 		// 생성자가 실행되면 DB에 자동 연결되어 Connection 객체 생성
 		
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");	// MySQL의 JDBC 드라이버 클래스 로드
 			conn = DriverManager.getConnection("jdbc:mysql://jdb.deu.monster:60001/java03_team02",
-					"java03_team02","whdldl123!");
+					"java03_team02","whdldl123!");	// 자바 애플리케이션을 JDBC 드라이버에 연결
 			System.out.println("DB 연결 완료");
-			stmt = conn.createStatement();
+			stmt = conn.createStatement();	// SQL문을 실행하기 위해 Statement 객체 생성
 
 		} catch (ClassNotFoundException e) {
 			System.out.println("JDBC 드라이버 로드 에러");
@@ -35,7 +35,7 @@ public class dbConnector {
 		
 		ResultSet src = null;
 		try {
-			src = stmt.executeQuery(sql);
+			src = stmt.executeQuery(sql); // 매개변수로 받은 SQL문 실행
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();

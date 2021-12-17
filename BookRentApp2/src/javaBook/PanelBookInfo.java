@@ -2,10 +2,12 @@ package javaBook;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
 import java.util.Vector;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -14,9 +16,9 @@ import javax.swing.table.TableColumnModel;
 import other.*;
 
 public class PanelBookInfo extends JPanel {
-	/**
-	 * 
-	 */
+	protected final static int bookWidth = 141;
+	protected final static int bookHeight = 227;
+	
 	private static final long serialVersionUID = 1L;
 
 	private JTextField Search_Field;
@@ -51,6 +53,7 @@ public class PanelBookInfo extends JPanel {
 	private Vector<Integer> v1 = new Vector<Integer>();
 	private Vector<String> v2 = new Vector<String>();
 	private Vector<String> v3 = new Vector<String>();
+	private Vector<Image> vImage = new Vector<Image>();
 	public PanelBookInfo(JFrame frame2) {
 		setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
 		setLayout(null);
@@ -222,7 +225,7 @@ public class PanelBookInfo extends JPanel {
 				JTable sourceTable = (JTable) e.getSource();
 				DefaultTableModel sourceModel = (DefaultTableModel) sourceTable.getModel();
 
-				// 클릭한 행 및 컬럼 위치 확보
+				// 클릭한 행 및 컬럼 위치 확보(클릭한 위치의 정보 출력)
 				int clickedTableRow = sourceTable.getSelectedRow(); // 행
 				int clickedTableColumn = sourceTable.getSelectedColumn();// 필드
 				System.out.print(clickedTableRow+"\t");
@@ -234,6 +237,12 @@ public class PanelBookInfo extends JPanel {
 				PRICE_FIELD.setText(v1.get(clickedTableRow).toString());
 				LINK_FIELD.setText(v2.get(clickedTableRow));
 				DESCRIPTION_FIELD.setText(v3.get(clickedTableRow));
+				
+				// 클릭한 위치의 데이터에 해당하는 이미지 출력
+		        Image tmpImg = vImage.get(clickedTableRow);		// 벡터로부터 Image 불러오기
+		        tmpImg = tmpImg.getScaledInstance(bookWidth, bookHeight, Image.SCALE_SMOOTH);	// Image 크기 재설정						
+				BOOK_IMAGE.setIcon(new ImageIcon(tmpImg));	// 재설정한 Image를 ImageIcon 객체로 재생성하여 레이블에 반영
+				
 			}
 		});
 		jp = new JScrollPane(table);
@@ -291,18 +300,25 @@ public class PanelBookInfo extends JPanel {
 				int RowCount = tableModel.getRowCount(); // 행 갯수 반환
 				if (RowCount > 0) { // 행 갯수가 0보다 크다면 모든 행 삭제
 					for (int i = RowCount - 1; i >= 0; i--)
-						tableModel.removeRow(i);
+						tableModel.removeRow(i);	// 행 삭제 메소드
 				}
-				while (src.next()) {
+				while (src.next()) {	// 검색된 데이터의 사용
 					Object data [] = { src.getString(1), src.getString(2), src.getString(3), src.getString(4),
 							" ",src.getString(9),src.getString(10)};
 					tmp = data;
-					tableModel.addRow(tmp);
-					v1.add(src.getInt(5));
-					v2.add(src.getString(8));
-					v3.add(src.getString(6));
+					tableModel.addRow(tmp);		// 행 추가 메소드
+					v1.add(src.getInt(5));		// 가격 데이터를 벡터에 추가
+					v2.add(src.getString(8));	// 대여자 데이터를 벡터에 추가
+					v3.add(src.getString(6));	// 도서설명 데이터를 벡터에 추가
+					
 					// DB에서 BLOB 자료형으로 저장된 데이터 그림 데이터로 변환
 					InputStream inputStream = src.getBinaryStream(7);
+					try {
+						vImage.add(ImageIO.read(inputStream));	// 바이너리 데이터를 이미지 형태로 읽어 벡터에 추가
+					} catch (IOException errImg) {
+						System.out.println("이미지 불러오기 오류");
+					}
+					
 				}
 				resizeColumnWidth(table);
 			} catch (SQLException e1) {

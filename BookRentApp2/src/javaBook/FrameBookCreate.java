@@ -2,25 +2,20 @@ package javaBook;
 
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
-import other.FileChooser;
-
 import java.awt.event.*;
-// 안녕
-public class FrameBookCreate{
 
+import other.*;
+
+public class FrameBookCreate{;
+	
 	private JFrame frame;
-	/**
-	 * Create the application.
-	 */
+
+	// 생성자
 	public FrameBookCreate() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	// 프레임 초기화
 	private void initialize() {
 		frame = new JFrame("도서 추가");
 		frame.setVisible(true);
@@ -46,7 +41,7 @@ public class FrameBookCreate{
 		IMAGE_INSERT_BUTTON.setBounds(22, 438, 141, 23);
 		IMAGE_INSERT_BUTTON.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ImageIcon images = FileChooser.getImageIcon(141, 227);	// 파일 선택기를 통해 이미지 리턴(매개변수는 가로, 세로 크기)
+				ImageIcon images = FileChooser.getImageIcon(PanelBookInfo.bookWidth, PanelBookInfo.bookHeight);	// 파일 선택기를 통해 이미지 리턴
 				book_panel.setBookIcon(images);
 			}
 		});

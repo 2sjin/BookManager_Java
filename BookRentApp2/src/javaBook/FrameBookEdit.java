@@ -37,7 +37,7 @@ public class FrameBookEdit {
 		IMAGE_UPDATE_BUTTON.setBounds(22, 438, 141, 23);
 		IMAGE_UPDATE_BUTTON.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ImageIcon images = FileChooser.getImageIcon(141, 227);	// 파일 선택기를 통해 이미지 리턴(매개변수는 가로, 세로 크기)
+				ImageIcon images = FileChooser.getImageIcon(PanelBookInfo.bookWidth, PanelBookInfo.bookHeight);	// 파일 선택기를 통해 이미지 리턴
 				book_panel.setBookIcon(images);
 			}
 		});
