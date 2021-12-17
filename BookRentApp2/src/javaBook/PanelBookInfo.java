@@ -19,12 +19,6 @@ public class PanelBookInfo extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private JTextField Search_Field;
-	private JTextField ISBN_FIELD;
-	private JTextField TITLE_FIELD;
-	private JTextField AUTHOR_FIELD;
-	private JTextField PUB_FIELD;
-	private JTextField PRICE_FIELD;
-	private JTextField LINK_FIELD;
 	private JTextArea DESCRIPTION_FIELD;
 	private JLabel BOOK_IMAGE;
 	private JLabel Book_LENDER;
@@ -45,12 +39,12 @@ public class PanelBookInfo extends JPanel {
 	private dbConnector dbConn = new dbConnector();
 	private JLabel Book_Search;
 	private JLabel Search_result;
-	private Object F[][];
 	private Object[] tmp =null;
 	private Vector<Integer> v1 = new Vector<Integer>();
 	private Vector<String> v2 = new Vector<String>();
 	private Vector<String> v3 = new Vector<String>();
 	private Vector<Image> vImage = new Vector<Image>();
+	private JTextField jf[] = new JTextField[7];
 	
 	// 생성자
 	public PanelBookInfo(JFrame frame2) {
@@ -108,58 +102,58 @@ public class PanelBookInfo extends JPanel {
 		Book_DESCRIPTION.setBounds(175, 382, 77, 15);
 		add(Book_DESCRIPTION);
 
-		ISBN_FIELD = new JTextField();
-		ISBN_FIELD.setForeground(SystemColor.windowText);
-		ISBN_FIELD.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
-		ISBN_FIELD.setEditable(false);
-		ISBN_FIELD.setBounds(259, 200, 259, 21);
-		add(ISBN_FIELD);
-		ISBN_FIELD.setColumns(10);
+		jf[0] = new JTextField();
+		jf[0].setForeground(SystemColor.windowText);
+		jf[0].setFont(new Font("맑은 고딕", Font.PLAIN, 13));
+		jf[0].setEditable(false);
+		jf[0].setBounds(259, 200, 259, 21);
+		add(jf[0]);
+		jf[0].setColumns(13);
 
-		TITLE_FIELD = new JTextField();
-		TITLE_FIELD.setForeground(SystemColor.windowText);
-		TITLE_FIELD.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
-		TITLE_FIELD.setEditable(false);
-		TITLE_FIELD.setColumns(10);
-		TITLE_FIELD.setBounds(259, 230, 259, 21);
-		add(TITLE_FIELD);
+		jf[1] = new JTextField();
+		jf[1].setForeground(SystemColor.windowText);
+		jf[1].setFont(new Font("맑은 고딕", Font.PLAIN, 13));
+		jf[1].setEditable(false);
+		jf[1].setColumns(100);
+		jf[1].setBounds(259, 230, 259, 21);
+		add(jf[1]);
 
-		AUTHOR_FIELD = new JTextField();
-		AUTHOR_FIELD.setForeground(SystemColor.windowText);
-		AUTHOR_FIELD.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
-		AUTHOR_FIELD.setEditable(false);
-		AUTHOR_FIELD.setColumns(10);
-		AUTHOR_FIELD.setBounds(259, 260, 259, 21);
-		add(AUTHOR_FIELD);
+		jf[2] = new JTextField();
+		jf[2].setForeground(SystemColor.windowText);
+		jf[2].setFont(new Font("맑은 고딕", Font.PLAIN, 13));
+		jf[2].setEditable(false);
+		jf[2].setColumns(50);
+		jf[2].setBounds(259, 260, 259, 21);
+		add(jf[2]);
 
-		PUB_FIELD = new JTextField();
-		PUB_FIELD.setForeground(SystemColor.windowText);
-		PUB_FIELD.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
-		PUB_FIELD.setEditable(false);
-		PUB_FIELD.setColumns(10);
-		PUB_FIELD.setBounds(259, 290, 259, 21);
-		add(PUB_FIELD);
+		jf[3] = new JTextField();
+		jf[3].setForeground(SystemColor.windowText);
+		jf[3].setFont(new Font("맑은 고딕", Font.PLAIN, 13));
+		jf[3].setEditable(false);
+		jf[3].setColumns(30);
+		jf[3].setBounds(259, 290, 259, 21);
+		add(jf[3]);
 
-		PRICE_FIELD = new JTextField();
-		PRICE_FIELD.setForeground(SystemColor.windowText);
-		PRICE_FIELD.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
-		PRICE_FIELD.setEditable(false);
-		PRICE_FIELD.setColumns(10);
-		PRICE_FIELD.setBounds(259, 320, 259, 21);
-		add(PRICE_FIELD);
+		jf[4] = new JTextField();
+		jf[4].setForeground(SystemColor.windowText);
+		jf[4].setFont(new Font("맑은 고딕", Font.PLAIN, 13));
+		jf[4].setEditable(false);
+		jf[4].setColumns(11);
+		jf[4].setBounds(259, 320, 259, 21);
+		add(jf[4]);
 
-		LINK_FIELD = new JTextField();
-		LINK_FIELD.setForeground(SystemColor.windowText);
-		LINK_FIELD.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
-		LINK_FIELD.setEditable(false);
-		LINK_FIELD.setColumns(10);
-		LINK_FIELD.setBounds(259, 350, 259, 21);
-		add(LINK_FIELD);
+		jf[5] = new JTextField();
+		jf[5].setForeground(SystemColor.windowText);
+		jf[5].setFont(new Font("맑은 고딕", Font.PLAIN, 13));
+		jf[5].setEditable(false);
+		jf[5].setColumns(255);
+		jf[5].setBounds(259, 350, 259, 21);
+		add(jf[5]);
 
 		DESCRIPTION_FIELD = new JTextArea();
+		DESCRIPTION_FIELD.setEditable(false);
 		DESCRIPTION_FIELD.setForeground(SystemColor.windowText);
 		DESCRIPTION_FIELD.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
-		DESCRIPTION_FIELD.setEditable(false);
 		DESCRIPTION_FIELD.setColumns(10);
 		DESCRIPTION_FIELD.setBounds(259, 380, 259, 80);
 		DESCRIPTION_FIELD.setLineWrap(true);
@@ -226,15 +220,12 @@ public class PanelBookInfo extends JPanel {
 
 				// 클릭한 행 및 컬럼 위치 확보(클릭한 위치의 정보 출력)
 				int clickedTableRow = sourceTable.getSelectedRow(); // 행
-				int clickedTableColumn = sourceTable.getSelectedColumn();// 필드
-				System.out.print(clickedTableRow+"\t");
-				System.out.println(clickedTableColumn);
-				ISBN_FIELD.setText((String)sourceModel.getValueAt(clickedTableRow, 0));
-				TITLE_FIELD.setText((String)sourceModel.getValueAt(clickedTableRow, 1));
-				AUTHOR_FIELD.setText((String)sourceModel.getValueAt(clickedTableRow, 2));
-				PUB_FIELD.setText((String)sourceModel.getValueAt(clickedTableRow, 3));
-				PRICE_FIELD.setText(v1.get(clickedTableRow).toString());
-				LINK_FIELD.setText(v2.get(clickedTableRow));
+				jf[0].setText((String)sourceModel.getValueAt(clickedTableRow, 0));
+				jf[1].setText((String)sourceModel.getValueAt(clickedTableRow, 1));
+				jf[2].setText((String)sourceModel.getValueAt(clickedTableRow, 2));
+				jf[3].setText((String)sourceModel.getValueAt(clickedTableRow, 3));
+				jf[4].setText(v1.get(clickedTableRow).toString());
+				jf[5].setText(v2.get(clickedTableRow));
 				DESCRIPTION_FIELD.setText(v3.get(clickedTableRow));
 				
 				// 클릭한 위치의 데이터에 해당하는 이미지 출력
@@ -256,12 +247,12 @@ public class PanelBookInfo extends JPanel {
 	}
 
 	public void true_flase_enabled(boolean boo) {
-		ISBN_FIELD.setEditable(boo);
-		TITLE_FIELD.setEditable(boo);
-		AUTHOR_FIELD.setEditable(boo);
-		PUB_FIELD.setEditable(boo);
-		PRICE_FIELD.setEditable(boo);
-		LINK_FIELD.setEditable(boo);
+		jf[0].setEditable(boo);
+		jf[1].setEditable(boo);
+		jf[2].setEditable(boo);
+		jf[3].setEditable(boo);
+		jf[4].setEditable(boo);
+		jf[5].setEditable(boo);
 		DESCRIPTION_FIELD.setEditable(boo);
 	}
 
@@ -284,7 +275,7 @@ public class PanelBookInfo extends JPanel {
 	}
 
 	// 내부 클래서로 이벤트 리스너 작성 with 검색필드, 검색버튼
-	private class BookActionListener<F> implements ActionListener {
+	private class BookActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			
 			// 검색필드(책의 제목, 책의 저자,책의 ISBN) text값 db명령문을 Search 수행
@@ -337,5 +328,14 @@ public class PanelBookInfo extends JPanel {
 			}
 			columnModel.getColumn(column).setPreferredWidth(width);
 		}
+	}
+	public JTextField[] getJTextField() {
+		return jf;
+	}
+	public JTextArea getJTextArea() {
+		return DESCRIPTION_FIELD;
+	}
+	public JLabel getJLabel() {
+		return BOOK_IMAGE;
 	}
 }

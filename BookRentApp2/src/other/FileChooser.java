@@ -24,4 +24,7 @@ public class FileChooser {
         
         return images;
 	}
+	public static JFileChooser getJFileChooser() {
+		return bookImg;
+	}
 }
