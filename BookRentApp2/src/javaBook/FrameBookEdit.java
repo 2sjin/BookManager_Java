@@ -1,27 +1,22 @@
 package javaBook;
-import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
-import other.FileChooser;
 
 import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+import other.*;
+
 
 public class FrameBookEdit {
 
 	private JFrame frame;
 
-
-	/**
-	 * Create the application.
-	 */
+	// 생성자
 	public FrameBookEdit() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	// 프레임 초기화
 	private void initialize() {
 		frame = new JFrame("도서 수정");
 		frame.setVisible(true);

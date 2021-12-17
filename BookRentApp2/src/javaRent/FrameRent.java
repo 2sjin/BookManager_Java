@@ -15,7 +15,7 @@ public class FrameRent extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
-	// Create the frame.
+	// 생성자
 	public FrameRent() {
 		setTitle("도서 대여");
 		setBounds(100, 100, 1100, 689);

@@ -3,7 +3,7 @@ package javaUser;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.*;
 
 import other.FileChooser;
 
@@ -19,9 +19,8 @@ public class PanelUserInfo extends JPanel {
 	JTable UserSearchResult;
 	JTable BookList;
 	JButton ImageChange;
-	/**
-	 * Create the panel.
-	 */
+
+	// 생성자
 	public PanelUserInfo() {
 		setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
 		setLayout(null);

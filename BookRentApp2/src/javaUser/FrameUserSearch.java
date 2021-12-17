@@ -9,17 +9,13 @@ public class FrameUserSearch {
 	private JFrame frame;
 
 
-	/**
-	 * Create the application.
-	 */
+	// 생성자
 	public FrameUserSearch() {
 		
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	// 프레임 초기화
 	private void initialize() {
 		frame = new JFrame("회원 조회");
 		frame.setVisible(true);

@@ -37,7 +37,6 @@ public class dbConnector {
 		try {
 			src = stmt.executeQuery(sql); // 매개변수로 받은 SQL문 실행
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			//e.printStackTrace();
 			System.out.println("SQL 실행 에러");
 			return null;

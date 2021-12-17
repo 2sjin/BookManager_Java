@@ -9,17 +9,13 @@ public class FrameUserOut {
 	private JFrame frame;
 
 
-	/**
-	 * Create the application.
-	 */
+	// 생성자
 	public FrameUserOut() {
 		
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	// 프레임 초기화
 	private void initialize() {
 		frame = new JFrame("회원 탈퇴");
 		frame.setVisible(true);

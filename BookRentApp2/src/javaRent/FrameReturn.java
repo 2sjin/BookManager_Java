@@ -14,7 +14,7 @@ public class FrameReturn extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	
-	// Create the frame.
+	// 생성자
 	public FrameReturn() {
 		setTitle("도서 반납");
 		setBounds(100, 100, 555, 689);

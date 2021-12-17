@@ -16,18 +16,12 @@ public class FrameUserCreate {
 	private JTextField EmailtextField;
 
 
-
-	/**
-	 * Create the application.
-	 */
+	// 생성자
 	public FrameUserCreate() {
-		
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	// 프레임 초기화
 	private void initialize() {
 		frame = new JFrame("회원 등록");
 		frame.setVisible(true);

@@ -1,17 +1,14 @@
 package javaBook;
 
+import java.io.*;
+import java.sql.*;
+import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.*;
-import java.util.Vector;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumnModel;
+import javax.swing.table.*;
+import javax.imageio.ImageIO;
 
 import other.*;
 
@@ -54,6 +51,8 @@ public class PanelBookInfo extends JPanel {
 	private Vector<String> v2 = new Vector<String>();
 	private Vector<String> v3 = new Vector<String>();
 	private Vector<Image> vImage = new Vector<Image>();
+	
+	// 생성자
 	public PanelBookInfo(JFrame frame2) {
 		setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
 		setLayout(null);
@@ -112,7 +111,7 @@ public class PanelBookInfo extends JPanel {
 		ISBN_FIELD = new JTextField();
 		ISBN_FIELD.setForeground(SystemColor.windowText);
 		ISBN_FIELD.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
-		ISBN_FIELD.setEnabled(false);
+		ISBN_FIELD.setEditable(false);
 		ISBN_FIELD.setBounds(259, 200, 259, 21);
 		add(ISBN_FIELD);
 		ISBN_FIELD.setColumns(10);
@@ -120,7 +119,7 @@ public class PanelBookInfo extends JPanel {
 		TITLE_FIELD = new JTextField();
 		TITLE_FIELD.setForeground(SystemColor.windowText);
 		TITLE_FIELD.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
-		TITLE_FIELD.setEnabled(false);
+		TITLE_FIELD.setEditable(false);
 		TITLE_FIELD.setColumns(10);
 		TITLE_FIELD.setBounds(259, 230, 259, 21);
 		add(TITLE_FIELD);
@@ -128,7 +127,7 @@ public class PanelBookInfo extends JPanel {
 		AUTHOR_FIELD = new JTextField();
 		AUTHOR_FIELD.setForeground(SystemColor.windowText);
 		AUTHOR_FIELD.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
-		AUTHOR_FIELD.setEnabled(false);
+		AUTHOR_FIELD.setEditable(false);
 		AUTHOR_FIELD.setColumns(10);
 		AUTHOR_FIELD.setBounds(259, 260, 259, 21);
 		add(AUTHOR_FIELD);
@@ -136,7 +135,7 @@ public class PanelBookInfo extends JPanel {
 		PUB_FIELD = new JTextField();
 		PUB_FIELD.setForeground(SystemColor.windowText);
 		PUB_FIELD.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
-		PUB_FIELD.setEnabled(false);
+		PUB_FIELD.setEditable(false);
 		PUB_FIELD.setColumns(10);
 		PUB_FIELD.setBounds(259, 290, 259, 21);
 		add(PUB_FIELD);
@@ -144,7 +143,7 @@ public class PanelBookInfo extends JPanel {
 		PRICE_FIELD = new JTextField();
 		PRICE_FIELD.setForeground(SystemColor.windowText);
 		PRICE_FIELD.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
-		PRICE_FIELD.setEnabled(false);
+		PRICE_FIELD.setEditable(false);
 		PRICE_FIELD.setColumns(10);
 		PRICE_FIELD.setBounds(259, 320, 259, 21);
 		add(PRICE_FIELD);
@@ -152,7 +151,7 @@ public class PanelBookInfo extends JPanel {
 		LINK_FIELD = new JTextField();
 		LINK_FIELD.setForeground(SystemColor.windowText);
 		LINK_FIELD.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
-		LINK_FIELD.setEnabled(false);
+		LINK_FIELD.setEditable(false);
 		LINK_FIELD.setColumns(10);
 		LINK_FIELD.setBounds(259, 350, 259, 21);
 		add(LINK_FIELD);
@@ -160,7 +159,7 @@ public class PanelBookInfo extends JPanel {
 		DESCRIPTION_FIELD = new JTextArea();
 		DESCRIPTION_FIELD.setForeground(SystemColor.windowText);
 		DESCRIPTION_FIELD.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
-		DESCRIPTION_FIELD.setEnabled(false);
+		DESCRIPTION_FIELD.setEditable(false);
 		DESCRIPTION_FIELD.setColumns(10);
 		DESCRIPTION_FIELD.setBounds(259, 380, 259, 80);
 		DESCRIPTION_FIELD.setLineWrap(true);
@@ -257,13 +256,13 @@ public class PanelBookInfo extends JPanel {
 	}
 
 	public void true_flase_enabled(boolean boo) {
-		ISBN_FIELD.setEnabled(boo);
-		TITLE_FIELD.setEnabled(boo);
-		AUTHOR_FIELD.setEnabled(boo);
-		PUB_FIELD.setEnabled(boo);
-		PRICE_FIELD.setEnabled(boo);
-		LINK_FIELD.setEnabled(boo);
-		DESCRIPTION_FIELD.setEnabled(boo);
+		ISBN_FIELD.setEditable(boo);
+		TITLE_FIELD.setEditable(boo);
+		AUTHOR_FIELD.setEditable(boo);
+		PUB_FIELD.setEditable(boo);
+		PRICE_FIELD.setEditable(boo);
+		LINK_FIELD.setEditable(boo);
+		DESCRIPTION_FIELD.setEditable(boo);
 	}
 
 	public void ComponentSetVisible(boolean boo) {
@@ -322,7 +321,6 @@ public class PanelBookInfo extends JPanel {
 				}
 				resizeColumnWidth(table);
 			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}

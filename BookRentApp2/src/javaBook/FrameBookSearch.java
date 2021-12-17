@@ -8,16 +8,12 @@ public class FrameBookSearch {
 
 	private JFrame frame;
 
-	/**
-	 * Create the application.
-	 */
+	// 생성자
 	public FrameBookSearch() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	// 프레임 초기화
 	private void initialize() {
 		frame = new JFrame("도서 조회");
 		frame.setVisible(true);
