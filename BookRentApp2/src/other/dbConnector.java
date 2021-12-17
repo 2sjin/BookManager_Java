@@ -12,51 +12,51 @@ public class dbConnector {
 	
 	public dbConnector() {
 		
-		// »ı¼ºÀÚ°¡ ½ÇÇàµÇ¸é DB¿¡ ÀÚµ¿ ¿¬°áµÇ¾î Connection °´Ã¼ »ı¼º
+		// ìƒì„±ìê°€ ì‹¤í–‰ë˜ë©´ DBì— ìë™ ì—°ê²°ë˜ì–´ Connection ê°ì²´ ìƒì„±
 		
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");	// MySQLÀÇ JDBC µå¶óÀÌ¹ö Å¬·¡½º ·Îµå
+			Class.forName("com.mysql.cj.jdbc.Driver");	// MySQLì˜ JDBC ë“œë¼ì´ë²„ í´ë˜ìŠ¤ ë¡œë“œ
 			conn = DriverManager.getConnection("jdbc:mysql://jdb.deu.monster:60001/java03_team02",
-					"java03_team02","whdldl123!");	// ÀÚ¹Ù ¾ÖÇÃ¸®ÄÉÀÌ¼ÇÀ» JDBC µå¶óÀÌ¹ö¿¡ ¿¬°á
-			System.out.println("DB ¿¬°á ¿Ï·á");
-			stmt = conn.createStatement();	// SQL¹®À» ½ÇÇàÇÏ±â À§ÇØ Statement °´Ã¼ »ı¼º
+					"java03_team02","whdldl123!");	// ìë°” ì• í”Œë¦¬ì¼€ì´ì…˜ì„ JDBC ë“œë¼ì´ë²„ì— ì—°ê²°
+			System.out.println("DB ì—°ê²° ì™„ë£Œ");
+			stmt = conn.createStatement();	// SQLë¬¸ì„ ì‹¤í–‰í•˜ê¸° ìœ„í•´ Statement ê°ì²´ ìƒì„±
 
 		} catch (ClassNotFoundException e) {
-			System.out.println("JDBC µå¶óÀÌ¹ö ·Îµå ¿¡·¯");
+			System.out.println("JDBC ë“œë¼ì´ë²„ ë¡œë“œ ì—ëŸ¬");
 		} catch (SQLException e) {
-			System.out.println("DB ¿¬°á ¿À·ù");
+			System.out.println("DB ì—°ê²° ì˜¤ë¥˜");
 		}
 	}
 	
 	
-	// SQL¹® ½ÇÇàÇÏ±â À§ÇÑ ¸Ş¼Òµå - Parameter : String°´Ã¼·Î ¸¸µç SQL¹®
-	// ½ÇÇà°á°ú´Â ResultSetÀ¸·Î ¹İÈ¯
+	// SQLë¬¸ ì‹¤í–‰í•˜ê¸° ìœ„í•œ ë©”ì†Œë“œ - Parameter : Stringê°ì²´ë¡œ ë§Œë“  SQLë¬¸
+	// ì‹¤í–‰ê²°ê³¼ëŠ” ResultSetìœ¼ë¡œ ë°˜í™˜
 	public ResultSet executeQurey(String sql) {
 		ResultSet src = null;
 		try {
-			src = stmt.executeQuery(sql); // ¸Å°³º¯¼ö·Î ¹ŞÀº SQL¹® ½ÇÇà
+			src = stmt.executeQuery(sql); // ë§¤ê°œë³€ìˆ˜ë¡œ ë°›ì€ SQLë¬¸ ì‹¤í–‰
 		} catch (SQLException e) {
 			//e.printStackTrace();
-			System.out.println("SQL ½ÇÇà ¿¡·¯");
+			System.out.println("SQL ì‹¤í–‰ ì—ëŸ¬");
 			return null;
 		}
 		
 		return src;
 	}
 	
-	// µ¥ÀÌÅÍ ¼öÁ¤ ¹× ·¹ÄÚµå »èÁ¦¸¦ À§ÇÑ SQL ½ÇÇà ¸Ş¼Òµå
+	// ë°ì´í„° ìˆ˜ì • ë° ë ˆì½”ë“œ ì‚­ì œë¥¼ ìœ„í•œ SQL ì‹¤í–‰ ë©”ì†Œë“œ
 	public void executeUpdate(String sql) {
-		// SQL¹® ½ÇÇàÇÏ±â À§ÇÑ ¸Ş¼Òµå - Parameter : String°´Ã¼·Î ¸¸µç SQL¹®
+		// SQLë¬¸ ì‹¤í–‰í•˜ê¸° ìœ„í•œ ë©”ì†Œë“œ - Parameter : Stringê°ì²´ë¡œ ë§Œë“  SQLë¬¸
 
 		try {
-			stmt.executeUpdate(sql); // ¸Å°³º¯¼ö·Î ¹ŞÀº SQL¹® ½ÇÇà
+			stmt.executeUpdate(sql); // ë§¤ê°œë³€ìˆ˜ë¡œ ë°›ì€ SQLë¬¸ ì‹¤í–‰
 		} catch (SQLException e) {
-			System.out.println("SQL ½ÇÇà ¿¡·¯");
+			System.out.println("SQL ì‹¤í–‰ ì—ëŸ¬");
 		}
 	}
 	
 	public Connection getConnection() {
-		//PreparedStatementÀÌ¿ëÇØ SQL ÀÛ¼ºÇÒ °æ¿ì Connection °´Ã¼°¡ ÇÊ¿äÇØ ¸¸µç ¸Ş¼Òµå
+		//PreparedStatementì´ìš©í•´ SQL ì‘ì„±í•  ê²½ìš° Connection ê°ì²´ê°€ í•„ìš”í•´ ë§Œë“  ë©”ì†Œë“œ
 		
 		if(conn!=null) {
 			return conn;
