@@ -171,6 +171,7 @@ public class PanelBookInfo extends JPanel {
 		add(Book_LENDER);
 
 		LENDER_LABEL = new JLabel("");
+		LENDER_LABEL.setHorizontalAlignment(SwingConstants.CENTER);
 		LENDER_LABEL.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		LENDER_LABEL.setBounds(45, 508, 141, 15);
 		add(LENDER_LABEL);
@@ -181,6 +182,7 @@ public class PanelBookInfo extends JPanel {
 		add(Book_RENTAL_DATE);
 
 		RENTAL_DATE_LABEL = new JLabel("");
+		RENTAL_DATE_LABEL.setHorizontalAlignment(SwingConstants.CENTER);
 		RENTAL_DATE_LABEL.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		RENTAL_DATE_LABEL.setBounds(212, 508, 141, 15);
 		add(RENTAL_DATE_LABEL);
@@ -191,8 +193,9 @@ public class PanelBookInfo extends JPanel {
 		add(Book_RETURN_DATE);
 
 		RETURN_DATE_LABEL = new JLabel("");
+		RETURN_DATE_LABEL.setHorizontalAlignment(SwingConstants.CENTER);
 		RETURN_DATE_LABEL.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
-		RETURN_DATE_LABEL.setBounds(372, 508, 146, 15);
+		RETURN_DATE_LABEL.setBounds(378, 508, 146, 15);
 		add(RETURN_DATE_LABEL);
 
 		CANCEL_BUTTON = new JButton("취소");
@@ -227,10 +230,13 @@ public class PanelBookInfo extends JPanel {
 				jf[4].setText(v1.get(clickedTableRow).toString());
 				jf[5].setText(v2.get(clickedTableRow));
 				DESCRIPTION_FIELD.setText(v3.get(clickedTableRow));
+				LENDER_LABEL.setText((String)sourceModel.getValueAt(clickedTableRow, 4));
+				RENTAL_DATE_LABEL.setText((String)sourceModel.getValueAt(clickedTableRow, 5));
+				RETURN_DATE_LABEL.setText((String)sourceModel.getValueAt(clickedTableRow, 6));
 				
 				// 클릭한 위치의 데이터에 해당하는 이미지 출력
 		        Image tmpImg = vImage.get(clickedTableRow);		// 벡터로부터 Image 불러오기
-		        tmpImg = tmpImg.getScaledInstance(bookWidth, bookHeight, Image.SCALE_SMOOTH);	// Image 크기 재설정						
+		        tmpImg = tmpImg.getScaledInstance(bookWidth, bookHeight, Image.SCALE_SMOOTH);	// Image 크기 재설정	
 				BOOK_IMAGE.setIcon(new ImageIcon(tmpImg));	// 재설정한 Image를 ImageIcon 객체로 재생성하여 레이블에 반영
 				
 			}
@@ -273,8 +279,7 @@ public class PanelBookInfo extends JPanel {
 	public void setBookIcon(ImageIcon img) {
 		BOOK_IMAGE.setIcon(img);
 	}
-
-	// 내부 클래서로 이벤트 리스너 작성 with 검색필드, 검색버튼
+	// 내부 클래스로 이벤트 리스너 작성 with 검색필드, 검색버튼
 	private class BookActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			
@@ -308,7 +313,6 @@ public class PanelBookInfo extends JPanel {
 					} catch (IOException errImg) {
 						System.out.println("이미지 불러오기 오류");
 					}
-					
 				}
 				resizeColumnWidth(table);
 			} catch (SQLException e1) {
@@ -338,8 +342,21 @@ public class PanelBookInfo extends JPanel {
 	public JLabel getJLabel() {
 		return BOOK_IMAGE;
 	}
+<<<<<<< HEAD
 	
 	public String getBookISBN() {
 		return jf[0].getText();
 	}
 }
+=======
+	public JTable getJTable() {
+		return table;
+	}
+	public void Tableremove(int column) {
+		v1.remove(column);
+		v2.remove(column);
+		v3.remove(column);
+		vImage.remove(column);
+	}
+}
+>>>>>>> df06d71 (도서 수정 구현 실패)

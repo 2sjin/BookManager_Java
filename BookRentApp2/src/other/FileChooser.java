@@ -10,7 +10,6 @@ import javax.swing.filechooser.*;
 public class FileChooser {
 	private static JFileChooser bookImg = new JFileChooser();
 	private static FileNameExtensionFilter fileFilter = new FileNameExtensionFilter("All Images", "jpg","jpge","png","gif","svg");
-	
 	public static ImageIcon getImageIcon(int width, int height) {
 		bookImg.setFileFilter(fileFilter);
 		bookImg.showOpenDialog(null);

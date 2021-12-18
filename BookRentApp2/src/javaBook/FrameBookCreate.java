@@ -15,9 +15,9 @@ public class FrameBookCreate{;
 	private JFrame frame;
 	private JTextField jf[];
 	private JTextArea DESCRIPTION_FIELD;
-	private JLabel la;
 	private dbConnector dbConn = new dbConnector();
 	private JFileChooser bookimg;
+	private String filePath;
 	// 생성자
 	public FrameBookCreate() {
 		initialize();
@@ -36,7 +36,6 @@ public class FrameBookCreate{;
 		// 객체 공유
 		jf = book_panel.getJTextField();
 		DESCRIPTION_FIELD = book_panel.getJTextArea();
-		la = book_panel.getJLabel();
 		
 		book_panel.true_flase_enabled(true);
 		book_panel.ComponentSetVisible(false);
@@ -61,20 +60,10 @@ public class FrameBookCreate{;
 						ps.setString(4, jf[3].getText());
 						ps.setInt(5, Integer.parseInt(jf[4].getText()));
 						ps.setString(6, DESCRIPTION_FIELD.getText());
-						String filePath = bookimg.getSelectedFile().getPath();
 						
 						File tmpFile = new File(filePath);
 						ps.setBinaryStream(7,new FileInputStream(tmpFile), tmpFile.length());
 						ps.setString(8, jf[5].getText());
-						
-						System.out.println(jf[0].getText());
-						System.out.println(jf[1].getText());
-						System.out.println(jf[2].getText());
-						System.out.println(jf[3].getText());
-						System.out.println(jf[4].getText());
-						System.out.println(DESCRIPTION_FIELD.getText());
-						System.out.println(jf[5].getText());
-						System.out.println(tmpFile.getPath());
 						
 						int count = ps.executeUpdate();
 						if(count == 0) {
@@ -104,7 +93,7 @@ public class FrameBookCreate{;
 				ImageIcon images = FileChooser.getImageIcon(PanelBookInfo.bookWidth, PanelBookInfo.bookHeight);	// 파일 선택기를 통해 이미지 리턴
 				
 				bookimg = FileChooser.getJFileChooser();
-				String filePath = bookimg.getSelectedFile().getPath();
+				filePath = bookimg.getSelectedFile().getPath();
 				System.out.println(filePath);
 				book_panel.setBookIcon(images);
 			}
