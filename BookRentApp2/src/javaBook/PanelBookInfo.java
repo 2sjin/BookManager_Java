@@ -15,7 +15,7 @@ import other.*;
 public class PanelBookInfo extends JPanel {
 	protected final static int bookWidth = 141;
 	protected final static int bookHeight = 227;
-	
+
 	private static final long serialVersionUID = 1L;
 
 	private JTextField Search_Field;
@@ -39,13 +39,13 @@ public class PanelBookInfo extends JPanel {
 	private dbConnector dbConn = new dbConnector();
 	private JLabel Book_Search;
 	private JLabel Search_result;
-	private Object[] tmp =null;
+	private Object[] tmp = null;
 	private Vector<Integer> v1 = new Vector<Integer>();
 	private Vector<String> v2 = new Vector<String>();
 	private Vector<String> v3 = new Vector<String>();
 	private Vector<Image> vImage = new Vector<Image>();
 	private JTextField jf[] = new JTextField[7];
-	
+
 	// 생성자
 	public PanelBookInfo(JFrame frame2) {
 		setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
@@ -223,27 +223,27 @@ public class PanelBookInfo extends JPanel {
 
 				// 클릭한 행 및 컬럼 위치 확보(클릭한 위치의 정보 출력)
 				int clickedTableRow = sourceTable.getSelectedRow(); // 행
-				jf[0].setText((String)sourceModel.getValueAt(clickedTableRow, 0));
-				jf[1].setText((String)sourceModel.getValueAt(clickedTableRow, 1));
-				jf[2].setText((String)sourceModel.getValueAt(clickedTableRow, 2));
-				jf[3].setText((String)sourceModel.getValueAt(clickedTableRow, 3));
+				jf[0].setText((String) sourceModel.getValueAt(clickedTableRow, 0));
+				jf[1].setText((String) sourceModel.getValueAt(clickedTableRow, 1));
+				jf[2].setText((String) sourceModel.getValueAt(clickedTableRow, 2));
+				jf[3].setText((String) sourceModel.getValueAt(clickedTableRow, 3));
 				jf[4].setText(v1.get(clickedTableRow).toString());
 				jf[5].setText(v2.get(clickedTableRow));
 				DESCRIPTION_FIELD.setText(v3.get(clickedTableRow));
-				LENDER_LABEL.setText((String)sourceModel.getValueAt(clickedTableRow, 4));
-				RENTAL_DATE_LABEL.setText((String)sourceModel.getValueAt(clickedTableRow, 5));
-				RETURN_DATE_LABEL.setText((String)sourceModel.getValueAt(clickedTableRow, 6));
-				
+				LENDER_LABEL.setText((String) sourceModel.getValueAt(clickedTableRow, 4));
+				RENTAL_DATE_LABEL.setText((String) sourceModel.getValueAt(clickedTableRow, 5));
+				RETURN_DATE_LABEL.setText((String) sourceModel.getValueAt(clickedTableRow, 6));
+
 				// 클릭한 위치의 데이터에 해당하는 이미지 출력
-		        Image tmpImg = vImage.get(clickedTableRow);		// 벡터로부터 Image 불러오기
-		        tmpImg = tmpImg.getScaledInstance(bookWidth, bookHeight, Image.SCALE_SMOOTH);	// Image 크기 재설정	
-				BOOK_IMAGE.setIcon(new ImageIcon(tmpImg));	// 재설정한 Image를 ImageIcon 객체로 재생성하여 레이블에 반영
-				
+				Image tmpImg = vImage.get(clickedTableRow); // 벡터로부터 Image 불러오기
+				tmpImg = tmpImg.getScaledInstance(bookWidth, bookHeight, Image.SCALE_SMOOTH); // Image 크기 재설정
+				BOOK_IMAGE.setIcon(new ImageIcon(tmpImg)); // 재설정한 Image를 ImageIcon 객체로 재생성하여 레이블에 반영
+
 			}
 		});
 		jp = new JScrollPane(table);
 		jp.setEnabled(false);
-		
+
 		panel.add(jp, BorderLayout.CENTER);
 
 		Search_Button = new JButton("검색");
@@ -279,37 +279,37 @@ public class PanelBookInfo extends JPanel {
 	public void setBookIcon(ImageIcon img) {
 		BOOK_IMAGE.setIcon(img);
 	}
+
 	// 내부 클래스로 이벤트 리스너 작성 with 검색필드, 검색버튼
 	private class BookActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			
+
 			// 검색필드(책의 제목, 책의 저자,책의 ISBN) text값 db명령문을 Search 수행
 			String BookSearch = Search_Field.getText();
-			
+
 			try {
-				src = dbConn.executeQurey(
-						"select BOOK.*,RENT_DATE,RENT_DUE_DATE from BOOK"
-						+ " LEFT JOIN RENT ON BOOK.BOOK_ISBN = RENT.BOOK_ISBN"
-						+ " where BOOK.BOOK_TITLE LIKE '%" + BookSearch + "%' or "
-								+ "BOOK.BOOK_AUTHOR LIKE '%" + BookSearch + "%' or BOOK.BOOK_ISBN = '" + BookSearch + "';");
+				src = dbConn.executeQurey("select BOOK.*,RENT_DATE,RENT_DUE_DATE from BOOK"
+						+ " LEFT JOIN RENT ON BOOK.BOOK_ISBN = RENT.BOOK_ISBN" + " where BOOK.BOOK_TITLE LIKE '%"
+						+ BookSearch + "%' or " + "BOOK.BOOK_AUTHOR LIKE '%" + BookSearch + "%' or BOOK.BOOK_ISBN = '"
+						+ BookSearch + "';");
 				int RowCount = tableModel.getRowCount(); // 행 갯수 반환
 				if (RowCount > 0) { // 행 갯수가 0보다 크다면 모든 행 삭제
 					for (int i = RowCount - 1; i >= 0; i--)
-						tableModel.removeRow(i);	// 행 삭제 메소드
+						tableModel.removeRow(i); // 행 삭제 메소드
 				}
-				while (src.next()) {	// 검색된 데이터의 사용
-					Object data [] = { src.getString(1), src.getString(2), src.getString(3), src.getString(4),
-							" ",src.getString(9),src.getString(10)};
+				while (src.next()) { // 검색된 데이터의 사용
+					Object data[] = { src.getString(1), src.getString(2), src.getString(3), src.getString(4), " ",
+							src.getString(9), src.getString(10) };
 					tmp = data;
-					tableModel.addRow(tmp);		// 행 추가 메소드
-					v1.add(src.getInt(5));		// 가격 데이터를 벡터에 추가
-					v2.add(src.getString(8));	// 대여자 데이터를 벡터에 추가
-					v3.add(src.getString(6));	// 도서설명 데이터를 벡터에 추가
-					
+					tableModel.addRow(tmp); // 행 추가 메소드
+					v1.add(src.getInt(5)); // 가격 데이터를 벡터에 추가
+					v2.add(src.getString(8)); // 대여자 데이터를 벡터에 추가
+					v3.add(src.getString(6)); // 도서설명 데이터를 벡터에 추가
+
 					// DB에서 BLOB 자료형으로 저장된 데이터 그림 데이터로 변환
 					InputStream inputStream = src.getBinaryStream(7);
 					try {
-						vImage.add(ImageIO.read(inputStream));	// 바이너리 데이터를 이미지 형태로 읽어 벡터에 추가
+						vImage.add(ImageIO.read(inputStream)); // 바이너리 데이터를 이미지 형태로 읽어 벡터에 추가
 					} catch (IOException errImg) {
 						System.out.println("이미지 불러오기 오류");
 					}
@@ -333,25 +333,28 @@ public class PanelBookInfo extends JPanel {
 			columnModel.getColumn(column).setPreferredWidth(width);
 		}
 	}
+
 	public JTextField[] getJTextField() {
 		return jf;
 	}
+
 	public JTextArea getJTextArea() {
 		return DESCRIPTION_FIELD;
 	}
+
 	public JLabel getJLabel() {
 		return BOOK_IMAGE;
 	}
-<<<<<<< HEAD
-	
+
 	public String getBookISBN() {
 		return jf[0].getText();
 	}
-}
-=======
+
+
 	public JTable getJTable() {
 		return table;
 	}
+
 	public void Tableremove(int column) {
 		v1.remove(column);
 		v2.remove(column);
@@ -359,4 +362,3 @@ public class PanelBookInfo extends JPanel {
 		vImage.remove(column);
 	}
 }
->>>>>>> df06d71 (도서 수정 구현 실패)
