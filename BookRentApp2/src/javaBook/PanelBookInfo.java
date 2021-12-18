@@ -289,7 +289,7 @@ public class PanelBookInfo extends JPanel {
 
 			try {
 				src = dbConn.executeQurey("select BOOK.*,RENT_DATE,RENT_DUE_DATE from BOOK"
-						+ " LEFT JOIN RENT ON BOOK.BOOK_ISBN = RENT.BOOK_ISBN" + " where BOOK.BOOK_TITLE LIKE '%"
+						+ " LEFT JOIN RENT ON BOOK.BOOK_ISBN = RENT.BOOK_ISBN where BOOK.BOOK_TITLE LIKE '%"
 						+ BookSearch + "%' or " + "BOOK.BOOK_AUTHOR LIKE '%" + BookSearch + "%' or BOOK.BOOK_ISBN = '"
 						+ BookSearch + "';");
 				int RowCount = tableModel.getRowCount(); // 행 갯수 반환
@@ -299,7 +299,7 @@ public class PanelBookInfo extends JPanel {
 				}
 				while (src.next()) { // 검색된 데이터의 사용
 					Object data[] = { src.getString(1), src.getString(2), src.getString(3), src.getString(4), " ",
-							src.getString(9), src.getString(10) };
+							src.getString(9), src.getString(10)};
 					tmp = data;
 					tableModel.addRow(tmp); // 행 추가 메소드
 					v1.add(src.getInt(5)); // 가격 데이터를 벡터에 추가
@@ -360,5 +360,11 @@ public class PanelBookInfo extends JPanel {
 		v2.remove(column);
 		v3.remove(column);
 		vImage.remove(column);
+	}
+	public void ClearVector() {
+		v1.clear();
+		v2.clear();
+		v3.clear();
+		vImage.clear();
 	}
 }

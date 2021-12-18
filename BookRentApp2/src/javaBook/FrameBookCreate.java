@@ -91,7 +91,6 @@ public class FrameBookCreate{;
 		IMAGE_INSERT_BUTTON.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ImageIcon images = FileChooser.getImageIcon(PanelBookInfo.bookWidth, PanelBookInfo.bookHeight);	// 파일 선택기를 통해 이미지 리턴
-				
 				bookimg = FileChooser.getJFileChooser();
 				filePath = bookimg.getSelectedFile().getPath();
 				System.out.println(filePath);
