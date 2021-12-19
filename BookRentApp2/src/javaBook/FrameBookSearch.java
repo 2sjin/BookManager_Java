@@ -17,13 +17,11 @@ public class FrameBookSearch {
 	private void initialize() {
 		frame = new JFrame("도서 조회");
 		frame.setVisible(true);
-		
 		frame.setBounds(100, 100, 555, 689);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
-		
 		JPanel book_panel = new PanelBookInfo(frame);
 		frame.getContentPane().add(book_panel);
-		
+		frame.setLocationRelativeTo(null); // 화면 정중앙 배치
 		JPanel panel = new JPanel();
 		panel.setBackground(UIManager.getColor("CheckBoxMenuItem.selectionBackground"));
 		frame.getContentPane().add(panel, BorderLayout.NORTH);

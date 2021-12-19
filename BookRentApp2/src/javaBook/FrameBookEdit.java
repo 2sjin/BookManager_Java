@@ -29,19 +29,12 @@ public class FrameBookEdit {
 
 	// 생성자
 	public FrameBookEdit() {
-		initialize();
-	}
-
-	// 프레임 초기화
-	private void initialize() {
 		frame = new JFrame("도서 수정");
 		frame.setVisible(true);
-
 		frame.setBounds(100, 100, 555, 689);
-
 		PanelBookInfo book_panel = new PanelBookInfo(frame);
 		frame.getContentPane().add(book_panel, BorderLayout.CENTER);
-
+		frame.setLocationRelativeTo(null); // 화면 정중앙 배치
 		// 객체 공유
 		jf = book_panel.getJTextField();
 		DESCRIPTION_FIELD = book_panel.getJTextArea();
@@ -108,7 +101,6 @@ public class FrameBookEdit {
 								if(count == 0) {
 									JOptionPane.showMessageDialog(null,"ISBN : "+jf[1].getText()+"이(는) 수정에 실패하였습니다.", "도서 수정",JOptionPane.ERROR_MESSAGE);
 								}else {
-									book_panel.ClearVector();
 									JOptionPane.showMessageDialog(null,"ISBN : "+jf[1].getText()+"로 수정이 완료되었습니다.", "도서 수정",JOptionPane.NO_OPTION);
 								}
 							}
@@ -140,7 +132,6 @@ public class FrameBookEdit {
 								if(count == 0) {
 									JOptionPane.showMessageDialog(null,"ISBN : "+jf[1].getText()+"이(는) 수정에 실패하였습니다.", "도서 수정",JOptionPane.ERROR_MESSAGE);
 								}else {
-									book_panel.ClearVector();
 									JOptionPane.showMessageDialog(null,"ISBN : "+jf[1].getText()+"로 수정이 완료되었습니다.", "도서 수정",JOptionPane.NO_OPTION);
 								}
 							}
