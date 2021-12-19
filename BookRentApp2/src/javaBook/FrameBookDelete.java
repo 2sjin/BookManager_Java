@@ -58,6 +58,7 @@ public class FrameBookDelete{
 									JOptionPane.showMessageDialog(null,"ISBN : "+Book_ISBN+"이(는) 삭제에 실패하였습니다.", "도서 삭제",JOptionPane.ERROR_MESSAGE);
 								}else {
 									JOptionPane.showMessageDialog(null,"ISBN : "+Book_ISBN+"로 삭제가 완료되었습니다.", "도서 삭제",JOptionPane.NO_OPTION);
+									book_panel.refreshTable();	// 테이블 새로고침
 								}
 							}
 							catch (SQLException e1) {

@@ -344,6 +344,12 @@ public class PanelBookInfo extends JPanel {
 		}
 	}
 
+	// 테이블 새로고침(입력이 없어도 [검색] 이벤트 강제로 실행)
+	public void refreshTable() {
+		new BookActionListener().actionPerformed(null);
+	}
+	
+	// 리턴 메소드
 	public JTextField[] getJTextField() {
 		return jf;
 	}

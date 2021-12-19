@@ -71,6 +71,8 @@ public class FrameReturn extends JFrame {
 								+ "WHERE BOOK.BOOK_ISBN = '" + clicked_ISBN + "';");
 						// 메시지 출력
 						JOptionPane.showConfirmDialog(null, ISBN_to_TITLE(clicked_ISBN) + "(" + clicked_ISBN + ") 도서를 반납하였습니다.","도서 반납",JOptionPane.CLOSED_OPTION);
+						// 테이블 새로고침
+						book_panel.refreshTable();
 					}										
 
 				} catch (SQLException e1) { e1.printStackTrace(); }

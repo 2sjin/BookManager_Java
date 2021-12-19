@@ -92,6 +92,8 @@ public class FrameRent extends JFrame {
 						JOptionPane.showConfirmDialog(null, ISBN_to_TITLE(clicked_ISBN) + "(" + clicked_ISBN + ") 도서를 대여하였습니다.\n"
 								 + "※ 대여자: " + PHONE_to_NAME(clicked_PHONE) + "(" + clicked_PHONE + ")",
 								"도서 대여",JOptionPane.CLOSED_OPTION);
+						// 테이블 새로고침
+						book_panel.refreshTable();
 					}
 					
 				} catch (SQLException e1) { e1.printStackTrace(); }	
