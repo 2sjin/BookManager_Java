@@ -288,10 +288,12 @@ public class PanelBookInfo extends JPanel {
 			String BookSearch = Search_Field.getText();
 
 			try {
-				src = dbConn.executeQurey("select BOOK.*,RENT_DATE,RENT_DUE_DATE from BOOK"
-						+ " LEFT JOIN RENT ON BOOK.BOOK_ISBN = RENT.BOOK_ISBN where BOOK.BOOK_TITLE LIKE '%"
-						+ BookSearch + "%' or " + "BOOK.BOOK_AUTHOR LIKE '%" + BookSearch + "%' or BOOK.BOOK_ISBN = '"
-						+ BookSearch + "';");
+				src = dbConn.executeQurey("SELECT BOOK.*, MAX(RENT_DATE), MAX(RENT_DUE_DATE) FROM BOOK"
+						+ " LEFT JOIN RENT ON BOOK.BOOK_ISBN = RENT.BOOK_ISBN"
+						+ " WHERE BOOK.BOOK_TITLE LIKE '%" + BookSearch + "%' or "
+						+ " BOOK.BOOK_AUTHOR LIKE '%" + BookSearch + "%' or "
+						+ " BOOK.BOOK_ISBN = '" + BookSearch + "'"
+						+ " GROUP BY BOOK_ISBN;");
 				int RowCount = tableModel.getRowCount(); // 행 갯수 반환
 				if (RowCount > 0) { // 행 갯수가 0보다 크다면 모든 행 삭제
 					for (int i = RowCount - 1; i >= 0; i--)
