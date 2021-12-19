@@ -30,7 +30,7 @@ public class FrameBookCreate{;
 		
 		frame.setBounds(100, 100, 555, 689);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
-		
+		frame.setLocationRelativeTo(null); // 화면 정중앙 배치
 		PanelBookInfo book_panel = new PanelBookInfo(frame);
 		
 		// 객체 공유

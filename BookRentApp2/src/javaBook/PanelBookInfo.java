@@ -303,6 +303,10 @@ public class PanelBookInfo extends JPanel {
 					for (int i = RowCount - 1; i >= 0; i--)
 						tableModel.removeRow(i); // 행 삭제 메소드
 				}
+				v1.clear();
+				v2.clear();
+				v3.clear();
+				vImage.clear();
 				while (src.next()) { // 검색된 데이터의 사용
 					Object data[] = { src.getString("BOOK_ISBN"), src.getString("BOOK_TITLE"), src.getString("BOOK_AUTHOR"),
 						src.getString("BOOK_PUB"), src.getString("USER_PHONE"), src.getString("RENT_DATE"), src.getString("RENT_DUE_DATE")};
@@ -355,22 +359,7 @@ public class PanelBookInfo extends JPanel {
 	public String getBookISBN() {
 		return jf[0].getText();
 	}
-
-
 	public JTable getJTable() {
 		return table;
-	}
-
-	public void Tableremove(int column) {
-		v1.remove(column);
-		v2.remove(column);
-		v3.remove(column);
-		vImage.remove(column);
-	}
-	public void ClearVector() {
-		v1.clear();
-		v2.clear();
-		v3.clear();
-		vImage.clear();
 	}
 }

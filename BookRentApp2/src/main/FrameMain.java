@@ -20,7 +20,7 @@ public class FrameMain extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 300, 160);
 		setVisible(true);
-		
+		setLocationRelativeTo(null); // 화면 정중앙 배치
 		// 메뉴바 생성
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
