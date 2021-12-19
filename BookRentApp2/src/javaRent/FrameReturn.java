@@ -66,18 +66,26 @@ public class FrameReturn extends JFrame {
 						// 대여 카운트 감소 SQL 수행
 						dbConn.executeUpdate("UPDATE USER SET USER_RENT_CNT = USER-RENT-CNT - 1 "
 								+ "WHERE USER_PHONE = '01025773617';");
-						// 특정 ISBN에 해당하는 도서 제목 저장 
-						ResultSet srcName = dbConn.executeQurey("SELECT BOOK.BOOK_ISBN, BOOK.BOOK_TITLE FROM BOOK, RENT "
-								+ "WHERE BOOK.BOOK_ISBN = RENT.BOOK_ISBN and RENT.BOOK_ISBN = " + clicked_ISBN + ";");
-						String tmpName = null;
-						while(srcName.next())
-							tmpName = srcName.getString(2);
 						// 메시지 출력
-						JOptionPane.showConfirmDialog(null, tmpName + "(" + clicked_ISBN + ") 도서를 반납하였습니다.","도서 반납",JOptionPane.CLOSED_OPTION);
+						JOptionPane.showConfirmDialog(null, ISBN_to_TITLE(clicked_ISBN) + "(" + clicked_ISBN + ") 도서를 반납하였습니다.","도서 반납",JOptionPane.CLOSED_OPTION);
 					}										
 
 				} catch (SQLException e1) { e1.printStackTrace(); }
 			}
 		});
+	}
+	
+	// 메소드: 특정 ISBN에 해당하는 도서 제목 저장 	
+	public String ISBN_to_TITLE(String ISBN) {
+		String tmpTitle = null;
+		try {
+			ResultSet srcTitle = dbConn.executeQurey("SELECT BOOK.BOOK_TITLE FROM BOOK, RENT "
+					+ "WHERE BOOK.BOOK_ISBN = RENT.BOOK_ISBN and RENT.BOOK_ISBN = '" + ISBN + "';");
+			while(srcTitle.next())
+				tmpTitle = srcTitle.getString(1);
+		} catch (SQLException e) {
+			return null;
+		}		
+		return tmpTitle;
 	}
 }
