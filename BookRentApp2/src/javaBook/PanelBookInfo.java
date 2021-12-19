@@ -288,20 +288,24 @@ public class PanelBookInfo extends JPanel {
 			String BookSearch = Search_Field.getText();
 
 			try {
-				src = dbConn.executeQurey("SELECT BOOK.*, MAX(RENT_DATE), MAX(RENT_DUE_DATE) FROM BOOK"
-						+ " LEFT JOIN RENT ON BOOK.BOOK_ISBN = RENT.BOOK_ISBN"
+				src = dbConn.executeQurey("SELECT BOOK.*,"
+						+ " IF(RENT_RETURN_DATE IS NOT NULL, NULL, RENT.USER_PHONE) AS USER_PHONE,"
+						+ " IF(RENT_RETURN_DATE IS NOT NULL, NULL, RENT_DATE) AS RENT_DATE,"
+						+ " IF(RENT_RETURN_DATE IS NOT NULL, NULL, RENT_DUE_DATE) AS RENT_DUE_DATE"
+						+ " FROM BOOK"
+						+ " LEFT JOIN RENT ON (BOOK.BOOK_ISBN = RENT.BOOK_ISBN AND BOOK.RENT_SEQ = RENT.RENT_SEQ)"
 						+ " WHERE BOOK.BOOK_TITLE LIKE '%" + BookSearch + "%' or "
 						+ " BOOK.BOOK_AUTHOR LIKE '%" + BookSearch + "%' or "
 						+ " BOOK.BOOK_ISBN = '" + BookSearch + "'"
-						+ " GROUP BY BOOK_ISBN;");
+						+ "GROUP BY BOOK.BOOK_ISBN;");
 				int RowCount = tableModel.getRowCount(); // 행 갯수 반환
 				if (RowCount > 0) { // 행 갯수가 0보다 크다면 모든 행 삭제
 					for (int i = RowCount - 1; i >= 0; i--)
 						tableModel.removeRow(i); // 행 삭제 메소드
 				}
 				while (src.next()) { // 검색된 데이터의 사용
-					Object data[] = { src.getString(1), src.getString(2), src.getString(3), src.getString(4), " ",
-							src.getString(9), src.getString(10)};
+					Object data[] = { src.getString("BOOK_ISBN"), src.getString("BOOK_TITLE"), src.getString("BOOK_AUTHOR"),
+						src.getString("BOOK_PUB"), src.getString("USER_PHONE"), src.getString("RENT_DATE"), src.getString("RENT_DUE_DATE")};
 					tmp = data;
 					tableModel.addRow(tmp); // 행 추가 메소드
 					v1.add(src.getInt(5)); // 가격 데이터를 벡터에 추가

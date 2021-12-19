@@ -64,8 +64,11 @@ public class FrameReturn extends JFrame {
 								+ "SET RENT_RETURN_DATE = CURDATE() "
 								+ "WHERE RENT.BOOK_ISBN = '" + clicked_ISBN + "' and RENT_RETURN_DATE is null;");
 						// 대여 카운트 감소 SQL 수행
-						dbConn.executeUpdate("UPDATE USER SET USER_RENT_CNT = USER-RENT-CNT - 1 "
+						dbConn.executeUpdate("UPDATE USER SET USER_RENT_CNT = USER_RENT_CNT - 1 "
 								+ "WHERE USER_PHONE = '01025773617';");
+						// 대여 일련번호 초기화
+						dbConn.executeUpdate("UPDATE BOOK SET RENT_SEQ = '0'"
+								+ "WHERE BOOK.BOOK_ISBN = '" + clicked_ISBN + "';");
 						// 메시지 출력
 						JOptionPane.showConfirmDialog(null, ISBN_to_TITLE(clicked_ISBN) + "(" + clicked_ISBN + ") 도서를 반납하였습니다.","도서 반납",JOptionPane.CLOSED_OPTION);
 					}										

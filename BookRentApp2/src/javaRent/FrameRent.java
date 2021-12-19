@@ -85,6 +85,9 @@ public class FrameRent extends JFrame {
 						// 대여 카운트 증가 SQL 수행
 						dbConn.executeUpdate("UPDATE USER SET USER_RENT_CNT = USER_RENT_CNT + 1 "
 								+ "WHERE USER_PHONE = '01025773617';");
+						// 대여 일련번호 갱신
+						dbConn.executeUpdate("UPDATE BOOK SET RENT_SEQ = '" + getMax_RENT_SEQ() + "'"
+								+ "WHERE BOOK.BOOK_ISBN = '" + clicked_ISBN + "';");
 						// 메시지 출력
 						JOptionPane.showConfirmDialog(null, ISBN_to_TITLE(clicked_ISBN) + "(" + clicked_ISBN + ") 도서를 대여하였습니다.\n"
 								 + "※ 대여자: " + PHONE_to_NAME(clicked_PHONE) + "(" + clicked_PHONE + ")",
@@ -98,30 +101,43 @@ public class FrameRent extends JFrame {
 	
 	// 메소드: 특정 ISBN에 해당하는 도서 제목 저장 	
 	public String ISBN_to_TITLE(String ISBN) {
-		String tmpTitle = null;
+		String temp = null;
 		try {
 			ResultSet srcTitle = dbConn.executeQurey("SELECT BOOK.BOOK_TITLE FROM BOOK, RENT "
 					+ "WHERE BOOK.BOOK_ISBN = RENT.BOOK_ISBN and RENT.BOOK_ISBN = '" + ISBN + "';");
 			while(srcTitle.next())
-				tmpTitle = srcTitle.getString(1);
+				temp = srcTitle.getString(1);
 		} catch (SQLException e) {
 			return null;
 		}		
-		return tmpTitle;
+		return temp;
 	}
 	
 	// 메소드: 특정 전화번호에 해당하는 회원 이름 저장 	
 	public String PHONE_to_NAME(String PHONE) {
-		String tmpName = null;
+		String temp = null;
 		try {
 			ResultSet srcName = dbConn.executeQurey("SELECT USER.USER_NAME FROM USER, RENT "
 					+ "WHERE USER.USER_PHONE = RENT.USER_PHONE and RENT.USER_PHONE = '" + PHONE + "';");
 			while(srcName.next())
-				tmpName = srcName.getString(1);
+				temp = srcName.getString(1);
 		} catch (SQLException e) {
 			return null;
 		}		
-		return tmpName;
+		return temp;
+	}
+	
+	// 메소드: 대여 일련번호(RENT_SEQ)의 최대값 리턴
+	public String getMax_RENT_SEQ() {
+		String temp = null;
+		try {
+			ResultSet srcName = dbConn.executeQurey("SELECT MAX(RENT_SEQ) FROM RENT;");
+			while(srcName.next())
+				temp = srcName.getString(1);
+		} catch (SQLException e) {
+			return null;
+		}		
+		return temp;
 	}
 	
 }
