@@ -23,6 +23,7 @@ public class FrameBookDelete{
 		frame = new JFrame("도서 삭제");
 		frame.setVisible(true);
 		frame.setBounds(100, 100, 555, 689);
+		frame.setLocationRelativeTo(null); // 화면 정중앙 배치
 		PanelBookInfo book_panel = new PanelBookInfo(frame);
 		frame.getContentPane().add(book_panel, BorderLayout.CENTER);
 		
@@ -56,8 +57,8 @@ public class FrameBookDelete{
 								if(count == 0) {
 									JOptionPane.showMessageDialog(null,"ISBN : "+Book_ISBN+"이(는) 삭제에 실패하였습니다.", "도서 삭제",JOptionPane.ERROR_MESSAGE);
 								}else {
-									book_panel.Tableremove(clickedTableRow);
 									JOptionPane.showMessageDialog(null,"ISBN : "+Book_ISBN+"로 삭제가 완료되었습니다.", "도서 삭제",JOptionPane.NO_OPTION);
+									book_panel.refreshTable();	// 테이블 새로고침
 								}
 							}
 							catch (SQLException e1) {

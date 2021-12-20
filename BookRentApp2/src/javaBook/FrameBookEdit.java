@@ -25,22 +25,16 @@ public class FrameBookEdit {
 	private DefaultTableModel sourceModel;
 	private int clickedTableRow;
 	private String Book_ISBN;
-	private String filePath;
+	private String filePath=null;
+
 	// 생성자
 	public FrameBookEdit() {
-		initialize();
-	}
-
-	// 프레임 초기화
-	private void initialize() {
 		frame = new JFrame("도서 수정");
 		frame.setVisible(true);
-
 		frame.setBounds(100, 100, 555, 689);
-
 		PanelBookInfo book_panel = new PanelBookInfo(frame);
 		frame.getContentPane().add(book_panel, BorderLayout.CENTER);
-
+		frame.setLocationRelativeTo(null); // 화면 정중앙 배치
 		// 객체 공유
 		jf = book_panel.getJTextField();
 		DESCRIPTION_FIELD = book_panel.getJTextArea();
@@ -55,7 +49,7 @@ public class FrameBookEdit {
 				// 클릭한 행 및 컬럼 위치 확보(클릭한 위치의 정보 출력)
 				clickedTableRow = sourceTable.getSelectedRow(); // 행
 				Book_ISBN = (String)sourceModel.getValueAt(clickedTableRow, 0);
-				filePath = bookimg.getSelectedFile().getPath();
+				System.out.println(bookimg.getCurrentDirectory());
 			}
 		});
 		// 이미지 변경
@@ -67,7 +61,7 @@ public class FrameBookEdit {
 				ImageIcon images = FileChooser.getImageIcon(PanelBookInfo.bookWidth, PanelBookInfo.bookHeight);
 				bookimg = FileChooser.getJFileChooser();
 				filePath = bookimg.getSelectedFile().getPath();
-			
+				System.out.println(filePath);
 				book_panel.setBookIcon(images);
 			}
 		});
@@ -85,7 +79,7 @@ public class FrameBookEdit {
 				int num = JOptionPane.showConfirmDialog(null, "도서를 수정 하시겠습니까?", "도서 수정", JOptionPane.ERROR_MESSAGE);
 				switch (num) {
 				case JOptionPane.YES_OPTION: {
-						if(sourceModel.getValueAt(clickedTableRow,5)==null) {
+						if(sourceModel.getValueAt(clickedTableRow,5)==null && !(filePath==null)) {
 							String sql= "update BOOK set BOOK_ISBN = ?, BOOK_TITLE = ?, BOOK_AUTHOR = ?, BOOK_PUB = ?,"
 									+ "BOOK_PRICE = ?, BOOK_DESCRIPTION = ?, BOOK_IMAGE = ?,BOOK_LINK = ? "
 									+ "where BOOK_ISBN = ?";
@@ -115,6 +109,34 @@ public class FrameBookEdit {
 								e1.printStackTrace();
 							}
 							catch (FileNotFoundException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+						}
+						else if(sourceModel.getValueAt(clickedTableRow,5)==null && filePath==null) {
+							String sql= "update BOOK set BOOK_ISBN = ?, BOOK_TITLE = ?, BOOK_AUTHOR = ?, BOOK_PUB = ?,"
+									+ "BOOK_PRICE = ?, BOOK_DESCRIPTION = ?,BOOK_LINK = ? "
+									+ "where BOOK_ISBN = ?";
+							Connection tmpConn = dbConn.getConnection();
+							try {
+								PreparedStatement ps = tmpConn.prepareStatement(sql);
+								ps.setString(1, jf[0].getText());
+								ps.setString(2, jf[1].getText());
+								ps.setString(3, jf[2].getText());
+								ps.setString(4, jf[3].getText());
+								ps.setInt(5, Integer.parseInt(jf[4].getText()));
+								ps.setString(6, DESCRIPTION_FIELD.getText());
+								ps.setString(7, jf[5].getText());
+								ps.setString(8, Book_ISBN);
+								int count = ps.executeUpdate();
+								if(count == 0) {
+									JOptionPane.showMessageDialog(null,"ISBN : "+jf[1].getText()+"이(는) 수정에 실패하였습니다.", "도서 수정",JOptionPane.ERROR_MESSAGE);
+								}else {
+									JOptionPane.showMessageDialog(null,"ISBN : "+jf[1].getText()+"로 수정이 완료되었습니다.", "도서 수정",JOptionPane.NO_OPTION);
+									book_panel.refreshTable();	// 테이블 새로고침
+								}
+							}
+							catch (SQLException e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}

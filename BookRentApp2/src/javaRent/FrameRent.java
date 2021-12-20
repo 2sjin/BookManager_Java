@@ -64,9 +64,11 @@ public class FrameRent extends JFrame {
 		UPDATE_BUTTON.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		UPDATE_BUTTON.setBounds(342, 574, 80, 28);
 		book_panel.add(UPDATE_BUTTON);
+		
 		UPDATE_BUTTON.addActionListener(new  ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String clicked_ISBN = book_panel.getBookISBN();
+				String clicked_ISBN = book_panel.getBookISBN();	// 클릭한 도서의 ISBN 가져오기
+				String clicked_PHONE = "01025773617";			// 클릭한 회원의 전화번호 가져오기(구현 예정)
 				
 				try {
 					// 책이 대여중인지 확인하기 위한 SQL 실행
@@ -79,23 +81,65 @@ public class FrameRent extends JFrame {
 					else {
 						// 대여 SQL 수행
 						dbConn.executeUpdate("INSERT INTO RENT(RENT_DATE, RENT_DUE_DATE, BOOK_ISBN, USER_PHONE) "
-								+ "VALUES(CURDATE(), date_add(CURDATE(), interval 14 day), " + clicked_ISBN + ", '01025773617');");
+								+ "VALUES(CURDATE(), date_add(CURDATE(), interval 14 day), " + clicked_ISBN + ", '" + clicked_PHONE + "');");
 						// 대여 카운트 증가 SQL 수행
 						dbConn.executeUpdate("UPDATE USER SET USER_RENT_CNT = USER_RENT_CNT + 1 "
 								+ "WHERE USER_PHONE = '01025773617';");
-						// 특정 ISBN에 해당하는 도서 제목 저장 
-						ResultSet srcName = dbConn.executeQurey("SELECT BOOK.BOOK_ISBN, BOOK.BOOK_TITLE FROM BOOK, RENT "
-								+ "WHERE BOOK.BOOK_ISBN = RENT.BOOK_ISBN and RENT.BOOK_ISBN = " + clicked_ISBN + ";");
-						String tmpName = null;
-						while(srcName.next())
-							tmpName = srcName.getString(2);
+						// 대여 일련번호 갱신
+						dbConn.executeUpdate("UPDATE BOOK SET RENT_SEQ = '" + getMax_RENT_SEQ() + "'"
+								+ "WHERE BOOK.BOOK_ISBN = '" + clicked_ISBN + "';");
 						// 메시지 출력
-						JOptionPane.showConfirmDialog(null, tmpName + "(" + clicked_ISBN + ") 도서를 대여하였습니다.\n※ 대여자: 이승진(01025773617)",
+						JOptionPane.showConfirmDialog(null, ISBN_to_TITLE(clicked_ISBN) + "(" + clicked_ISBN + ") 도서를 대여하였습니다.\n"
+								 + "※ 대여자: " + PHONE_to_NAME(clicked_PHONE) + "(" + clicked_PHONE + ")",
 								"도서 대여",JOptionPane.CLOSED_OPTION);
+						// 테이블 새로고침
+						book_panel.refreshTable();
 					}
 					
 				} catch (SQLException e1) { e1.printStackTrace(); }	
 			}
-		});
+		});		
 	}
+	
+	// 메소드: 특정 ISBN에 해당하는 도서 제목 저장 	
+	public String ISBN_to_TITLE(String ISBN) {
+		String temp = null;
+		try {
+			ResultSet srcTitle = dbConn.executeQurey("SELECT BOOK.BOOK_TITLE FROM BOOK, RENT "
+					+ "WHERE BOOK.BOOK_ISBN = RENT.BOOK_ISBN and RENT.BOOK_ISBN = '" + ISBN + "';");
+			while(srcTitle.next())
+				temp = srcTitle.getString(1);
+		} catch (SQLException e) {
+			return null;
+		}		
+		return temp;
+	}
+	
+	// 메소드: 특정 전화번호에 해당하는 회원 이름 저장 	
+	public String PHONE_to_NAME(String PHONE) {
+		String temp = null;
+		try {
+			ResultSet srcName = dbConn.executeQurey("SELECT USER.USER_NAME FROM USER, RENT "
+					+ "WHERE USER.USER_PHONE = RENT.USER_PHONE and RENT.USER_PHONE = '" + PHONE + "';");
+			while(srcName.next())
+				temp = srcName.getString(1);
+		} catch (SQLException e) {
+			return null;
+		}		
+		return temp;
+	}
+	
+	// 메소드: 대여 일련번호(RENT_SEQ)의 최대값 리턴
+	public String getMax_RENT_SEQ() {
+		String temp = null;
+		try {
+			ResultSet srcName = dbConn.executeQurey("SELECT MAX(RENT_SEQ) FROM RENT;");
+			while(srcName.next())
+				temp = srcName.getString(1);
+		} catch (SQLException e) {
+			return null;
+		}		
+		return temp;
+	}
+	
 }

@@ -30,7 +30,7 @@ public class FrameBookCreate{;
 		
 		frame.setBounds(100, 100, 555, 689);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
-		
+		frame.setLocationRelativeTo(null); // 화면 정중앙 배치
 		PanelBookInfo book_panel = new PanelBookInfo(frame);
 		
 		// 객체 공유
@@ -91,7 +91,6 @@ public class FrameBookCreate{;
 		IMAGE_INSERT_BUTTON.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ImageIcon images = FileChooser.getImageIcon(PanelBookInfo.bookWidth, PanelBookInfo.bookHeight);	// 파일 선택기를 통해 이미지 리턴
-				
 				bookimg = FileChooser.getJFileChooser();
 				filePath = bookimg.getSelectedFile().getPath();
 				System.out.println(filePath);
