@@ -312,9 +312,9 @@ public class PanelBookInfo extends JPanel {
 						src.getString("BOOK_PUB"), src.getString("USER_PHONE"), src.getString("RENT_DATE"), src.getString("RENT_DUE_DATE")};
 					tmp = data;
 					tableModel.addRow(tmp); // 행 추가 메소드
-					v1.add(src.getInt(5)); // 가격 데이터를 벡터에 추가
-					v2.add(src.getString(8)); // 대여자 데이터를 벡터에 추가
-					v3.add(src.getString(6)); // 도서설명 데이터를 벡터에 추가
+					v1.add(src.getInt("BOOK_PRICE")); // 가격 데이터를 벡터에 추가
+					v2.add(src.getString("USER_PHONE")); // 대여자 데이터를 벡터에 추가
+					v3.add(src.getString("BOOK_DESCRIPTION")); // 도서설명 데이터를 벡터에 추가
 
 					// DB에서 BLOB 자료형으로 저장된 데이터 그림 데이터로 변환
 					InputStream inputStream = src.getBinaryStream(7);
@@ -365,7 +365,9 @@ public class PanelBookInfo extends JPanel {
 	public String getBookISBN() {
 		return jf[0].getText();
 	}
+	
 	public JTable getJTable() {
 		return table;
 	}
+	
 }
