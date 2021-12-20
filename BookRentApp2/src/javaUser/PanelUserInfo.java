@@ -1,11 +1,14 @@
 package javaUser;
 
+import java.io.*;
+import java.sql.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.table.*;
 
 import other.FileChooser;
+import other.dbConnector;
 
 import java.awt.*;
 
@@ -17,8 +20,16 @@ public class PanelUserInfo extends JPanel {
 	JTextField Sex;
 	JTextField Email;
 	JTable UserSearchResult;
+	DefaultTableModel tableModel;
+	Object [][] data = new Object[0][6];
+	String [] header = {"ISBN", "제목", "저자", "출판사", "대여일", "반납예정일"};
 	JTable BookList;
+	DefaultTableModel tableModel2;
+	Object [][] data2 = new Object[0][6];
+	String [] header2 = {"전화번호", "이름", "생년월일", "성별", "등록여부", "대여도서"};
 	JButton ImageChange;
+	private ResultSet src = null;
+	private dbConnector dbConn = new dbConnector();
 
 	// 생성자
 	public PanelUserInfo() {
@@ -39,44 +50,20 @@ public class PanelUserInfo extends JPanel {
 		
 		UserSearch = new JTextField();
 		UserSearch.setColumns(41);
+		UserSearch.addActionListener(new UserActionListener());
 		Center_Panel.add(UserSearch);
 		
 		JLabel lblNewLabel_3 = new JLabel("회원 검색 결과");
 		lblNewLabel_3.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		Center_Panel.add(lblNewLabel_3);
 		
-		UserSearchResult = new JTable();
-		UserSearchResult.setEnabled(false);
-		UserSearchResult.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
-		UserSearchResult.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-			},
-			new String[] {
-				"ISBN", "제목", "저자", "출판사", "대여일", "반납예정일"
-			}
-		));
-		BookList = new JTable();
+		
+		tableModel2 = new DefaultTableModel(data2, header2);
+		BookList = new JTable(tableModel2);
+		BookList.setFont(new Font("맑은 고딕", Font.PLAIN, 10));
+		
+		resizeColumnWidth(BookList);
 		BookList.setEnabled(false);
-		BookList.setFont(new Font("굴림", Font.PLAIN, 17));
-		BookList.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-			},
-			new String[] {
-				"전화번호", "이름", "생년월일", "성별", "등록여부", "대여도서"
-			}
-		));
 		JScrollPane scrollPane = new JScrollPane(BookList);
 		scrollPane.setPreferredSize(new Dimension(500, 90));
 		Center_Panel.add(scrollPane);
@@ -139,8 +126,12 @@ public class PanelUserInfo extends JPanel {
 		lblNewLabel_5.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		List_Panel.add(lblNewLabel_5);
 		
+		tableModel = new DefaultTableModel(data, header);
+		UserSearchResult = new JTable(tableModel);
+		UserSearchResult.setEnabled(false);
+		UserSearchResult.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		JScrollPane jp = new JScrollPane(UserSearchResult);
-		jp.setPreferredSize(new Dimension(460, 120));
+		jp.setPreferredSize(new Dimension(470, 120));
 		List_Panel.add(jp);
 
 		ImageChange = new JButton("이미지 변경");
@@ -195,5 +186,42 @@ public class PanelUserInfo extends JPanel {
 		Sex.setEditable(boo);
 		Email.setEditable(boo);
 		ImageChange.setVisible(boo);
+	}
+	private class UserActionListener implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			try {
+				src = dbConn.executeQurey("Select *from USER;");
+				int RowCount = tableModel2.getRowCount(); // 행 갯수 반환
+				if (RowCount > 0) { // 행 갯수가 0보다 크다면 모든 행 삭제
+					for (int i = RowCount - 1; i >= 0; i--)
+						tableModel2.removeRow(i); // 행 삭제 메소드
+				}
+				while(src.next()) {
+					String sexState;
+					if(src.getInt(4)==1) {
+						sexState = "여성";
+					}
+					else
+						sexState = "남성";
+					Object [] tmp = {src.getString(1),src.getString(2),src.getString(3),sexState,src.getString(5),""};
+					tableModel2.addRow(tmp);
+				}
+				resizeColumnWidth(BookList);
+			}catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
+	public void resizeColumnWidth(JTable table) {
+		final TableColumnModel columnModel = table.getColumnModel();
+		for (int column = 0; column < table.getColumnCount(); column++) {
+			int width = 72; // Min width
+			for (int row = 0; row < table.getRowCount(); row++) {
+				TableCellRenderer renderer = table.getCellRenderer(row, column);
+				Component comp = table.prepareRenderer(renderer, row, column);
+				width = Math.max(comp.getPreferredSize().width + 8, width);
+			}
+			columnModel.getColumn(column).setPreferredWidth(width);
+		}
 	}
 }
