@@ -104,7 +104,7 @@ public class FrameRent extends JFrame {
 								"도서 대여",JOptionPane.CLOSED_OPTION);
 						// 새로고침
 						book_panel.refreshTable();
-						book_panel.setRentTextField(clicked_USER_PHONE, getMaxRENT("DATE"), getMaxRENT("DUE_DATE"));
+						book_panel.setRentTextField(clicked_USER_NAME + "(" + clicked_USER_PHONE + ")", getMaxRENT("DATE"), getMaxRENT("DUE_DATE"));
 					}
 					
 				} catch (SQLException e1) { e1.printStackTrace(); }	
