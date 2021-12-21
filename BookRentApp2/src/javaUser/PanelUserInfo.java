@@ -2,7 +2,10 @@ package javaUser;
 
 import java.io.*;
 import java.sql.*;
+import java.util.Vector;
 import java.awt.event.*;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.table.*;
@@ -13,7 +16,10 @@ import other.dbConnector;
 import java.awt.*;
 
 public class PanelUserInfo extends JPanel {
-	JTextField UserSearch;
+	protected final static int UserWidth = 119;
+	protected final static int UserHeight = 140;
+	
+	JTextField UserSearchField;
 	JTextField Phone;
 	JTextField Name;
 	JTextField Birth;
@@ -30,7 +36,10 @@ public class PanelUserInfo extends JPanel {
 	JButton ImageChange;
 	private ResultSet src = null;
 	private dbConnector dbConn = new dbConnector();
-
+	JLabel lblNewLabel_4_11;
+	JLabel ImageUser;
+	private Vector<String> v2 = new Vector<String>();
+	private Vector<Image> vImage = new Vector<Image>();
 	// 생성자
 	public PanelUserInfo() {
 		setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
@@ -48,10 +57,10 @@ public class PanelUserInfo extends JPanel {
 		lblNewLabel_2.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		Center_Panel.add(lblNewLabel_2);
 		
-		UserSearch = new JTextField();
-		UserSearch.setColumns(41);
-		UserSearch.addActionListener(new UserActionListener());
-		Center_Panel.add(UserSearch);
+		UserSearchField = new JTextField();
+		UserSearchField.setColumns(41);
+		UserSearchField.addActionListener(new UserActionListener());
+		Center_Panel.add(UserSearchField);
 		
 		JLabel lblNewLabel_3 = new JLabel("회원 검색 결과");
 		lblNewLabel_3.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
@@ -63,7 +72,23 @@ public class PanelUserInfo extends JPanel {
 		BookList.setFont(new Font("맑은 고딕", Font.PLAIN, 10));
 		
 		resizeColumnWidth(BookList);
-		BookList.setEnabled(false);
+		BookList.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				JTable sourceTable = (JTable) e.getSource();
+				DefaultTableModel sourceModel = (DefaultTableModel) sourceTable.getModel();
+				int clickedTableRow = sourceTable.getSelectedRow();
+				Phone.setText((String) sourceModel.getValueAt(clickedTableRow, 0));
+				Name.setText((String) sourceModel.getValueAt(clickedTableRow, 1));
+				Birth.setText((String) sourceModel.getValueAt(clickedTableRow, 2));
+				Sex.setText((String) sourceModel.getValueAt(clickedTableRow, 3));
+				Email.setText(v2.get(clickedTableRow));
+				lblNewLabel_4_11.setText((String) sourceModel.getValueAt(clickedTableRow, 4));
+				
+				Image tmpImg = vImage.get(clickedTableRow); // 벡터로부터 Image 불러오기
+				tmpImg = tmpImg.getScaledInstance(UserWidth, UserHeight, Image.SCALE_SMOOTH); // Image 크기 재설정
+				ImageUser.setIcon(new ImageIcon(tmpImg));
+			}
+		});
 		JScrollPane scrollPane = new JScrollPane(BookList);
 		scrollPane.setPreferredSize(new Dimension(500, 90));
 		Center_Panel.add(scrollPane);
@@ -75,11 +100,11 @@ public class PanelUserInfo extends JPanel {
 		panel.setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
 		Center_Panel.add(panel);
 		
-		JLabel Image = new JLabel("");
-		Image.setOpaque(true);
-		Image.setBackground(UIManager.getColor("CheckBoxMenuItem.selectionBackground"));
-		Image.setBounds(12, 10, 119, 140);
-		panel.add(Image);
+		ImageUser = new JLabel("");
+		ImageUser.setOpaque(isOpaque());
+		ImageUser.setBackground(UIManager.getColor("CheckBoxMenuItem.selectionBackground"));
+		ImageUser.setBounds(12, 10, 119, 140);
+		panel.add(ImageUser);
 		
 		JLabel lblNewLabel_4 = new JLabel("전화번호 :");
 		lblNewLabel_4.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
@@ -111,7 +136,7 @@ public class PanelUserInfo extends JPanel {
 		lblNewLabel_4_10.setBounds(143, 170, 105, 22);
 		panel.add(lblNewLabel_4_10);
 		
-		JLabel lblNewLabel_4_11 = new JLabel("등록");
+		lblNewLabel_4_11 = new JLabel("등록");
 		lblNewLabel_4_11.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		lblNewLabel_4_11.setBounds(260, 170, 105, 22);
 		panel.add(lblNewLabel_4_11);
@@ -142,37 +167,37 @@ public class PanelUserInfo extends JPanel {
 		ImageChange.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ImageIcon images = FileChooser.getImageIcon(119, 140);	// 파일 선택기를 통해 이미지 리턴(매개변수는 가로, 세로 크기)
-				Image.setIcon(images);
+				ImageUser.setIcon(images);
 			}
 		});
 		panel.add(ImageChange);
 		
 		Phone = new JTextField();
-		Phone.setColumns(10);
+		Phone.setColumns(20);
 		Phone.setBorder(new LineBorder(Color.BLUE));
 		Phone.setBounds(260, 10, 210, 22);
 		panel.add(Phone);
 		
 		Name = new JTextField();
-		Name.setColumns(10);
+		Name.setColumns(20);
 		Name.setBorder(new LineBorder(Color.BLUE));
 		Name.setBounds(260, 42, 210, 22);
 		panel.add(Name);
 		
 		Birth = new JTextField();
-		Birth.setColumns(10);
+		Birth.setColumns(20);
 		Birth.setBorder(new LineBorder(Color.BLUE));
 		Birth.setBounds(260, 74, 210, 22);
 		panel.add(Birth);
 		
 		Sex = new JTextField();
-		Sex.setColumns(10);
+		Sex.setColumns(20);
 		Sex.setBorder(new LineBorder(Color.BLUE));
 		Sex.setBounds(260, 106, 210, 22);
 		panel.add(Sex);
 		
 		Email = new JTextField();
-		Email.setColumns(10);
+		Email.setColumns(30);
 		Email.setBorder(new LineBorder(Color.BLUE));
 		Email.setBounds(260, 138, 210, 22);
 		panel.add(Email);
@@ -189,8 +214,10 @@ public class PanelUserInfo extends JPanel {
 	}
 	private class UserActionListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
+			String UserSearch = UserSearchField.getText();
 			try {
-				src = dbConn.executeQurey("Select *from USER;");
+				src = dbConn.executeQurey("Select * FROM USER "+ "WHERE USER.USER_NAME LIKE '%" + UserSearch + "%' or "
+						+ " USER.USER_PHONE LIKE '%" + UserSearch + "%';");
 				int RowCount = tableModel2.getRowCount(); // 행 갯수 반환
 				if (RowCount > 0) { // 행 갯수가 0보다 크다면 모든 행 삭제
 					for (int i = RowCount - 1; i >= 0; i--)
@@ -198,13 +225,26 @@ public class PanelUserInfo extends JPanel {
 				}
 				while(src.next()) {
 					String sexState;
+					String memberState;
 					if(src.getInt(4)==1) {
 						sexState = "여성";
 					}
 					else
 						sexState = "남성";
-					Object [] tmp = {src.getString(1),src.getString(2),src.getString(3),sexState,src.getString(5),""};
+					if(src.getString(8)==null) {
+						memberState = "등록";
+					}
+					else
+						memberState = "미등록";
+					Object [] tmp = {src.getString(1),src.getString(2),src.getString(3),sexState,memberState,src.getString(9)};
 					tableModel2.addRow(tmp);
+					v2.add(src.getString(5));
+					InputStream inputStream = src.getBinaryStream(6);
+					try {
+						vImage.add(ImageIO.read(inputStream)); // 바이너리 데이터를 이미지 형태로 읽어 벡터에 추가
+					} catch (IOException errImg) {
+						System.out.println("이미지 불러오기 오류");
+					}
 				}
 				resizeColumnWidth(BookList);
 			}catch (SQLException e1) {
