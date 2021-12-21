@@ -45,7 +45,9 @@ public class PanelBookInfo extends JPanel {
 	private Vector<String> v3 = new Vector<String>();
 	private Vector<Image> vImage = new Vector<Image>();
 	private JTextField jf[] = new JTextField[7];
-
+	private JTable tempTable;
+	private DefaultTableModel tempModel;
+	
 	// 생성자
 	public PanelBookInfo(JFrame frame2) {
 		setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
@@ -220,7 +222,9 @@ public class PanelBookInfo extends JPanel {
 				// 이벤트 처리를 위한 table 관련 객제 정보 받기
 				JTable sourceTable = (JTable) e.getSource();
 				DefaultTableModel sourceModel = (DefaultTableModel) sourceTable.getModel();
-
+				tempTable = sourceTable;
+				tempModel = sourceModel;
+				
 				// 클릭한 행 및 컬럼 위치 확보(클릭한 위치의 정보 출력)
 				int clickedTableRow = sourceTable.getSelectedRow(); // 행
 				jf[0].setText((String) sourceModel.getValueAt(clickedTableRow, 0));
@@ -313,7 +317,7 @@ public class PanelBookInfo extends JPanel {
 					tmp = data;
 					tableModel.addRow(tmp); // 행 추가 메소드
 					v1.add(src.getInt("BOOK_PRICE")); // 가격 데이터를 벡터에 추가
-					v2.add(src.getString("USER_PHONE")); // 대여자 데이터를 벡터에 추가
+					v2.add(src.getString("BOOK_LINK")); // 관련링크 데이터를 벡터에 추가
 					v3.add(src.getString("BOOK_DESCRIPTION")); // 도서설명 데이터를 벡터에 추가
 
 					// DB에서 BLOB 자료형으로 저장된 데이터 그림 데이터로 변환
@@ -346,7 +350,14 @@ public class PanelBookInfo extends JPanel {
 
 	// 테이블 새로고침(입력이 없어도 [검색] 이벤트 강제로 실행)
 	public void refreshTable() {
-		new BookActionListener().actionPerformed(null);
+		new BookActionListener().actionPerformed(null);		
+	}
+	
+	// 대여 정보 관련 텍스트필드의 정보 수정
+	public void setRentTextField(String a, String b, String c) {
+		LENDER_LABEL.setText(a);
+		RENTAL_DATE_LABEL.setText(b);
+		RETURN_DATE_LABEL.setText(c);	
 	}
 	
 	// 리턴 메소드

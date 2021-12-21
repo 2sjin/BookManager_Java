@@ -96,14 +96,15 @@ public class FrameRent extends JFrame {
 						dbConn.executeUpdate("UPDATE USER SET USER_RENT_CNT = USER_RENT_CNT + 1 "
 								+ "WHERE USER_PHONE = '" + clicked_USER_PHONE + "';");
 						// 대여 일련번호 갱신
-						dbConn.executeUpdate("UPDATE BOOK SET RENT_SEQ = '" + getMax_RENT_SEQ() + "'"
+						dbConn.executeUpdate("UPDATE BOOK SET RENT_SEQ = '" + getMaxRENT("SEQ") + "'"
 								+ "WHERE BOOK.BOOK_ISBN = '" + clicked_BOOK_ISBN + "';");
 						// 메시지 출력
 						JOptionPane.showConfirmDialog(null, clicked_BOOK_TITLE + "(" + clicked_BOOK_ISBN + ") 도서를 대여하였습니다.\n"
 								 + "※ 대여자: " + clicked_USER_NAME + "(" + clicked_USER_PHONE + ")",
 								"도서 대여",JOptionPane.CLOSED_OPTION);
-						// 테이블 새로고침
+						// 새로고침
 						book_panel.refreshTable();
+						book_panel.setRentTextField(clicked_USER_PHONE, getMaxRENT("DATE"), getMaxRENT("DUE_DATE"));
 					}
 					
 				} catch (SQLException e1) { e1.printStackTrace(); }	
@@ -112,11 +113,11 @@ public class FrameRent extends JFrame {
 	}
 	
 
-	// 메소드: 대여 일련번호(RENT_SEQ)의 최대값 리턴
-	public String getMax_RENT_SEQ() {
+	// 메소드: RENT 테이블에서 특정 필드의 최대값 리턴
+	public String getMaxRENT(String s) {
 		String temp = null;
 		try {
-			ResultSet srcName = dbConn.executeQurey("SELECT MAX(RENT_SEQ) FROM RENT;");
+			ResultSet srcName = dbConn.executeQurey("SELECT MAX(RENT_" + s + ") FROM RENT;");
 			while(srcName.next())
 				temp = srcName.getString(1);
 		} catch (SQLException e) {
