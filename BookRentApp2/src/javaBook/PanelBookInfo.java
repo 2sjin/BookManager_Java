@@ -362,8 +362,13 @@ public class PanelBookInfo extends JPanel {
 		return BOOK_IMAGE;
 	}
 
-	public String getBookISBN() {
-		return jf[0].getText();
+	public String getBookInfo(String s) {
+		switch(s) {
+			case "ISBN": return jf[0].getText(); 
+			case "TITLE": return jf[1].getText();
+			case "RENT_NAME": return LENDER_LABEL.getText();
+			default: return null;
+		}
 	}
 	
 	public JTable getJTable() {
