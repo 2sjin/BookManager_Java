@@ -43,10 +43,6 @@ public class PanelUserInfo extends JPanel {
 	private Vector<String> v2 = new Vector<String>();
 	private Vector<Image> vImage = new Vector<Image>();
 	
-<<<<<<< HEAD
-	
-=======
->>>>>>> abf23b03c77d6afb4e32541875751cc6823da765
 	// 생성자
 	public PanelUserInfo() {
 		setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
@@ -81,10 +77,12 @@ public class PanelUserInfo extends JPanel {
 		
 		
 		tableModel2 = new DefaultTableModel(data2, header2){
+			private static final long serialVersionUID = 1L;
 	         public boolean isCellEditable(int row, int column) {
 	             return false;
-	          }
-	       };
+	         }
+		};
+		
 		BookList = new JTable(tableModel2);
 		BookList.setFont(new Font("맑은 고딕", Font.PLAIN, 10));
 		
@@ -170,11 +168,13 @@ public class PanelUserInfo extends JPanel {
 		lblNewLabel_5.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		List_Panel.add(lblNewLabel_5);
 		
-		tableModel = new DefaultTableModel(data, header){
-	         public boolean isCellEditable(int row, int column) {
-	             return false;
-	          }
-	       };
+		tableModel = new DefaultTableModel(data, header) {
+			private static final long serialVersionUID = 1L;
+	        public boolean isCellEditable(int row, int column) {
+	        	return false;
+	         }
+		};
+		
 		UserSearchResult = new JTable(tableModel);
 		UserSearchResult.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		resizeColumnWidth(UserSearchResult);
