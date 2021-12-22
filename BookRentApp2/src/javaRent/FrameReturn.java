@@ -50,7 +50,14 @@ public class FrameReturn extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String clicked_ISBN = book_panel.getBookInfo("ISBN");	// 클릭한 도서의 ISBN 리턴받기
 				String clicked_TITLE = book_panel.getBookInfo("TITLE");	// 클릭한 도서의 제목 리턴받기
-				String clicked_RENT_NAME = book_panel.getBookInfo("RENT_NAME");	// 클릭한 도서의 대여자 이름 리턴받기
+				String clicked_RENT_PHONE = book_panel.getBookInfo("RENT_PHONE");	// 클릭한 도서의 대여자 전화번호 리턴받기
+				
+				// 도서를 선택하지 않았을 경우
+				if(clicked_ISBN.equals("")) {	
+					JOptionPane.showConfirmDialog(null,"검색 후 테이블(도서 검색 결과) 내의 원하는 항목을 클릭하세요.\n",
+							"도서 반납",JOptionPane.CLOSED_OPTION);
+					return;
+				}
 				
 				try {
 					// 책이 대여 중인지 확인하기 위한 SQL 실행
@@ -67,7 +74,7 @@ public class FrameReturn extends JFrame {
 								+ "WHERE RENT.BOOK_ISBN = '" + clicked_ISBN + "' and RENT_RETURN_DATE is null;");
 						// 대여 카운트 감소 SQL 수행
 						dbConn.executeUpdate("UPDATE USER SET USER_RENT_CNT = USER_RENT_CNT - 1 "
-								+ "WHERE USER_PHONE = '" + clicked_RENT_NAME + "';");
+								+ "WHERE USER_PHONE = '" + clicked_RENT_PHONE + "';");
 						// 대여 일련번호 초기화
 						dbConn.executeUpdate("UPDATE BOOK SET RENT_SEQ = '0'"
 								+ "WHERE BOOK.BOOK_ISBN = '" + clicked_ISBN + "';");

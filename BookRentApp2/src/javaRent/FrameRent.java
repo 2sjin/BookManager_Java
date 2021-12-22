@@ -74,7 +74,11 @@ public class FrameRent extends JFrame {
 				String clicked_USER_REG = user_panel.getUserInfo("REG");	// 클릭한 회원의 등록 여부 리턴받기
 				
 				// 회원 또는 도서를 선택하지 않았을 경우
-				if(clicked_USER_PHONE.equals("") || clicked_BOOK_ISBN.equals("")) return;
+				if(clicked_USER_PHONE.equals("") || clicked_BOOK_ISBN.equals("")) {	
+					JOptionPane.showConfirmDialog(null,"검색 후 테이블(회원 검색 결과, 도서 검색 결과) 내의 원하는 항목을 클릭하세요.\n",
+							"도서 대여",JOptionPane.CLOSED_OPTION);
+					return;
+				}
 				
 				// 미등록(탈퇴) 회원을 선택하였을 경우
 				if(!clicked_USER_REG.equals("등록"))
@@ -103,6 +107,7 @@ public class FrameRent extends JFrame {
 								 + "※ 대여자: " + clicked_USER_NAME + "(" + clicked_USER_PHONE + ")",
 								"도서 대여",JOptionPane.CLOSED_OPTION);
 						// 새로고침
+						user_panel.refreshTable();
 						book_panel.refreshTable();
 						book_panel.setRentTextField(clicked_USER_NAME + "(" + clicked_USER_PHONE + ")", getMaxRENT("DATE"), getMaxRENT("DUE_DATE"));
 					}

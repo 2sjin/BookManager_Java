@@ -45,7 +45,7 @@ public class PanelBookInfo extends JPanel {
 	private Vector<String> v3 = new Vector<String>();
 	private Vector<Image> vImage = new Vector<Image>();
 	private JTextField jf[] = new JTextField[7];
-
+	private String TEMP_LENDER_PHONE;
 	
 	// 생성자
 	public PanelBookInfo(JFrame frame2) {
@@ -233,11 +233,11 @@ public class PanelBookInfo extends JPanel {
 				DESCRIPTION_FIELD.setText(v3.get(clickedTableRow));				
 
 				// 클릭한 위치의 데이터에 해당하는 대여자 출력
-				String tmpLENDER = (String) sourceModel.getValueAt(clickedTableRow, 4);
-				if(tmpLENDER == null)
+				TEMP_LENDER_PHONE = (String) sourceModel.getValueAt(clickedTableRow, 4);
+				if(TEMP_LENDER_PHONE == null)
 					LENDER_LABEL.setText(null);
 				else
-					LENDER_LABEL.setText(PHONE_to_NAME(tmpLENDER) + "(" +tmpLENDER + ")");
+					LENDER_LABEL.setText(PHONE_to_NAME(TEMP_LENDER_PHONE) + "(" + TEMP_LENDER_PHONE + ")");	
 
 				// 클릭한 위치의 데이터에 해당하는 대여일 및 반납예정일 출력
 				RENTAL_DATE_LABEL.setText((String) sourceModel.getValueAt(clickedTableRow, 5));
@@ -386,6 +386,7 @@ public class PanelBookInfo extends JPanel {
 			case "ISBN": return jf[0].getText(); 
 			case "TITLE": return jf[1].getText();
 			case "RENT_NAME": return LENDER_LABEL.getText();
+			case "RENT_PHONE": return TEMP_LENDER_PHONE;
 			default: return null;
 		}
 	}

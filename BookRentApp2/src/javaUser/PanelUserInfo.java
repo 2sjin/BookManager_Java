@@ -10,12 +10,12 @@ import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.table.*;
 
-import other.FileChooser;
-import other.dbConnector;
+import other.*;
 
 import java.awt.*;
 
 public class PanelUserInfo extends JPanel {
+	private static final long serialVersionUID = 1L;
 	protected final static int UserWidth = 119;
 	protected final static int UserHeight = 140;
 	
@@ -41,6 +41,8 @@ public class PanelUserInfo extends JPanel {
 	JLabel ImageUser;
 	private Vector<String> v2 = new Vector<String>();
 	private Vector<Image> vImage = new Vector<Image>();
+	
+	
 	// 생성자
 	public PanelUserInfo() {
 		setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
@@ -89,26 +91,7 @@ public class PanelUserInfo extends JPanel {
 				tmpImg = tmpImg.getScaledInstance(UserWidth, UserHeight, Image.SCALE_SMOOTH); // Image 크기 재설정
 				ImageUser.setIcon(new ImageIcon(tmpImg));
 				
-				try {
-					src = dbConn.executeQurey("SELECT BOOK.BOOK_ISBN, BOOK.BOOK_TITLE, BOOK.BOOK_AUTHOR, BOOK.BOOK_PUB, RENT.RENT_DATE, RENT.RENT_DUE_DATE FROM BOOK\r\n"
-							+ "LEFT JOIN RENT ON BOOK.BOOK_ISBN = RENT.BOOK_ISBN\r\n"
-							+ "WHERE RENT_RETURN_DATE IS NULL\r\n"
-							+ "AND RENT.USER_PHONE = '"+Phone.getText()+"';");
-					int RowCount = tableModel.getRowCount(); // 행 갯수 반환
-					if (RowCount > 0) { // 행 갯수가 0보다 크다면 모든 행 삭제
-						for (int i = RowCount - 1; i >= 0; i--)
-							tableModel.removeRow(i); // 행 삭제 메소드
-					}
-					while(src.next()) {
-						
-						Object [] tmp = {src.getString(1), src.getString(2), src.getString(3),
-								src.getString(4), src.getString(5), src.getString(6)};
-						tableModel.addRow(tmp);
-					}
-					resizeColumnWidth(UserSearchResult);
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
+				loadRentListSQL();  // 대여중인 도서 목록 SQL 불러오기
 			}
 		});
 		scrollPane = new JScrollPane(BookList);
@@ -287,7 +270,37 @@ public class PanelUserInfo extends JPanel {
 			columnModel.getColumn(column).setPreferredWidth(width);
 		}
 	}
+
+	// 대여중인 도서 목록 SQL 불러오기
+	public void loadRentListSQL() {
+		try {
+			src = dbConn.executeQurey("SELECT BOOK.BOOK_ISBN, BOOK.BOOK_TITLE, BOOK.BOOK_AUTHOR, BOOK.BOOK_PUB, RENT.RENT_DATE, RENT.RENT_DUE_DATE FROM BOOK\r\n"
+					+ "LEFT JOIN RENT ON BOOK.BOOK_ISBN = RENT.BOOK_ISBN\r\n"
+					+ "WHERE RENT_RETURN_DATE IS NULL\r\n"
+					+ "AND RENT.USER_PHONE = '"+Phone.getText()+"';");
+			int RowCount = tableModel.getRowCount(); // 행 갯수 반환
+			if (RowCount > 0) { // 행 갯수가 0보다 크다면 모든 행 삭제
+				for (int i = RowCount - 1; i >= 0; i--)
+					tableModel.removeRow(i); // 행 삭제 메소드
+			}
+			while(src.next()) {	
+				Object [] tmp = {src.getString(1), src.getString(2), src.getString(3),
+						src.getString(4), src.getString(5), src.getString(6)};
+				tableModel.addRow(tmp);
+			}
+			resizeColumnWidth(UserSearchResult);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
 	
+	// 테이블 새로고침(입력이 없어도 [검색] 이벤트 강제로 실행)
+	public void refreshTable() {
+		new UserActionListener().actionPerformed(null);		
+		loadRentListSQL();
+		
+	}
+
 	// 리턴 메소드
 	public String getUserInfo(String s) {
 		switch(s) {
