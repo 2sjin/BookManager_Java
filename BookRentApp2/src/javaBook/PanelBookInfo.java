@@ -55,7 +55,11 @@ public class PanelBookInfo extends JPanel {
 		Book_Search.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		Book_Search.setBounds(12, 10, 80, 15);
 		add(Book_Search);
-		tableModel = new DefaultTableModel(data, header);
+		tableModel = new DefaultTableModel(data, header) {
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 		table = new JTable(tableModel);
 		Search_Field = new JTextField();
 		Search_Field.setBounds(104, 7, 350, 21);

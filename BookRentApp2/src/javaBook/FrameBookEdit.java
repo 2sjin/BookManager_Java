@@ -49,7 +49,6 @@ public class FrameBookEdit {
 				// 클릭한 행 및 컬럼 위치 확보(클릭한 위치의 정보 출력)
 				clickedTableRow = sourceTable.getSelectedRow(); // 행
 				Book_ISBN = (String)sourceModel.getValueAt(clickedTableRow, 0);
-				System.out.println(bookimg.getCurrentDirectory());
 			}
 		});
 		// 이미지 변경
