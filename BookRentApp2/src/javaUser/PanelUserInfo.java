@@ -328,4 +328,7 @@ public class PanelUserInfo extends JPanel {
 			default: return null;
 		}
 	}
+	public void refreshTable() {
+		new UserActionListener().actionPerformed(null);		
+	}
 }

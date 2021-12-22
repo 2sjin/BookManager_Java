@@ -1,11 +1,19 @@
 package javaUser;
 
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.*;
 
 import other.FileChooser;
+import other.dbConnector;
 public class FrameUserCreate {
 
 	private JFrame frame;
@@ -14,8 +22,10 @@ public class FrameUserCreate {
 	private JTextField BirthtextField;
 	private JTextField SextextField;
 	private JTextField EmailtextField;
-
-
+	private dbConnector dbConn = new dbConnector();
+	private JFileChooser userimg;
+	private String filePath;
+	int sexnum=0;
 	// 생성자
 	public FrameUserCreate() {
 		initialize();
@@ -61,6 +71,9 @@ public class FrameUserCreate {
 		ImageButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ImageIcon images = FileChooser.getImageIcon(124, 160);	// 파일 선택기를 통해 이미지 리턴(매개변수는 가로, 세로 크기)
+				userimg = FileChooser.getJFileChooser();
+				filePath = userimg.getSelectedFile().getPath();
+				System.out.println(filePath);
 				Image.setIcon(images);
 			}
 		});
@@ -75,6 +88,42 @@ public class FrameUserCreate {
 		PushButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int result = JOptionPane.showConfirmDialog(null," 회원을 등록 하시겠습니까?","회원 등록",JOptionPane.YES_NO_OPTION);
+				switch(result) {
+				case JOptionPane.YES_OPTION:
+					String sql= "insert into USER(USER_PHONE, USER_NAME, USER_BIRTH, USER_SEX, USER_MAIL"
+							+ ",USER_IMAGE,USER_REG_DATE) values(?,?,?,?,?,?,now())";
+					Connection tmpConn = dbConn.getConnection();
+					if(SextextField.getText().equals("남자")) {
+						sexnum=0;
+					}
+					else
+						sexnum=1;
+					try {
+						PreparedStatement ps = tmpConn.prepareStatement(sql);
+						ps.setString(1, PhoneTextField.getText());
+						ps.setString(2, NametextField.getText());
+						ps.setString(3, BirthtextField.getText());
+						ps.setInt(4, sexnum);
+						ps.setString(5, EmailtextField.getText());
+						File tmpFile = new File(filePath);
+						ps.setBinaryStream(6,new FileInputStream(tmpFile), tmpFile.length());
+						
+						int count = ps.executeUpdate();
+						if(count == 0) {
+							JOptionPane.showMessageDialog(null,"이름 : "+NametextField.getText()+"이(는) 등록에 실패하였습니다.", "신규회원등록",JOptionPane.ERROR_MESSAGE);
+						}else {
+							JOptionPane.showMessageDialog(null,"이름 : "+NametextField.getText()+"이(는) 등록이 완료되었습니다.", "신규회원등록",JOptionPane.NO_OPTION);
+						}
+					}catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					catch (FileNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					break;
+				}
 			}
 		});
 		
