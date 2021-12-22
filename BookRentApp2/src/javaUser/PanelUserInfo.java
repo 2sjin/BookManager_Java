@@ -61,7 +61,7 @@ public class PanelUserInfo extends JPanel {
 		Center_Panel.add(lblNewLabel_2);
 		
 		UserSearchField = new JTextField();
-		UserSearchField.setColumns(34);
+		UserSearchField.setColumns(31);
 		UserSearchField.addActionListener(new UserActionListener());
 		Center_Panel.add(UserSearchField);
 		
