@@ -32,7 +32,7 @@ public class FrameMain extends JFrame {
 											 + "\n  - 검색창에 텍스트 입력 후(미입력 시 전체 데이터 조회 가능)"
 											 + "\n     [Enter] 키 입력 또는 [검색] 버튼 클릭"
 											 + "\n  - 테이블 내 항목은 클릭으로 선택 가능");
-		JLabel mainLabel_S = new JLabel("Made By 이승진, 조준호, 이동호");
+		JLabel mainLabel_S = new JLabel("");
 		mainLabel_N.setHorizontalAlignment(JLabel.CENTER);
 		mainLabel_S.setHorizontalAlignment(JLabel.CENTER);
 		mainLabel_N.setForeground(Color.BLUE);
