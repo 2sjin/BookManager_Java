@@ -56,13 +56,15 @@ public class PanelBookInfo extends JPanel {
 		Book_Search.setBounds(12, 10, 80, 15);
 		add(Book_Search);
 		tableModel = new DefaultTableModel(data, header) {
+			private static final long serialVersionUID = 1L;
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			}
 		};
+		
 		table = new JTable(tableModel);
 		Search_Field = new JTextField();
-		Search_Field.setBounds(104, 7, 350, 21);
+		Search_Field.setBounds(95, 7, 350, 21);
 		Search_Field.addActionListener(new BookActionListener());
 		add(Search_Field);
 		Search_Field.setColumns(10);
@@ -260,7 +262,8 @@ public class PanelBookInfo extends JPanel {
 		panel.add(jp, BorderLayout.CENTER);
 
 		Search_Button = new JButton("검색");
-		Search_Button.setBounds(466, 9, 69, 22);
+		Search_Button.setFont(new Font("맑은 고딕", Font.BOLD, 12));
+		Search_Button.setBounds(450, 7, 66, 22);
 		Search_Button.addActionListener(new BookActionListener());
 		add(Search_Button);
 	}

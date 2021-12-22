@@ -61,13 +61,13 @@ public class PanelUserInfo extends JPanel {
 		Center_Panel.add(lblNewLabel_2);
 		
 		UserSearchField = new JTextField();
-		UserSearchField.setColumns(38);
+		UserSearchField.setColumns(34);
 		UserSearchField.addActionListener(new UserActionListener());
 		Center_Panel.add(UserSearchField);
 		
-		SearchButton = new JButton("검 색");
-		SearchButton.setFont(new Font("맑은 고딕", Font.PLAIN, 10));
-		SearchButton.setPreferredSize(new Dimension(69, 20));
+		SearchButton = new JButton("검색");
+		SearchButton.setFont(new Font("맑은 고딕", Font.BOLD, 12));
+		SearchButton.setPreferredSize(new Dimension(69, 22));
 		SearchButton.addActionListener(new UserActionListener());
 		Center_Panel.add(SearchButton);
 		
