@@ -67,13 +67,23 @@ public class FrameRent extends JFrame {
 		
 		UPDATE_BUTTON.addActionListener(new  ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String clicked_ISBN = book_panel.getBookISBN();	// 클릭한 도서의 ISBN 가져오기
-				String clicked_PHONE = "01025773617";			// 클릭한 회원의 전화번호 가져오기(구현 예정)
+				String clicked_BOOK_ISBN = book_panel.getBookInfo("ISBN");	// 클릭한 도서의 ISBN 리턴받기
+				String clicked_BOOK_TITLE = book_panel.getBookInfo("TITLE");	// 클릭한 도서의 제목 리턴받기
+				String clicked_USER_PHONE = user_panel.getUserInfo("PHONE");	// 클릭한 회원의 전화번호 리턴받기
+				String clicked_USER_NAME = user_panel.getUserInfo("NAME");	// 클릭한 회원의 이름 리턴받기
+				String clicked_USER_REG = user_panel.getUserInfo("REG");	// 클릭한 회원의 등록 여부 리턴받기
+				
+				// 회원 또는 도서를 선택하지 않았을 경우
+				if(clicked_USER_PHONE.equals("") || clicked_BOOK_ISBN.equals("")) return;
+				
+				// 미등록(탈퇴) 회원을 선택하였을 경우
+				if(!clicked_USER_REG.equals("등록"))
+					JOptionPane.showConfirmDialog(null,"미등록 회원은 도서 대여가 불가능합니다.","도서 대여",JOptionPane.CLOSED_OPTION);						
 				
 				try {
 					// 책이 대여중인지 확인하기 위한 SQL 실행
 					ResultSet srcRent = dbConn.executeQurey("SELECT BOOK_ISBN FROM RENT "
-							+ "WHERE BOOK_ISBN = '" + clicked_ISBN + "' and RENT_RETURN_DATE is NULL; ");
+							+ "WHERE BOOK_ISBN = '" + clicked_BOOK_ISBN + "' and RENT_RETURN_DATE is NULL; ");
 					// 이미 대여중인 도서일 경우 메시지 출력
 					if(srcRent.next() == true)
 						JOptionPane.showConfirmDialog(null,"이미 대여중인 도서입니다.","도서 대여",JOptionPane.CLOSED_OPTION);						
@@ -81,19 +91,20 @@ public class FrameRent extends JFrame {
 					else {
 						// 대여 SQL 수행
 						dbConn.executeUpdate("INSERT INTO RENT(RENT_DATE, RENT_DUE_DATE, BOOK_ISBN, USER_PHONE) "
-								+ "VALUES(CURDATE(), date_add(CURDATE(), interval 14 day), " + clicked_ISBN + ", '" + clicked_PHONE + "');");
+								+ "VALUES(CURDATE(), date_add(CURDATE(), interval 14 day), " + clicked_BOOK_ISBN + ", '" + clicked_USER_PHONE + "');");
 						// 대여 카운트 증가 SQL 수행
 						dbConn.executeUpdate("UPDATE USER SET USER_RENT_CNT = USER_RENT_CNT + 1 "
-								+ "WHERE USER_PHONE = '01025773617';");
+								+ "WHERE USER_PHONE = '" + clicked_USER_PHONE + "';");
 						// 대여 일련번호 갱신
-						dbConn.executeUpdate("UPDATE BOOK SET RENT_SEQ = '" + getMax_RENT_SEQ() + "'"
-								+ "WHERE BOOK.BOOK_ISBN = '" + clicked_ISBN + "';");
+						dbConn.executeUpdate("UPDATE BOOK SET RENT_SEQ = '" + getMaxRENT("SEQ") + "'"
+								+ "WHERE BOOK.BOOK_ISBN = '" + clicked_BOOK_ISBN + "';");
 						// 메시지 출력
-						JOptionPane.showConfirmDialog(null, ISBN_to_TITLE(clicked_ISBN) + "(" + clicked_ISBN + ") 도서를 대여하였습니다.\n"
-								 + "※ 대여자: " + PHONE_to_NAME(clicked_PHONE) + "(" + clicked_PHONE + ")",
+						JOptionPane.showConfirmDialog(null, clicked_BOOK_TITLE + "(" + clicked_BOOK_ISBN + ") 도서를 대여하였습니다.\n"
+								 + "※ 대여자: " + clicked_USER_NAME + "(" + clicked_USER_PHONE + ")",
 								"도서 대여",JOptionPane.CLOSED_OPTION);
-						// 테이블 새로고침
+						// 새로고침
 						book_panel.refreshTable();
+						book_panel.setRentTextField(clicked_USER_NAME + "(" + clicked_USER_PHONE + ")", getMaxRENT("DATE"), getMaxRENT("DUE_DATE"));
 					}
 					
 				} catch (SQLException e1) { e1.printStackTrace(); }	
@@ -101,39 +112,12 @@ public class FrameRent extends JFrame {
 		});		
 	}
 	
-	// 메소드: 특정 ISBN에 해당하는 도서 제목 저장 	
-	public String ISBN_to_TITLE(String ISBN) {
+
+	// 메소드: RENT 테이블에서 특정 필드의 최대값 리턴
+	public String getMaxRENT(String s) {
 		String temp = null;
 		try {
-			ResultSet srcTitle = dbConn.executeQurey("SELECT BOOK.BOOK_TITLE FROM BOOK, RENT "
-					+ "WHERE BOOK.BOOK_ISBN = RENT.BOOK_ISBN and RENT.BOOK_ISBN = '" + ISBN + "';");
-			while(srcTitle.next())
-				temp = srcTitle.getString(1);
-		} catch (SQLException e) {
-			return null;
-		}		
-		return temp;
-	}
-	
-	// 메소드: 특정 전화번호에 해당하는 회원 이름 저장 	
-	public String PHONE_to_NAME(String PHONE) {
-		String temp = null;
-		try {
-			ResultSet srcName = dbConn.executeQurey("SELECT USER.USER_NAME FROM USER, RENT "
-					+ "WHERE USER.USER_PHONE = RENT.USER_PHONE and RENT.USER_PHONE = '" + PHONE + "';");
-			while(srcName.next())
-				temp = srcName.getString(1);
-		} catch (SQLException e) {
-			return null;
-		}		
-		return temp;
-	}
-	
-	// 메소드: 대여 일련번호(RENT_SEQ)의 최대값 리턴
-	public String getMax_RENT_SEQ() {
-		String temp = null;
-		try {
-			ResultSet srcName = dbConn.executeQurey("SELECT MAX(RENT_SEQ) FROM RENT;");
+			ResultSet srcName = dbConn.executeQurey("SELECT MAX(RENT_" + s + ") FROM RENT;");
 			while(srcName.next())
 				temp = srcName.getString(1);
 		} catch (SQLException e) {

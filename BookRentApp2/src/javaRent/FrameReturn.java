@@ -48,7 +48,9 @@ public class FrameReturn extends JFrame {
 		book_panel.add(UPDATE_BUTTON);
 		UPDATE_BUTTON.addActionListener(new  ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String clicked_ISBN = book_panel.getBookISBN();
+				String clicked_ISBN = book_panel.getBookInfo("ISBN");	// 클릭한 도서의 ISBN 리턴받기
+				String clicked_TITLE = book_panel.getBookInfo("TITLE");	// 클릭한 도서의 제목 리턴받기
+				String clicked_RENT_NAME = book_panel.getBookInfo("RENT_NAME");	// 클릭한 도서의 대여자 이름 리턴받기
 				
 				try {
 					// 책이 대여 중인지 확인하기 위한 SQL 실행
@@ -65,32 +67,19 @@ public class FrameReturn extends JFrame {
 								+ "WHERE RENT.BOOK_ISBN = '" + clicked_ISBN + "' and RENT_RETURN_DATE is null;");
 						// 대여 카운트 감소 SQL 수행
 						dbConn.executeUpdate("UPDATE USER SET USER_RENT_CNT = USER_RENT_CNT - 1 "
-								+ "WHERE USER_PHONE = '01025773617';");
+								+ "WHERE USER_PHONE = '" + clicked_RENT_NAME + "';");
 						// 대여 일련번호 초기화
 						dbConn.executeUpdate("UPDATE BOOK SET RENT_SEQ = '0'"
 								+ "WHERE BOOK.BOOK_ISBN = '" + clicked_ISBN + "';");
 						// 메시지 출력
-						JOptionPane.showConfirmDialog(null, ISBN_to_TITLE(clicked_ISBN) + "(" + clicked_ISBN + ") 도서를 반납하였습니다.","도서 반납",JOptionPane.CLOSED_OPTION);
-						// 테이블 새로고침
+						JOptionPane.showConfirmDialog(null, clicked_TITLE + "(" + clicked_ISBN + ") 도서를 반납하였습니다.","도서 반납",JOptionPane.CLOSED_OPTION);
+						// 새로고침
 						book_panel.refreshTable();
+						book_panel.setRentTextField(null, null, null);
 					}										
 
 				} catch (SQLException e1) { e1.printStackTrace(); }
 			}
 		});
-	}
-	
-	// 메소드: 특정 ISBN에 해당하는 도서 제목 저장 	
-	public String ISBN_to_TITLE(String ISBN) {
-		String tmpTitle = null;
-		try {
-			ResultSet srcTitle = dbConn.executeQurey("SELECT BOOK.BOOK_TITLE FROM BOOK, RENT "
-					+ "WHERE BOOK.BOOK_ISBN = RENT.BOOK_ISBN and RENT.BOOK_ISBN = '" + ISBN + "';");
-			while(srcTitle.next())
-				tmpTitle = srcTitle.getString(1);
-		} catch (SQLException e) {
-			return null;
-		}		
-		return tmpTitle;
 	}
 }

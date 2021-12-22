@@ -284,4 +284,14 @@ public class PanelUserInfo extends JPanel {
 			columnModel.getColumn(column).setPreferredWidth(width);
 		}
 	}
+	
+	// 리턴 메소드
+	public String getUserInfo(String s) {
+		switch(s) {
+			case "PHONE": return Phone.getText(); 
+			case "NAME": return Name.getText();
+			case "REG": return "등록";
+			default: return null;
+		}
+	}
 }
