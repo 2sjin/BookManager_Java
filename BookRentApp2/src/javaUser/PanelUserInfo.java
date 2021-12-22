@@ -35,12 +35,14 @@ public class PanelUserInfo extends JPanel {
 	Object [][] data2 = new Object[0][6];
 	String [] header2 = {"전화번호", "이름", "생년월일", "성별", "등록여부", "대여도서"};
 	JButton ImageChange;
+	JButton SearchButton;
 	private ResultSet src = null;
 	private dbConnector dbConn = new dbConnector();
 	JLabel lblNewLabel_4_11;
 	JLabel ImageUser;
 	private Vector<String> v2 = new Vector<String>();
 	private Vector<Image> vImage = new Vector<Image>();
+	
 	// 생성자
 	public PanelUserInfo() {
 		setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
@@ -59,16 +61,26 @@ public class PanelUserInfo extends JPanel {
 		Center_Panel.add(lblNewLabel_2);
 		
 		UserSearchField = new JTextField();
-		UserSearchField.setColumns(41);
+		UserSearchField.setColumns(38);
 		UserSearchField.addActionListener(new UserActionListener());
 		Center_Panel.add(UserSearchField);
+		
+		SearchButton = new JButton("검 색");
+		SearchButton.setFont(new Font("맑은 고딕", Font.PLAIN, 10));
+		SearchButton.setPreferredSize(new Dimension(69, 20));
+		SearchButton.addActionListener(new UserActionListener());
+		Center_Panel.add(SearchButton);
 		
 		JLabel lblNewLabel_3 = new JLabel("회원 검색 결과");
 		lblNewLabel_3.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		Center_Panel.add(lblNewLabel_3);
 		
 		
-		tableModel2 = new DefaultTableModel(data2, header2);
+		tableModel2 = new DefaultTableModel(data2, header2){
+	         public boolean isCellEditable(int row, int column) {
+	             return false;
+	          }
+	       };
 		BookList = new JTable(tableModel2);
 		BookList.setFont(new Font("맑은 고딕", Font.PLAIN, 10));
 		
@@ -173,7 +185,11 @@ public class PanelUserInfo extends JPanel {
 		lblNewLabel_5.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		List_Panel.add(lblNewLabel_5);
 		
-		tableModel = new DefaultTableModel(data, header);
+		tableModel = new DefaultTableModel(data, header){
+	         public boolean isCellEditable(int row, int column) {
+	             return false;
+	          }
+	       };
 		UserSearchResult = new JTable(tableModel);
 		UserSearchResult.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		resizeColumnWidth(UserSearchResult);
