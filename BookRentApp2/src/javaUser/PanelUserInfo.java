@@ -93,13 +93,14 @@ public class PanelUserInfo extends JPanel {
 					src = dbConn.executeQurey("SELECT BOOK.BOOK_ISBN, BOOK.BOOK_TITLE, BOOK.BOOK_AUTHOR, BOOK.BOOK_PUB, RENT.RENT_DATE, RENT.RENT_DUE_DATE FROM BOOK\r\n"
 							+ "LEFT JOIN RENT ON BOOK.BOOK_ISBN = RENT.BOOK_ISBN\r\n"
 							+ "WHERE RENT_RETURN_DATE IS NULL\r\n"
-							+ "AND RENT.USER_PHONE = '01025773617';");
+							+ "AND RENT.USER_PHONE = '"+Phone.getText()+"';");
 					int RowCount = tableModel.getRowCount(); // 행 갯수 반환
 					if (RowCount > 0) { // 행 갯수가 0보다 크다면 모든 행 삭제
 						for (int i = RowCount - 1; i >= 0; i--)
 							tableModel.removeRow(i); // 행 삭제 메소드
 					}
 					while(src.next()) {
+						
 						Object [] tmp = {src.getString(1), src.getString(2), src.getString(3),
 								src.getString(4), src.getString(5), src.getString(6)};
 						tableModel.addRow(tmp);
@@ -174,6 +175,8 @@ public class PanelUserInfo extends JPanel {
 		
 		tableModel = new DefaultTableModel(data, header);
 		UserSearchResult = new JTable(tableModel);
+		UserSearchResult.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		resizeColumnWidth(UserSearchResult);
 		UserSearchResult.setFont(new Font("맑은 고딕", Font.PLAIN, 10));
 		JScrollPane jp = new JScrollPane(UserSearchResult);
 		jp.setPreferredSize(new Dimension(470, 120));
