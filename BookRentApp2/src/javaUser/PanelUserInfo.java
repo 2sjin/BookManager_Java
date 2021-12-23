@@ -42,7 +42,6 @@ public class PanelUserInfo extends JPanel {
 	JLabel ImageUser;
 	private Vector<String> v2 = new Vector<String>();
 	private Vector<Image> vImage = new Vector<Image>();
-	private String tmpReg;
 	
 	// 생성자
 	public PanelUserInfo() {
@@ -261,7 +260,6 @@ public class PanelUserInfo extends JPanel {
 					}
 					else
 						memberState = "미등록";
-					tmpReg = memberState;
 					Object [] tmp = {src.getString(1),src.getString(2),src.getString(3),sexState,memberState,src.getString(9)};
 					tableModel2.addRow(tmp);
 					v2.add(src.getString(5));
@@ -330,7 +328,7 @@ public class PanelUserInfo extends JPanel {
 		switch(s) {
 			case "PHONE": return Phone.getText(); 
 			case "NAME": return Name.getText();
-			case "REG": return tmpReg;
+			case "REG": return lblNewLabel_4_11.getText();
 			default: return null;
 		}
 	}

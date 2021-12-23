@@ -81,8 +81,10 @@ public class FrameRent extends JFrame {
 				}
 				
 				// 미등록(탈퇴) 회원을 선택하였을 경우
-				if(!clicked_USER_REG.equals("등록"))
-					JOptionPane.showConfirmDialog(null,"미등록 회원은 도서 대여가 불가능합니다.","도서 대여",JOptionPane.CLOSED_OPTION);						
+				if(clicked_USER_REG.equals("미등록")) {
+					JOptionPane.showConfirmDialog(null,"미등록 회원은 도서 대여가 불가능합니다.","도서 대여",JOptionPane.CLOSED_OPTION);
+					return;
+				}
 				
 				try {
 					// 책이 대여중인지 확인하기 위한 SQL 실행
