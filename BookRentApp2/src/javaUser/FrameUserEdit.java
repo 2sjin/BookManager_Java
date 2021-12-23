@@ -103,38 +103,69 @@ public class FrameUserEdit {
 				int result = JOptionPane.showConfirmDialog(null," 회원 정보를 수정 하시겠습니까?","회원 정보 수정",JOptionPane.YES_NO_OPTION);
 				switch(result) {
 				case JOptionPane.YES_OPTION:{
-					String sql = "update USER set USER_PHONE = ?, USER_NAME = ?, USER_BIRTH = ?, USER_SEX = ?,"
-							+" USER_MAIL = ?, USER_IMAGE = ? WHERE USER_PHONE = ?";
-					Connection tmpConn = dbConn.getConnection();
-					if(ct.Sex.getText().equals("남자")) {
-						sexcheck=0;
-					}
-					else
-						sexcheck=1;
-					try {
-						PreparedStatement ps = tmpConn.prepareStatement(sql);
-						ps.setString(1, ct.Phone.getText());
-						ps.setString(2, ct.Name.getText());
-						ps.setString(3, ct.Birth.getText());
-						ps.setInt(4, sexcheck);
-						ps.setString(5, ct.Email.getText());
-						File tmpFile = new File(filePath);
-						ps.setBinaryStream(6,new FileInputStream(tmpFile), tmpFile.length());
-						ps.setString(7, User_Phone);
-						int count = ps.executeUpdate();
-						if(count == 0) {
-							JOptionPane.showMessageDialog(null,"ISBN : "+ct.Name.getText()+"이(는) 수정에 실패하였습니다.", "도서 수정",JOptionPane.ERROR_MESSAGE);
-						}else {
-							JOptionPane.showMessageDialog(null,"ISBN : "+ct.Name.getText()+"로 수정이 완료되었습니다.", "도서 수정",JOptionPane.NO_OPTION);
+					if(!(filePath==null)) {
+						String sql = "update USER set USER_PHONE = ?, USER_NAME = ?, USER_BIRTH = ?, USER_SEX = ?,"
+								+" USER_MAIL = ?, USER_IMAGE = ? WHERE USER_PHONE = ?";
+						Connection tmpConn = dbConn.getConnection();
+						if(ct.Sex.getText().equals("남자")) {
+							sexcheck=0;
 						}
-					}catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						else
+							sexcheck=1;
+						try {
+							PreparedStatement ps = tmpConn.prepareStatement(sql);
+							ps.setString(1, ct.Phone.getText());
+							ps.setString(2, ct.Name.getText());
+							ps.setString(3, ct.Birth.getText());
+							ps.setInt(4, sexcheck);
+							ps.setString(5, ct.Email.getText());
+							File tmpFile = new File(filePath);
+							ps.setBinaryStream(6,new FileInputStream(tmpFile), tmpFile.length());
+							ps.setString(7, User_Phone);
+							int count = ps.executeUpdate();
+							if(count == 0) {
+								JOptionPane.showMessageDialog(null,"ISBN : "+ct.Name.getText()+"이(는) 수정에 실패하였습니다.", "도서 수정",JOptionPane.ERROR_MESSAGE);
+							}else {
+								JOptionPane.showMessageDialog(null,"ISBN : "+ct.Name.getText()+"로 수정이 완료되었습니다.", "도서 수정",JOptionPane.NO_OPTION);
+							}
+						}catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						catch (FileNotFoundException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}else {
+						String sql = "update USER set USER_PHONE = ?, USER_NAME = ?, USER_BIRTH = ?, USER_SEX = ?,"
+								+" USER_MAIL = ? WHERE USER_PHONE = ?";
+						Connection tmpConn = dbConn.getConnection();
+						if(ct.Sex.getText().equals("남자")) {
+							sexcheck=0;
+						}
+						else
+							sexcheck=1;
+						try {
+							PreparedStatement ps = tmpConn.prepareStatement(sql);
+							ps.setString(1, ct.Phone.getText());
+							ps.setString(2, ct.Name.getText());
+							ps.setString(3, ct.Birth.getText());
+							ps.setInt(4, sexcheck);
+							ps.setString(5, ct.Email.getText());						
+							ps.setString(6, User_Phone);
+							int count = ps.executeUpdate();
+							if(count == 0) {
+								JOptionPane.showMessageDialog(null,"ISBN : "+ct.Name.getText()+"이(는) 수정에 실패하였습니다.", "도서 수정",JOptionPane.ERROR_MESSAGE);
+							}else {
+								JOptionPane.showMessageDialog(null,"ISBN : "+ct.Name.getText()+"로 수정이 완료되었습니다.", "도서 수정",JOptionPane.NO_OPTION);
+								
+							}
+						}catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
-					catch (FileNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+					
 				}
 				}
 			}

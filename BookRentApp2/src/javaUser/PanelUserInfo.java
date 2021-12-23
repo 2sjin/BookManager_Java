@@ -252,6 +252,8 @@ public class PanelUserInfo extends JPanel {
 					for (int i = RowCount - 1; i >= 0; i--)
 						tableModel2.removeRow(i); // 행 삭제 메소드
 				}
+				v2.clear();
+				vImage.clear();
 				while(src.next()) {
 					String sexState;
 					String memberState;
@@ -337,8 +339,4 @@ public class PanelUserInfo extends JPanel {
 			default: return null;
 		}
 	}
-<<<<<<< HEAD
-	
-=======
->>>>>>> 98c6eb541e26aadff87c49fad747cc09a5daf393
 }
