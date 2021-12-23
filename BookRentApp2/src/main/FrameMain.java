@@ -61,7 +61,7 @@ public class FrameMain extends JFrame {
 		JSeparator separator_0 = new JSeparator();
 		JMenuItem menuItemUser_1 = new JMenuItem("회원 등록");
 		JMenuItem menuItemUser_2 = new JMenuItem("회원 정보 수정");
-		JMenuItem menuItemUser_3 = new JMenuItem("회원 탈퇴");
+		JMenuItem menuItemUser_3 = new JMenuItem("회원 탈퇴/재등록");
 		menuUser.add(menuItemUser_0);
 		menuUser.add(separator_0);
 		menuUser.add(menuItemUser_1);

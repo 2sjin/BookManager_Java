@@ -321,7 +321,11 @@ public class PanelUserInfo extends JPanel {
 	public void refreshTable() {
 		new UserActionListener().actionPerformed(null);		
 		loadRentListSQL();
-		
+	}
+	
+	// 등록여부 레이블의 정보 수정
+	public void setRegLabel(String s) {
+		lblNewLabel_4_11.setText(s);
 	}
 
 	// 리턴 메소드
@@ -329,9 +333,12 @@ public class PanelUserInfo extends JPanel {
 		switch(s) {
 			case "PHONE": return Phone.getText(); 
 			case "NAME": return Name.getText();
-			case "REG": return "등록";
+			case "REG": return lblNewLabel_4_11.getText();
 			default: return null;
 		}
 	}
+<<<<<<< HEAD
 	
+=======
+>>>>>>> 98c6eb541e26aadff87c49fad747cc09a5daf393
 }
