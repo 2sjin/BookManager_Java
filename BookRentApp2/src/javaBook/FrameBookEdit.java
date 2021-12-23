@@ -98,9 +98,9 @@ public class FrameBookEdit {
 								ps.setString(9, Book_ISBN);
 								int count = ps.executeUpdate();
 								if(count == 0) {
-									JOptionPane.showMessageDialog(null,"ISBN : "+jf[1].getText()+"이(는) 수정에 실패하였습니다.", "도서 수정",JOptionPane.ERROR_MESSAGE);
+									JOptionPane.showMessageDialog(null,"ISBN : "+jf[0].getText()+"이(는) 수정에 실패하였습니다.", "도서 수정",JOptionPane.ERROR_MESSAGE);
 								}else {
-									JOptionPane.showMessageDialog(null,"ISBN : "+jf[1].getText()+"로 수정이 완료되었습니다.", "도서 수정",JOptionPane.NO_OPTION);
+									JOptionPane.showMessageDialog(null,"ISBN : "+jf[0].getText()+"로 수정이 완료되었습니다.", "도서 수정",JOptionPane.NO_OPTION);
 								}
 							}
 							catch (SQLException e1) {
@@ -129,9 +129,9 @@ public class FrameBookEdit {
 								ps.setString(8, Book_ISBN);
 								int count = ps.executeUpdate();
 								if(count == 0) {
-									JOptionPane.showMessageDialog(null,"ISBN : "+jf[1].getText()+"이(는) 수정에 실패하였습니다.", "도서 수정",JOptionPane.ERROR_MESSAGE);
+									JOptionPane.showMessageDialog(null,"ISBN : "+jf[0].getText()+"이(는) 수정에 실패하였습니다.", "도서 수정",JOptionPane.ERROR_MESSAGE);
 								}else {
-									JOptionPane.showMessageDialog(null,"ISBN : "+jf[1].getText()+"로 수정이 완료되었습니다.", "도서 수정",JOptionPane.NO_OPTION);
+									JOptionPane.showMessageDialog(null,"ISBN : "+jf[0].getText()+"로 수정이 완료되었습니다.", "도서 수정",JOptionPane.NO_OPTION);
 									book_panel.refreshTable();	// 테이블 새로고침
 								}
 							}

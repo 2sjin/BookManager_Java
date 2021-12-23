@@ -29,7 +29,7 @@ public class FrameUserOut {
 
 	// 프레임 초기화
 	private void initialize() {
-		frame = new JFrame("회원 탈퇴");
+		frame = new JFrame("회원 탈퇴/재등록");
 		frame.setVisible(true);
 		frame.getContentPane().setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
 		frame.setBounds(100, 100, 555, 689);
@@ -65,7 +65,7 @@ public class FrameUserOut {
 		Top_Panel.setBounds(0, 0, 541, 33);
 		frame.getContentPane().add(Top_Panel);
 		
-		JLabel lblNewLabel = new JLabel("회원 탈퇴");
+		JLabel lblNewLabel = new JLabel("회원 탈퇴/재등록");
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		lblNewLabel.setBackground(new Color(255, 255, 255));
@@ -83,7 +83,7 @@ public class FrameUserOut {
 			}
 		});
 		frame.getContentPane().add(CancelButton);
-		JButton UserOut = new JButton("\uD68C\uC6D0 \uD0C8\uD1F4");
+		JButton UserOut = new JButton("탈퇴/재등록");
         UserOut.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
         UserOut.setBorder(new LineBorder(UIManager.getColor("CheckBoxMenuItem.selectionBackground")));
         UserOut.setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
@@ -91,7 +91,7 @@ public class FrameUserOut {
         UserOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(User_Out.equals("등록")) {
-					int result = JOptionPane.showConfirmDialog(null," 회원을 탈퇴 처리 하시겠습니까?","회원 탈퇴",JOptionPane.YES_NO_OPTION);
+					int result = JOptionPane.showConfirmDialog(null," 회원을 탈퇴 처리 하시겠습니까?","회원 탈퇴/재등록",JOptionPane.YES_NO_OPTION);
 					switch(result) {
 					case JOptionPane.YES_OPTION:{
 						if(sourceModel.getValueAt(clickedTableRow,5).equals("0")) {
@@ -103,10 +103,11 @@ public class FrameUserOut {
 								ps.setString(1, User_Phone);								
 								int count = ps.executeUpdate();
 								if(count == 0) {
-									JOptionPane.showMessageDialog(null,"전화번호 : "+User_Phone+"이(는) 탈퇴에 실패하였습니다.", "회원 탈퇴",JOptionPane.ERROR_MESSAGE);
+									JOptionPane.showMessageDialog(null,"전화번호 : "+User_Phone+"이(는) 탈퇴에 실패하였습니다.", "회원 탈퇴/재등록",JOptionPane.ERROR_MESSAGE);
 								}else {
-									JOptionPane.showMessageDialog(null,"전화번호 : "+User_Phone+"회원의 탈퇴가 완료되었습니다.", "회원 탈퇴",JOptionPane.NO_OPTION);
+									JOptionPane.showMessageDialog(null,"전화번호 : "+User_Phone+"회원의 탈퇴가 완료되었습니다.", "회원 탈퇴/재등록",JOptionPane.NO_OPTION);
 									ct.refreshTable();	// 테이블 새로고침
+									ct.setRegLabel("미등록");
 								}
 								
 							}catch (SQLException e1) {
@@ -115,17 +116,18 @@ public class FrameUserOut {
 							}
 						}
 						else {
-							JOptionPane.showMessageDialog(null,"대여 중인 도서 n권을 모두 반납 후 다시 시도해주세요", "회원 탈퇴",JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null,"대여 중인 도서 n권을 모두 반납 후 다시 시도해주세요", "회원 탈퇴/재등록",JOptionPane.ERROR_MESSAGE);
 						}
 					}
 					}
 				}
 				else {
-					int num = JOptionPane.showConfirmDialog(null," 이 회원은 탈퇴한 회원입니다. 재등록 하시겠습니까?","재가입",JOptionPane.YES_NO_OPTION);
+					int num = JOptionPane.showConfirmDialog(null," 이 회원은 탈퇴한 회원입니다. 재등록 하시겠습니까?","회원 탈퇴/재등록",JOptionPane.YES_NO_OPTION);
 					if(num==JOptionPane.YES_OPTION) {
 						String sql2 = "UPDATE USER SET USER_OUT_DATE = NULL WHERE USER_PHONE = '"+User_Phone+"'";
 						dbConn.executeUpdate(sql2);
 						ct.refreshTable();
+						ct.setRegLabel("등록");
 					}else {
 						ct.refreshTable();
 					}
@@ -133,11 +135,11 @@ public class FrameUserOut {
 			}
 		});
         frame.getContentPane().add(UserOut);
-		ct.Phone.setEnabled(false);
-		ct.Name.setEnabled(false);
-		ct.Birth.setEnabled(false);
-		ct.Sex.setEnabled(false);
-		ct.Email.setEnabled(false);
+		ct.Phone.setEditable(false);
+		ct.Name.setEditable(false);
+		ct.Birth.setEditable(false);
+		ct.Sex.setEditable(false);
+		ct.Email.setEditable(false);
 		ct.tf_enabled(false);
         ct.setBackground(UIManager.getColor("InternalFrame.activeBorderColor"));
         ct.setBounds(0, 56, 541, 554);
