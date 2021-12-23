@@ -19,6 +19,8 @@ public class PanelUserInfo extends JPanel {
 	protected final static int UserWidth = 119;
 	protected final static int UserHeight = 140;
 	
+	
+	
 	JScrollPane scrollPane;
 	JTextField UserSearchField;
 	JTextField Phone;
@@ -190,8 +192,11 @@ public class PanelUserInfo extends JPanel {
 		ImageChange.setBounds(12, 163, 119, 29);
 		ImageChange.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ImageIcon images = FileChooser.getImageIcon(119, 140);	// 파일 선택기를 통해 이미지 리턴(매개변수는 가로, 세로 크기)
-				ImageUser.setIcon(images);
+				/*ImageIcon images = FileChooser.getImageIcon(119, 140);	// 파일 선택기를 통해 이미지 리턴(매개변수는 가로, 세로 크기)
+				
+				filePath = userimg.getSelectedFile().getPath();
+				System.out.println(filePath);
+				ImageUser.setIcon(images);*/
 			}
 		});
 		panel.add(ImageChange);
@@ -328,7 +333,5 @@ public class PanelUserInfo extends JPanel {
 			default: return null;
 		}
 	}
-	public void refreshTable() {
-		new UserActionListener().actionPerformed(null);		
-	}
+	
 }
