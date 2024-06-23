@@ -1,6 +1,9 @@
 # 도서관리 프로그램 설계 및 구현<br>(Library management program design and implementation as Java)
 - 기여자: 이승진(팀장), 조준호(부팀장), 이동호(팀원)
 
+## 프로젝트 산출물
+[☞ 프로젝트 결과보고서](https://drive.google.com/file/d/1myFJRFFxBxRmNFXB-YwLW25_cvfDfAZT/view?usp=sharing)
+
 ## 서론
 - 본 프로젝트는 컴퓨터 소프트웨어 개발 언어 중 JAVA를 이용하여 도서관리를 할 수 있는 기능을 제공하는 컴퓨터 소프트웨어를 구현하는 것이 목표임
 - ‘도서관리’기술은 도서관의 정보를 전산화하면서 나온 산물이며, 다른 업무 프로세스와 비교하면 많이 공유되어 있음
